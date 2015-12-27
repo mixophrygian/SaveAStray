@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var yelp = require('./yelp_api');
+var SearchResults = require('./SearchResults');
 
 var {
     StyleSheet,
@@ -24,7 +25,6 @@ class SearchPage extends Component {
         };
     }
     onSearchTextChanged(event) {
-        console.log('onSearchTextChanged');
         this.setState({ searchString: event.nativeEvent.text });
     }
     _executeQuery(query) {
@@ -45,16 +45,19 @@ class SearchPage extends Component {
 
     _handleResponse(response) {
         this.setState({ isLoading: false, message: ''});
-        //if (response.statusCode === 200) {
-            console.log('Shelters found: ' + JSON.stringify(response));
-        /*} else {
+        if (response.total > 0) {
+           // console.log('Shelters found: ' + JSON.stringify(response));
+            this.props.navigator.push({
+                title: 'Results',
+                component: SearchResults,
+                passProps: { results: response.businesses }
+            });
+        } else {
             this.setState({ message: 'Location not recognized; please try again.'});
-        }*/
+        }
     }
 
     render() {
-        console.log('SearchPage.render');
-        console.log(this.state.searchString);
         var spinner = this.state.isLoading ?
             ( <ActivityIndicatorIOS
                 style={styles.indicator}
