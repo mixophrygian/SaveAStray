@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var yelp = require('./yelp_api');
+var yelp = require('./lib/yelp_api');
 var SearchResults = require('./SearchResults');
 
 var {
@@ -46,14 +46,13 @@ class SearchPage extends Component {
     _handleResponse(response) {
         this.setState({ isLoading: false, message: ''});
         if (response.total > 0) {
-           // console.log('Shelters found: ' + JSON.stringify(response));
             this.props.navigator.push({
                 title: 'Results',
                 component: SearchResults,
                 passProps: { results: response.businesses }
             });
         } else {
-            this.setState({ message: 'Location not recognized; please try again.'});
+            this.setState({ message: 'Results not found; please try again.'});
         }
     }
 

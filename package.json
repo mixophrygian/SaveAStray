@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "lodash": "*",
-    "nonce": "*",
     "oauth-signature": "*",
     "querystring": "*",
     "react-native": "^0.7.1"
