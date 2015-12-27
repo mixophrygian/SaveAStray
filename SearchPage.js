@@ -28,11 +28,10 @@ class SearchPage extends Component {
         this.setState({ searchString: event.nativeEvent.text });
     }
     _executeQuery(query) {
-        console.log(query);
         this.setState({ isLoading: true });
         fetch(query)
             .then(response => response.json())
-            .then(json => this._handleResponse(json.response))
+            .then(json => this._handleResponse(json))
             .catch(error =>
                 this.setState({
                     isLoading: false,
@@ -46,11 +45,11 @@ class SearchPage extends Component {
 
     _handleResponse(response) {
         this.setState({ isLoading: false, message: ''});
-        if (response.statusCode === 200) {
-            console.log('Shelters found: ' + response.total);
-        } else {
+        //if (response.statusCode === 200) {
+            console.log('Shelters found: ' + JSON.stringify(response));
+        /*} else {
             this.setState({ message: 'Location not recognized; please try again.'});
-        }
+        }*/
     }
 
     render() {

@@ -1,36 +1,27 @@
+var n = require('nonce')();  
+var request = require('request');  
 var qs = require('querystring');  
 var _ = require('lodash');
-var nonce = require('./nonce.js')();
 var oauthSignature = require('oauth-signature');  
 
-var request_yelp = function(get_location) {
+var request_yelp = function(get_location, onlyNoKill, callback) {
     var httpMethod = "GET";
 
     var url = "http://api.yelp.com/v2/search";
+    var filter = onlyNoKill ? 'no-kill' : '';
 
     var default_parameters = {
         location: get_location,
-        term: 'no-kill',
+        term: filter,
         category_filter: "animalshelters",
         sort: "2"
     };
 
-    var randomString = function(length) {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for(var i = 0; i < length; i++) {
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        return text;
-    }
-    var ts = Math.floor(new Date().getTime() / 1000);
-    var timestamp = ts.toString();
-
     var required_parameters = {
         oauth_consumer_key : 'ie42Qg-zgR76dEDQ_upnuw', 
         oauth_token : 'yvYMnzjFkCWsm6M8zMTI9seC3t7F1WPA',
-        oauth_nonce : nonce(),
-        oauth_timestamp : timestamp.substr(0,10),
+        oauth_nonce : n(),
+        oauth_timestamp : n().toString().substr(0,10),
         oauth_signature_method : 'HMAC-SHA1',
         oauth_version : '1.0'
     };
@@ -49,12 +40,12 @@ var request_yelp = function(get_location) {
 
     /* Add the query string to the url */
     var apiURL = url+"?"+paramURL;
+
     console.log(apiURL);
-    return apiURL;
-    /* Then we use request to send make the API Request 
+    /* Then we use request to send make the API Request */
     request(apiURL, function(error, response, body){
         return callback(error, response, body);
     });
-*/
+
 };
 exports.request_yelp = request_yelp;
