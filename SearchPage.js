@@ -19,7 +19,7 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchString: 'Los Angeles',
+            searchString: '22309',
             isLoading: false,
             message: ''
         };
@@ -66,7 +66,7 @@ class SearchPage extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>
-                    Bring a lost pet to a safe home
+                   Rescue a lost friend 
                 </Text>
                <Image source={require('image!doghelp')} style={styles.image}/>
                 {spinner}
@@ -75,7 +75,7 @@ class SearchPage extends Component {
                         style={styles.searchInput}
                         value={this.state.searchString}
                         onChange={this.onSearchTextChanged.bind(this)}
-                        placeholder='Search by zipcode'/>
+                        placeholder='City or zipcode'/>
                     <TouchableHighlight style={styles.button}
                         underlayColor='#99d9f4'>
                         <Text 
