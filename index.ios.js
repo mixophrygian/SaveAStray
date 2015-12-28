@@ -10,6 +10,7 @@ class PetRescue extends React.Component {
                 initialRoute={{
                     title: 'Search',
                     component: SearchPage,
+                    navigationBarHidden: true
                 }}/>
         );
     }

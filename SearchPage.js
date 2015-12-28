@@ -64,7 +64,7 @@ class SearchPage extends Component {
                 size='large'/>) :
             (<View style={styles.spinnerPlaceHolder}/>);
         return (
-        <Image style={styles.container} source={require('./catnose3.png')}>
+        <Image style={styles.container} source={require('./Stray_Dog_Bahamas.jpg')}>
             <View style={styles.content}>
                 <Text style={styles.bigTitle}>
                    Rescue 
@@ -91,6 +91,7 @@ class SearchPage extends Component {
                      <Text style={styles.buttonText}>Current Location</Text>
                </TouchableHighlight> 
                 <Text style={styles.description}>
+                Search for no-kill shelters by city or zipcode
                 </Text>
                 <Text style={styles.description}>{this.state.message}</Text>
             </View>
@@ -139,7 +140,7 @@ var styles = StyleSheet.create({
     },
     content: {
         padding: 30,
-        marginTop:35,
+        marginTop:285,
         backgroundColor: 'rgba(0,0,0,0)',
         flexDirection: 'column',
         alignItems: 'center'
