@@ -59,6 +59,7 @@ class SearchPage extends Component {
     render() {
         var spinner = this.state.isLoading ?
             ( <ActivityIndicatorIOS
+                color='white'
                 style={styles.indicator}
                 hidden='true'
                 size='large'/>) :
@@ -72,7 +73,6 @@ class SearchPage extends Component {
                 <Text style={styles.title}>
                     a lost pet 
                 </Text>
-                {spinner}
                     <View style={styles.flowRight}>
                     <TextInput
                         style={styles.searchInput}
@@ -94,6 +94,7 @@ class SearchPage extends Component {
                 Search for no-kill shelters by city or zipcode
                 </Text>
                 <Text style={styles.description}>{this.state.message}</Text>
+                {spinner}
             </View>
             </Image>
         );
