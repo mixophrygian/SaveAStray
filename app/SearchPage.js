@@ -80,14 +80,14 @@ class SearchPage extends Component {
                         onChange={this.onSearchTextChanged.bind(this)}
                         placeholder='City or zipcode'/>
                     <TouchableHighlight style={styles.button}
-                        underlayColor='#99d9f4'>
+                        underlayColor='#red'>
                         <Text 
                             style={styles.buttonText}
                             onPress={this.onSearchPressed.bind(this)}>Go</Text>
                     </TouchableHighlight>
                 </View>
                 <TouchableHighlight style={styles.button}
-                    underlayColor='#99d9f4'>
+                    underlayColor='#red'>
                      <Text style={styles.buttonText}>Current Location</Text>
                </TouchableHighlight> 
                 <Text style={styles.description}>

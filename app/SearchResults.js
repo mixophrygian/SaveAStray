@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var SingleResult = require('./SingleResult');
 
 var {
     StyleSheet,
@@ -14,8 +15,8 @@ var {
 
 var styles = StyleSheet.create({
     thumb: {
-        width: 80,
-        height: 80,
+        width: 90,
+        height: 90,
         marginRight: 10
     },
     textContainer: {
@@ -33,13 +34,13 @@ var styles = StyleSheet.create({
     header: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#48BBEC'
+        color: '#555555'
     },
     area: {
         fontSize: 20,
         marginTop: 3,
         marginBottom: 3,
-        color: 'gray'
+        color: '#656565'
     },
     reviewCount: {
         fontSize: 18,
@@ -48,7 +49,8 @@ var styles = StyleSheet.create({
     },
     rowContainer: {
         flexDirection: 'row',
-        padding: 10
+        padding: 10,
+        backgroundColor: 'white'
     }
 });
 
@@ -64,7 +66,13 @@ class SearchResults extends Component {
     }
 
     rowPressed(property) {
-        var property = this.props.results.filter(prop => prop.id === property.id);
+        var result = this.props.results.filter(prop => prop.id === property.id);
+
+        this.props.navigator.push({
+            title: '',
+            component: SingleResult,
+            passProps: {result: result}
+        });
     }
 
     renderRow(rowData, sectionID, rowID) {
@@ -100,7 +108,6 @@ class SearchResults extends Component {
     }
 
     render() {
-        console.log(this.state.dataSource)
         return (
             <ListView
                 dataSource={this.state.dataSource}
