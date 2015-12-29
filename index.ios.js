@@ -1,6 +1,6 @@
 'use strict'
 var React = require('react-native');
-var SearchPage = require('./SearchPage');
+var SearchPage = require('./app/SearchPage');
 
 //the navigationBarHidden thing depends on a change to react-native code: from this.props.navigationBarHidden to route.navigationBarHidden.  Within node_modules/react-native/Libraries/Components/Navigation/NavigatorIOS.ios.js. 
 

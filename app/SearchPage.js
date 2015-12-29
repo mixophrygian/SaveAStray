@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var yelp = require('./lib/yelp_api');
+var yelp = require('./../lib/yelp_api');
 var SearchResults = require('./SearchResults');
 
 var {
@@ -65,7 +65,7 @@ class SearchPage extends Component {
                 size='large'/>) :
             (<View style={styles.spinnerPlaceHolder}/>);
         return (
-        <Image style={styles.container} source={require('./Stray_Dog_Bahamas.jpg')}>
+        <Image style={styles.container} source={require('./../images/Stray_Dog_Bahamas.jpg')}>
             <View style={styles.content}>
                 <Text style={styles.bigTitle}>
                    Rescue 
