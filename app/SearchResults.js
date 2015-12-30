@@ -38,18 +38,16 @@ var styles = StyleSheet.create({
     },
     area: {
         fontSize: 20,
-        marginTop: 3,
-        marginBottom: 3,
         color: '#656565'
     },
     reviewCount: {
         fontSize: 18,
-        marginBottom: 2,
+        marginBottom: 4,
         color: '#656565'
     },
     rowContainer: {
         flexDirection: 'row',
-        padding: 10,
+        padding: 13,
         backgroundColor: 'white'
     }
 });
@@ -83,7 +81,8 @@ class SearchResults extends Component {
         var number = rowData.phone;
         var area = (rowData.location.neighborhoods || rowData.location.city);
         //TODO: add alternate place-holder picture when none is available
-        var picture = ( rowData.image_url || '');
+        var temp = require('./../images/catnose.jpg');
+        var picture = ( { uri: rowData.image_url } || temp);
 
         return (
             <TouchableHighlight 
@@ -91,7 +90,7 @@ class SearchResults extends Component {
                 underlayColor='#dddddd'>
             <View>
                 <View style={styles.rowContainer}>
-                    <Image style={styles.thumb} source={{ uri: picture }} />
+                    <Image style={styles.thumb} source={temp} />
                     <View style={styles.textContainer}>
                         <Text style={styles.header}>{name}</Text>
                         <Text style={styles.area}>{area}</Text>

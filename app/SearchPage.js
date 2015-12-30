@@ -3,6 +3,7 @@
 var React = require('react-native');
 var yelp = require('./../lib/yelp_api');
 var SearchResults = require('./SearchResults');
+var tempJson = require('./tempJson.json');
 
 var {
     StyleSheet,
@@ -39,8 +40,24 @@ class SearchPage extends Component {
                 }));
     }
     onSearchPressed() {
-        var query = yelp.request_yelp(this.state.searchString);
-        this._executeQuery(query);
+        //var query = yelp.request_yelp(this.state.searchString);
+        //this._executeQuery(query);
+        this._handleResponse(tempJson);
+    }
+
+    onLocationPressed() {
+        navigator.geolocation.getCurrentPosition(
+            location => {
+                var search = location.coords.latitude + ',' + location.coords.longitude;
+                this.setState({ searchString: search });
+                var query = yelp.request_yelp(this.state.searchString);
+                this._executeQuery(query);
+            },
+            error => {
+                this.setState({
+                    message: 'There was a problem obtaining your location: ' + error
+                });
+            });
     }
 
     _handleResponse(response) {
@@ -80,14 +97,15 @@ class SearchPage extends Component {
                         onChange={this.onSearchTextChanged.bind(this)}
                         placeholder='City or zipcode'/>
                     <TouchableHighlight style={styles.button}
-                        underlayColor='#red'>
+                        underlayColor={ButtonUnderlayColor}>
                         <Text 
                             style={styles.buttonText}
                             onPress={this.onSearchPressed.bind(this)}>Go</Text>
                     </TouchableHighlight>
                 </View>
                 <TouchableHighlight style={styles.button}
-                    underlayColor='#red'>
+                    underlayColor={ButtonUnderlayColor}
+                    onPress={this.onLocationPressed.bind(this)}>
                      <Text style={styles.buttonText}>Current Location</Text>
                </TouchableHighlight> 
                 <Text style={styles.description}>
@@ -102,6 +120,7 @@ class SearchPage extends Component {
 };
 
 var ButtonInputHeight = 46;
+var ButtonUnderlayColor = 'rgba(171, 199, 212)';
                 
 var styles = StyleSheet.create({
     bigTitle: {
@@ -131,7 +150,7 @@ var styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
-        shadowRadius: 6
+        shadowRadius: 4
     },
     container: {
         flex: 1,
