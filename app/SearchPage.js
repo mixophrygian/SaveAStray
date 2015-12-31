@@ -20,7 +20,7 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchString: '22309',
+            searchString: '',
             isLoading: false,
             message: ''
         };
@@ -39,6 +39,8 @@ class SearchPage extends Component {
                     message: 'Something bad happened ' + error
                 }));
     }
+    //TODO: Make this asynchronous! Only executeQuery after yelp request is complete. 
+
     onSearchPressed() {
         var query = yelp.request_yelp(this.state.searchString);
         this._executeQuery(query);
@@ -57,6 +59,7 @@ class SearchPage extends Component {
                 this.setState({
                     message: 'There was a problem obtaining your location: ' + error
                 });
+                console.log(error);
             });
     }
 
@@ -95,7 +98,9 @@ class SearchPage extends Component {
                         style={styles.searchInput}
                         value={this.state.searchString}
                         onChange={this.onSearchTextChanged.bind(this)}
+                        placeholderTextColor='pink'
                         placeholder='City or zipcode'/>
+
                     <TouchableHighlight style={styles.button}
                         underlayColor={ButtonUnderlayColor}>
                         <Text 
