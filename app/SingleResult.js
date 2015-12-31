@@ -73,7 +73,9 @@ class SingleResult extends Component {
         var name = result.name;
         var displayPhone = result.display_phone.slice(3);
         var tempImage = require('./../images/catnose.jpg');
-        var picture = result.image_url ? {uri: result.image_url} : tempImage;
+        var bigPicture = result.image_url.slice(0,-7) + '/o.jpg';
+        var picture = result.image_url ? {uri: bigPicture} : tempImage;
+        console.log(picture);
 
         return (
             <View style={styles.container}>
