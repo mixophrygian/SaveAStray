@@ -72,13 +72,13 @@ class SingleResult extends Component {
         var starsURL = result.rating_img_url;
         var name = result.name;
         var displayPhone = result.display_phone.slice(3);
-        var image = result.image_url;
         var tempImage = require('./../images/catnose.jpg');
+        var picture = result.image_url ? {uri: result.image_url} : tempImage;
 
         return (
             <View style={styles.container}>
                 <Image style={styles.image}
-                        source={ tempImage } />
+                        source={ picture } />
                 <View style={styles.heading}>
                     <Text style={styles.name}>{name}</Text>
                     <TouchableHighlight

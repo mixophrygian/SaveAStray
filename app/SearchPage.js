@@ -40,9 +40,9 @@ class SearchPage extends Component {
                 }));
     }
     onSearchPressed() {
-        //var query = yelp.request_yelp(this.state.searchString);
-        //this._executeQuery(query);
-        this._handleResponse(tempJson);
+        var query = yelp.request_yelp(this.state.searchString);
+        this._executeQuery(query);
+        //this._handleResponse(tempJson);
     }
 
     onLocationPressed() {

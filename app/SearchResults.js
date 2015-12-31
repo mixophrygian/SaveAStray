@@ -80,9 +80,8 @@ class SearchResults extends Component {
         var rating = rowData.rating;
         var number = rowData.phone;
         var area = (rowData.location.neighborhoods || rowData.location.city);
-        //TODO: add alternate place-holder picture when none is available
-        var temp = require('./../images/catnose.jpg');
-        var picture = ( { uri: rowData.image_url } || temp);
+        var tempImage = require('./../images/catnose.jpg');
+        var picture = rowData.image_url ? { uri: rowData.image_url } : tempImage;
 
         return (
             <TouchableHighlight 
@@ -90,7 +89,7 @@ class SearchResults extends Component {
                 underlayColor='#dddddd'>
             <View>
                 <View style={styles.rowContainer}>
-                    <Image style={styles.thumb} source={temp} />
+                    <Image style={styles.thumb} source={picture} />
                     <View style={styles.textContainer}>
                         <Text style={styles.header}>{name}</Text>
                         <Text style={styles.area}>{area}</Text>
