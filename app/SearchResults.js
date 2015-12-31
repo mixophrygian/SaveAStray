@@ -17,7 +17,8 @@ var styles = StyleSheet.create({
     thumb: {
         width: 90,
         height: 90,
-        marginRight: 10
+        marginRight: 10,
+        backgroundColor: 'gray'
     },
     textContainer: {
         flex: 1
@@ -80,6 +81,7 @@ class SearchResults extends Component {
         var rating = rowData.rating;
         var number = rowData.phone;
         var area = (rowData.location.neighborhoods || rowData.location.city);
+        area += ', ' + rowData.location.state_code;
         var tempImage = require('./../images/catnose.jpg');
         var picture = rowData.image_url ? { uri: rowData.image_url } : tempImage;
 
@@ -89,7 +91,7 @@ class SearchResults extends Component {
                 underlayColor='#dddddd'>
             <View>
                 <View style={styles.rowContainer}>
-                    <Image style={styles.thumb} source={picture} />
+                    <Image style={styles.thumb} defaultSource={tempImage}  source={picture} />
                     <View style={styles.textContainer}>
                         <Text style={styles.header}>{name}</Text>
                         <Text style={styles.area}>{area}</Text>

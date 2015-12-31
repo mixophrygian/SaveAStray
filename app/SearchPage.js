@@ -20,7 +20,7 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchString: '',
+            searchString: 'Minneapolis',
             isLoading: false,
             message: ''
         };
@@ -52,7 +52,7 @@ class SearchPage extends Component {
             location => {
                 var search = location.coords.latitude + ',' + location.coords.longitude;
                 this.setState({ searchString: search });
-                var query = yelp.request_yelp(this.state.searchString);
+                var query = yelp.request_yelp(search);
                 this._executeQuery(query);
             },
             error => {

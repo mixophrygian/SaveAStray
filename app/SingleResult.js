@@ -21,7 +21,6 @@ var styles = StyleSheet.create({
     stars: {
         width: 84,
         height: 17,
-        paddingLeft: 3
     },
     separator: {
         height: 1,
@@ -36,12 +35,15 @@ var styles = StyleSheet.create({
         width: 400,
         height: 300
     },
+    textContainer: {
+        margin: 10
+    },
     name: {
         fontSize: 25,
         fontWeight: 'bold',
+        color: 'black',
         marginTop: 5,
-        marginLeft: 9,
-        color: 'black'
+        marginLeft: 10
     },
     phoneText: {
         fontSize: 25,
@@ -52,8 +54,7 @@ var styles = StyleSheet.create({
     },
     description: {
         fontSize: 18,
-        margin: 5,
-        color: '#656565'
+        color: '#656565',
     }
 });
 
@@ -71,16 +72,17 @@ class SingleResult extends Component {
         var reviews = result.review_count;
         var starsURL = result.rating_img_url;
         var name = result.name;
-        var displayPhone = result.display_phone.slice(3);
+        var displayPhone = result.display_phone ? result.display_phone.slice(3) : '';
         var tempImage = require('./../images/catnose.jpg');
-        var bigPicture = result.image_url.slice(0,-7) + '/o.jpg';
-        var picture = result.image_url ? {uri: bigPicture} : tempImage;
-        console.log(picture);
+        var picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
+        console.log(JSON.stringify(result));
 
         return (
             <View style={styles.container}>
                 <Image style={styles.image}
-                        source={ picture } />
+                        resizeMode='cover'
+                        source={ picture } 
+                        defaultSource={{ tempImage }} />
                 <View style={styles.heading}>
                     <Text style={styles.name}>{name}</Text>
                     <TouchableHighlight
@@ -92,6 +94,7 @@ class SingleResult extends Component {
                     </TouchableHighlight>
                     <View style={styles.separator}/>
                 </View>
+                <View style={styles.textContainer}>
                 <Text style={styles.description}>{reviews} Reviews</Text>
                 <Image style={styles.stars} source={{ uri: result.rating_img_url }} />
                 <Text style={styles.description}>WARNING This result is not confirmed no-kill.  Tap phone number to CALL to verify.</Text>
@@ -102,6 +105,7 @@ class SingleResult extends Component {
                     >
                     <Text style={styles.yelpURLText}>View on Yelp</Text>
                 </TouchableHighlight>
+                </View>
             </View>
         );
 
