@@ -91,7 +91,7 @@ class SearchResults extends Component {
                 underlayColor='#dddddd'>
             <View>
                 <View style={styles.rowContainer}>
-                    <Image style={styles.thumb} defaultSource={tempImage}  source={picture} />
+                    <Image style={styles.thumb} defaultSource={{tempImage}} source={picture} />
                     <View style={styles.textContainer}>
                         <Text style={styles.header}>{name}</Text>
                         <Text style={styles.area}>{area}</Text>

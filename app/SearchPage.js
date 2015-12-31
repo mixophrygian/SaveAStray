@@ -68,6 +68,7 @@ class SearchPage extends Component {
         if (response.total > 0) {
             this.props.navigator.push({
                 title: 'Results',
+                tintColor: 'green',
                 component: SearchResults,
                 passProps: { results: response.businesses }
             });
@@ -88,17 +89,14 @@ class SearchPage extends Component {
         <Image style={styles.container} source={require('./../images/Stray_Dog_Bahamas.jpg')}>
             <View style={styles.content}>
                 <Text style={styles.bigTitle}>
-                   Rescue 
-                </Text>
-                <Text style={styles.title}>
-                    a lost pet 
+                  Save a stray 
                 </Text>
                     <View style={styles.flowRight}>
                     <TextInput
                         style={styles.searchInput}
                         value={this.state.searchString}
                         onChange={this.onSearchTextChanged.bind(this)}
-                        placeholderTextColor='pink'
+                        placeholderTextColor='white'
                         placeholder='City or zipcode'/>
 
                     <TouchableHighlight style={styles.button}
@@ -129,7 +127,7 @@ var ButtonUnderlayColor = 'rgba(171, 199, 212)';
                 
 var styles = StyleSheet.create({
     bigTitle: {
-        fontSize: 74,
+        fontSize: 64,
         textAlign: 'center',
         color: 'white',
         shadowColor: 'black',
