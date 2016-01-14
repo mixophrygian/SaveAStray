@@ -13,7 +13,8 @@ var {
     TouchableHighlight,
     ActivityIndicatorIOS,
     Image,
-    Component
+    Component,
+    Dimensions
 } = React;
 
 class SearchPage extends Component {
@@ -22,8 +23,13 @@ class SearchPage extends Component {
         this.state = {
             searchString: 'Minneapolis',
             isLoading: false,
-            message: ''
+            message: '',
+            visibleHeight: Dimensions.get('window').height
         };
+    }
+
+    componentWillMount () {
+          console.log(this.state.visibleHeight);
     }
     onSearchTextChanged(event) {
         this.setState({ searchString: event.nativeEvent.text });
@@ -39,7 +45,6 @@ class SearchPage extends Component {
                     message: 'Something bad happened ' + error
                 }));
     }
-    //TODO: Make this asynchronous! Only executeQuery after yelp request is complete. 
 
     onSearchPressed() {
         var query = yelp.request_yelp(this.state.searchString);
