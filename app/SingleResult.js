@@ -1,8 +1,8 @@
 'use strict';
 
-var React = require('react-native');
+import React from 'react-native';
 
-var { 
+const { 
     StyleSheet,
     Image,
     TouchableHighlight,
@@ -11,7 +11,7 @@ var {
     Component
 } = React;
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         marginTop: 65
     },
@@ -68,13 +68,13 @@ class SingleResult extends Component {
     getDirections() {
     }
     render() {
-        var result = this.props.result[0];
-        var reviews = result.review_count;
-        var starsURL = result.rating_img_url;
-        var name = result.name;
-        var displayPhone = result.display_phone ? result.display_phone.slice(3) : '';
-        var tempImage = require('./../images/catnose.jpg');
-        var picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
+        const result = this.props.result[0];
+        const reviews = result.review_count;
+        const starsURL = result.rating_img_url;
+        const name = result.name;
+        const displayPhone = result.display_phone ? result.display_phone.slice(3) : '';
+        const tempImage = require('./../images/catnose.jpg');
+        const picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
 
         return (
             <View style={styles.container}>

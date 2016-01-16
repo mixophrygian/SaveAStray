@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('react-native');
-var yelp = require('./../lib/yelp_api');
-var SearchResults = require('./SearchResults');
-var tempJson = require('./tempJson.json');
+import React from 'react-native';
+import yelp from './../lib/yelp_api';
+import SearchResults from './SearchResults';
+import tempJson from './tempJson.json';
 
-var {
+const {
     StyleSheet,
     Text,
     TextInput,
@@ -55,12 +55,14 @@ class SearchPage extends Component {
     onLocationPressed() {
         navigator.geolocation.getCurrentPosition(
             location => {
-                var search = location.coords.latitude + ',' + location.coords.longitude;
+                const search = location.coords.latitude + ',' + location.coords.longitude;
+                console.log(search);
                 this.setState({ searchString: search });
-                var query = yelp.request_yelp(search);
+                const query = yelp.request_yelp(search);
                 this._executeQuery(query);
             },
             error => {
+              console.log('error');
                 this.setState({
                     message: 'There was a problem obtaining your location: ' + error
                 });
