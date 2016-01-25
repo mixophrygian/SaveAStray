@@ -24,16 +24,22 @@ class SearchPage extends Component {
             searchString: 'Minneapolis',
             isLoading: false,
             message: '',
-            visibleHeight: Dimensions.get('window').height
+            visibleHeight: Dimensions.get('window').height,
+            keyboardMargin: 0
         };
-    }
-
-    componentWillMount () {
-          console.log(this.state.visibleHeight);
     }
     onSearchTextChanged(event) {
         this.setState({ searchString: event.nativeEvent.text });
     }
+
+    showKeyboard(event) {
+      this.setState({ keyboardMargin: 180 });
+    }
+
+    hideKeyboard() {
+      this.setState({ keyboardMargin: 0 });
+    }
+
     _executeQuery(query) {
         this.setState({ isLoading: true });
         fetch(query)
@@ -94,7 +100,7 @@ class SearchPage extends Component {
             (<View style={styles.indicator}/>);
         return (
         <Image style={styles.container} source={require('./../images/Stray_Dog_Bahamas.jpg')}>
-            <View style={styles.content}>
+            <View style={[styles.content, {marginBottom: this.state.keyboardMargin}]}>
                 <Text style={styles.bigTitle}>
                   Save a </Text>
                 <Text style={styles.bigTitle2}>
@@ -104,7 +110,13 @@ class SearchPage extends Component {
                     <TextInput
                         style={styles.searchInput}
                         value={this.state.searchString}
+                        autoCorrect={false}
+                        onSubmitEditing={this.onSearchPressed.bind(this)}
                         onChange={this.onSearchTextChanged.bind(this)}
+                        returnKeyType={'search'}
+                        onFocus={this.showKeyboard.bind(this)}
+                        keyboardType={"default"}
+                        keyboardAppearance={"dark"}
                         placeholderTextColor='white'
                         placeholder='City or zip code'/>
 
