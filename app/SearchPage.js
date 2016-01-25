@@ -61,10 +61,16 @@ class SearchPage extends Component {
     onLocationPressed() {
         navigator.geolocation.getCurrentPosition(
             location => {
+<<<<<<< HEAD
                 const search = location.coords.latitude + ',' + location.coords.longitude;
                 console.log(search);
                 this.setState({ searchString: ''});
                 const query = yelp.request_yelp(search);
+=======
+                var search = location.coords.latitude + ',' + location.coords.longitude;
+                this.setState({ searchString: search });
+                var query = yelp.request_yelp(search);
+>>>>>>> a26ee014749f50b70e5f3368c0033ad1b32a8e2c
                 this._executeQuery(query);
             },
             error => {
