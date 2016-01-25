@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('react-native');
-var yelp = require('./../lib/yelp_api');
-var SearchResults = require('./SearchResults');
-var tempJson = require('./tempJson.json');
+import React from 'react-native';
+import yelp from './../lib/yelp_api';
+import SearchResults from './SearchResults';
+import tempJson from './tempJson.json';
 
-var {
+const {
     StyleSheet,
     Text,
     TextInput,
@@ -13,7 +13,8 @@ var {
     TouchableHighlight,
     ActivityIndicatorIOS,
     Image,
-    Component
+    Component,
+    Dimensions
 } = React;
 
 class SearchPage extends Component {
@@ -22,12 +23,23 @@ class SearchPage extends Component {
         this.state = {
             searchString: 'Minneapolis',
             isLoading: false,
-            message: ''
+            message: '',
+            visibleHeight: Dimensions.get('window').height,
+            keyboardMargin: 0
         };
     }
     onSearchTextChanged(event) {
         this.setState({ searchString: event.nativeEvent.text });
     }
+
+    showKeyboard(event) {
+      this.setState({ keyboardMargin: 180 });
+    }
+
+    hideKeyboard() {
+      this.setState({ keyboardMargin: 0 });
+    }
+
     _executeQuery(query) {
         this.setState({ isLoading: true });
         fetch(query)
@@ -39,7 +51,6 @@ class SearchPage extends Component {
                     message: 'Something bad happened ' + error
                 }));
     }
-    //TODO: Make this asynchronous! Only executeQuery after yelp request is complete. 
 
     onSearchPressed() {
         var query = yelp.request_yelp(this.state.searchString);
@@ -50,12 +61,20 @@ class SearchPage extends Component {
     onLocationPressed() {
         navigator.geolocation.getCurrentPosition(
             location => {
+<<<<<<< HEAD
+                const search = location.coords.latitude + ',' + location.coords.longitude;
+                console.log(search);
+                this.setState({ searchString: ''});
+                const query = yelp.request_yelp(search);
+=======
                 var search = location.coords.latitude + ',' + location.coords.longitude;
                 this.setState({ searchString: search });
                 var query = yelp.request_yelp(search);
+>>>>>>> a26ee014749f50b70e5f3368c0033ad1b32a8e2c
                 this._executeQuery(query);
             },
             error => {
+              console.log('error');
                 this.setState({
                     message: 'There was a problem obtaining your location: ' + error
                 });
@@ -68,6 +87,7 @@ class SearchPage extends Component {
         if (response.total > 0) {
             this.props.navigator.push({
                 title: 'Results',
+                tintColor: 'green',
                 component: SearchResults,
                 passProps: { results: response.businesses }
             });
@@ -83,38 +103,41 @@ class SearchPage extends Component {
                 style={styles.indicator}
                 hidden='true'
                 size='large'/>) :
-            (<View style={styles.spinnerPlaceHolder}/>);
+            (<View style={styles.indicator}/>);
         return (
         <Image style={styles.container} source={require('./../images/Stray_Dog_Bahamas.jpg')}>
-            <View style={styles.content}>
+            <View style={[styles.content, {marginBottom: this.state.keyboardMargin}]}>
                 <Text style={styles.bigTitle}>
-                   Rescue 
-                </Text>
-                <Text style={styles.title}>
-                    a lost pet 
+                  Save a </Text>
+                <Text style={styles.bigTitle2}>
+                stray
                 </Text>
                     <View style={styles.flowRight}>
                     <TextInput
                         style={styles.searchInput}
                         value={this.state.searchString}
+                        autoCorrect={false}
+                        onSubmitEditing={this.onSearchPressed.bind(this)}
                         onChange={this.onSearchTextChanged.bind(this)}
-                        placeholderTextColor='pink'
-                        placeholder='City or zipcode'/>
+                        returnKeyType={'search'}
+                        onFocus={this.showKeyboard.bind(this)}
+                        keyboardType={"default"}
+                        keyboardAppearance={"dark"}
+                        placeholderTextColor='white'
+                        placeholder='City or zip code'/>
 
-                    <TouchableHighlight style={styles.button}
-                        underlayColor={ButtonUnderlayColor}>
+                    <TouchableHighlight style={styles.button}>
                         <Text 
                             style={styles.buttonText}
                             onPress={this.onSearchPressed.bind(this)}>Go</Text>
                     </TouchableHighlight>
                 </View>
                 <TouchableHighlight style={styles.button}
-                    underlayColor={ButtonUnderlayColor}
                     onPress={this.onLocationPressed.bind(this)}>
                      <Text style={styles.buttonText}>Current Location</Text>
                </TouchableHighlight> 
                 <Text style={styles.description}>
-                Search for no-kill shelters by city or zipcode
+                Search for rescue shelters by city or zip code
                 </Text>
                 <Text style={styles.description}>{this.state.message}</Text>
                 {spinner}
@@ -129,7 +152,7 @@ var ButtonUnderlayColor = 'rgba(171, 199, 212)';
                 
 var styles = StyleSheet.create({
     bigTitle: {
-        fontSize: 74,
+        fontSize: 56,
         textAlign: 'center',
         color: 'white',
         shadowColor: 'black',
@@ -137,35 +160,38 @@ var styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 10
     },
-    title: {
-        fontSize: 48,
+    bigTitle2: {
+        fontSize: 56,
         textAlign: 'center',
         color: 'white',
         shadowColor: 'black',
-        marginTop: -15,
-        marginBottom: 10,
-        shadowOffset: {width: 0, height: 0},
+        shadowOffset: { width: 0, height: 0},
         shadowOpacity: 1,
-        shadowRadius: 8
+        shadowRadius: 10,
+        lineHeight: 50,
+        marginBottom: 10
     },
     description: {
-        fontSize: 0,
+        fontSize: 20,
         textAlign: 'center',
         color: 'white',
         shadowColor: 'black',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
-        shadowRadius: 4
+        shadowRadius: 6
     },
     container: {
         flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
         width: null,
         height: null,
         resizeMode: 'cover'
     },
     content: {
         padding: 30,
-        marginTop:285,
+        paddingBottom: 0,
+        paddingTop: 0,
         backgroundColor: 'rgba(0,0,0,0)',
         flexDirection: 'column',
         alignItems: 'center'
@@ -205,9 +231,11 @@ var styles = StyleSheet.create({
         color: 'white',
         paddingLeft: 15
     },
-    spinnerPlaceHolder: {
-    },
     indicator: {
+        marginTop: 0,
+        marginBottom: 10,
+        width: 38,
+        height: 38
     }
 });
 

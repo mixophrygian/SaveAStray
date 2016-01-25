@@ -1,9 +1,9 @@
 'use strict';
 
-var React = require('react-native');
-var SingleResult = require('./SingleResult');
+import React from 'react-native';
+import SingleResult from './SingleResult';
 
-var {
+const {
     StyleSheet,
     Image,
     View,
@@ -13,7 +13,7 @@ var {
     Component
 } = React;
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
     thumb: {
         width: 90,
         height: 90,
@@ -57,7 +57,7 @@ class SearchResults extends Component {
 
     constructor(props) {
         super(props);
-        var dataSource = new ListView.DataSource(
+        let dataSource = new ListView.DataSource(
             {rowHasChanged: (r1, r2) => r1.id !== r2.id });
         this.state = {
             dataSource: dataSource.cloneWithRows(this.props.results)
@@ -65,7 +65,7 @@ class SearchResults extends Component {
     }
 
     rowPressed(property) {
-        var result = this.props.results.filter(prop => prop.id === property.id);
+        const result = this.props.results.filter(prop => prop.id === property.id);
 
         this.props.navigator.push({
             title: '',
@@ -75,15 +75,15 @@ class SearchResults extends Component {
     }
 
     renderRow(rowData, sectionID, rowID) {
-        var name = rowData.name;
-        var reviewCount = rowData.review_count;
-        var reviews = reviewCount + (reviewCount > 1 ? ' reviews' : ' review');
-        var rating = rowData.rating;
-        var number = rowData.phone;
-        var area = (rowData.location.neighborhoods || rowData.location.city);
+        const name = rowData.name;
+        const reviewCount = rowData.review_count;
+        const reviews = reviewCount + (reviewCount > 1 ? ' reviews' : ' review');
+        const rating = rowData.rating;
+        const number = rowData.phone;
+        let area = (rowData.location.neighborhoods || rowData.location.city);
         area += ', ' + rowData.location.state_code;
-        var tempImage = require('./../images/catnose.jpg');
-        var picture = rowData.image_url ? { uri: rowData.image_url } : tempImage;
+        const tempImage = require('./../images/catnose.jpg');
+        const picture = rowData.image_url ? { uri: rowData.image_url } : tempImage;
 
         return (
             <TouchableHighlight 
@@ -91,7 +91,7 @@ class SearchResults extends Component {
                 underlayColor='#dddddd'>
             <View>
                 <View style={styles.rowContainer}>
-                    <Image style={styles.thumb} defaultSource={tempImage}  source={picture} />
+                    <Image style={styles.thumb} defaultSource={{tempImage}} source={picture} />
                     <View style={styles.textContainer}>
                         <Text style={styles.header}>{name}</Text>
                         <Text style={styles.area}>{area}</Text>

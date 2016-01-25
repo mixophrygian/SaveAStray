@@ -9,6 +9,6 @@
     "lodash": "*",
     "oauth-signature": "*",
     "querystring": "*",
-    "react-native": "^0.7.1"
+    "react-native": "*"
   }
 }
