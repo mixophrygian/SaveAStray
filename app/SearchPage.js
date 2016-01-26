@@ -14,10 +14,12 @@ const {
     ActivityIndicatorIOS,
     Image,
     Component,
-    Dimensions
+    Dimensions,
+    DeviceEventEmitter
 } = React;
 
 class SearchPage extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -28,6 +30,11 @@ class SearchPage extends Component {
             keyboardMargin: 0
         };
     }
+    componentWillMount() {
+      DeviceEventEmitter.addListener('keyboardWillShow', this.showKeyboard.bind(this));
+      DeviceEventEmitter.addListener('keyboardWillHide', this.hideKeyboard.bind(this));
+    }
+
     onSearchTextChanged(event) {
         this.setState({ searchString: event.nativeEvent.text });
     }
@@ -61,16 +68,10 @@ class SearchPage extends Component {
     onLocationPressed() {
         navigator.geolocation.getCurrentPosition(
             location => {
-<<<<<<< HEAD
                 const search = location.coords.latitude + ',' + location.coords.longitude;
                 console.log(search);
                 this.setState({ searchString: ''});
                 const query = yelp.request_yelp(search);
-=======
-                var search = location.coords.latitude + ',' + location.coords.longitude;
-                this.setState({ searchString: search });
-                var query = yelp.request_yelp(search);
->>>>>>> a26ee014749f50b70e5f3368c0033ad1b32a8e2c
                 this._executeQuery(query);
             },
             error => {
@@ -114,6 +115,7 @@ class SearchPage extends Component {
                 </Text>
                     <View style={styles.flowRight}>
                     <TextInput
+                        ref="TextInput"
                         style={styles.searchInput}
                         value={this.state.searchString}
                         autoCorrect={false}
