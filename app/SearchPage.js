@@ -88,7 +88,6 @@ class SearchPage extends Component {
         if (response.total > 0) {
             this.props.navigator.push({
                 title: 'Results',
-                tintColor: 'green',
                 component: SearchResults,
                 passProps: { results: response.businesses }
             });

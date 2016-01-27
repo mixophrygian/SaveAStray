@@ -9,7 +9,9 @@ const {
     TouchableHighlight,
     View,
     Text,
-    Component
+    Component,
+    LinkingIOS,
+    Linking
 } = React;
 
 const styles = StyleSheet.create({
@@ -30,11 +32,12 @@ const styles = StyleSheet.create({
     yelpURLButton: {
     },
     yelpURLText: {
-        color: 'blue'
+        color: 'blue',
+        marginTop: 10
     },
     image: {
         width: 400,
-        height: 300
+        height: 250
     },
     textContainer: {
         margin: 10
@@ -56,12 +59,30 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 18,
         color: '#656565',
+        borderColor: 'purple',
+        borderWidth: 1
+    },
+    address: {
+        fontSize: 16
+    },
+    reviewCount: {
+        fontSize: 18,
+        color: '#656565'
+    },
+    tapDirections: {
+        marginTop: 5,
+        fontSize: 16,
+        color: 'blue'
+    },
+    yelpInfo: {
+        marginBottom: 10
     }
 });
 
 class SingleResult extends Component {
     viewYelp() {
-        console.log(this.props.result[0].mobile_url);
+        const url = this.props.result[0].mobile_url;
+        LinkingIOS.openURL(url);
     }
 
     callLocation() {
@@ -70,16 +91,27 @@ class SingleResult extends Component {
     }
 
     getDirections() {
-
+      console.log('tap for directions');
+      
     }
 
     render() {
         const result = this.props.result[0];
+        console.log(result);
         const reviews = result.review_count;
         const starsURL = result.rating_img_url;
         const name = result.name;
         const displayPhone = result.display_phone ? result.display_phone.slice(3) : '';
+        const address = result.location.display_address.join('\n');
         const tempImage = require('./../images/catnose.jpg');
+        const directions = result.location.display_address[0].split(',')[0].search(/\d/) >= 0 ? (<TouchableHighlight
+            underlayColor='white'
+            onPress={this.getDirections.bind(this)}
+          >
+          <Text style={styles.tapDirections}>
+            (Get directions)
+          </Text>
+          </TouchableHighlight>) : <Text></Text>;
         const picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
 
         return (
@@ -100,17 +132,20 @@ class SingleResult extends Component {
                     <View style={styles.separator}/>
                 </View>
                 <View style={styles.textContainer}>
-                <Text style={styles.description}>{reviews} Reviews</Text>
-                <Image style={styles.stars} source={{ uri: result.rating_img_url }} />
-                <Text style={styles.description}>WARNING This result is not confirmed no-kill.  Tap phone number to CALL to verify.</Text>
-                <TouchableHighlight
-                    style={styles.yelpURLButton}
-                    underlayColor='white'
-                    onPress={this.viewYelp.bind(this)}
-                    >
-                    <Text style={styles.yelpURLText}>View on Yelp</Text>
-                </TouchableHighlight>
+                <View style={styles.yelpInfo}>
+                  <Text style={styles.reviewCount}>{reviews} Reviews</Text>
+                  <Image style={styles.stars} source={{ uri: result.rating_img_url }} />
                 </View>
+                  <Text style={styles.address}>{address}</Text>
+                  {directions}
+                      <TouchableHighlight
+                      style={styles.yelpURLButton}
+                      underlayColor='white'
+                      onPress={this.viewYelp.bind(this)}
+                      >
+                      <Text style={styles.yelpURLText}>View on Yelp</Text>
+                  </TouchableHighlight>
+                  </View>
             </View>
         );
 
