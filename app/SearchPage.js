@@ -128,10 +128,12 @@ class SearchPage extends Component {
                         placeholderTextColor='white'
                         placeholder='City or zip code'/>
 
-                    <TouchableHighlight style={styles.button}>
+                    <TouchableHighlight 
+                      onPress={this.onSearchPressed.bind(this)}
+                      style={styles.button}>
                         <Text 
                             style={styles.buttonText}
-                            onPress={this.onSearchPressed.bind(this)}>Go</Text>
+                        >Go</Text>
                     </TouchableHighlight>
                 </View>
                 <TouchableHighlight style={styles.button}
