@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react-native';
+import Communications from 'react-native-communications';
 
 const { 
     StyleSheet,
@@ -62,11 +63,16 @@ class SingleResult extends Component {
     viewYelp() {
         console.log(this.props.result[0].mobile_url);
     }
+
     callLocation() {
-        console.log(this.props.result[0].phone);
+        const phone = this.props.result[0].phone;
+        Communications.phonecall(phone, true);
     }
+
     getDirections() {
+
     }
+
     render() {
         const result = this.props.result[0];
         const reviews = result.review_count;
