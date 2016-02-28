@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     yelpURLText: {
         color: 'blue',
-        marginTop: 10
+        fontSize: 14
     },
     image: {
         width: 400,
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
         color: 'blue'
     },
     phoneButton: {
-        marginLeft: 10
+        marginLeft: 10,
+        marginBottom: 5
     },
     description: {
         fontSize: 18,
@@ -63,15 +64,17 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     address: {
-        fontSize: 16
+        fontSize: 18,
+        marginTop: 15
     },
     reviewCount: {
         fontSize: 18,
-        color: '#656565'
+        color: '#656565',
+        marginBottom: 3
     },
     tapDirections: {
         marginTop: 5,
-        fontSize: 16,
+        fontSize: 25,
         color: 'blue'
     },
     yelpInfo: {
@@ -91,8 +94,10 @@ class SingleResult extends Component {
     }
 
     getDirections() {
-      console.log('tap for directions');
-      
+      var lat = this.props.result[0].location.coordinate.latitude;
+      var lon = this.props.result[0].location.coordinate.longitude;
+      var url = 'http://maps.apple.com/?q=' + lat +',' + lon;
+      LinkingIOS.openURL(url);
     }
 
     render() {
@@ -109,7 +114,7 @@ class SingleResult extends Component {
             onPress={this.getDirections.bind(this)}
           >
           <Text style={styles.tapDirections}>
-            (Get directions)
+            Get directions
           </Text>
           </TouchableHighlight>) : <Text></Text>;
         const picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
@@ -135,17 +140,19 @@ class SingleResult extends Component {
                 <View style={styles.yelpInfo}>
                   <Text style={styles.reviewCount}>{reviews} Reviews</Text>
                   <Image style={styles.stars} source={{ uri: result.rating_img_url }} />
-                </View>
-                  <Text style={styles.address}>{address}</Text>
-                  {directions}
-                      <TouchableHighlight
+
+                  <TouchableHighlight
                       style={styles.yelpURLButton}
                       underlayColor='white'
                       onPress={this.viewYelp.bind(this)}
                       >
                       <Text style={styles.yelpURLText}>View on Yelp</Text>
                   </TouchableHighlight>
-                  </View>
+
+                </View>
+                  <Text style={styles.address}>{address}</Text>
+                  {directions}
+                </View>
             </View>
         );
 
