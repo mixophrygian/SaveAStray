@@ -10,6 +10,6 @@
     "oauth-signature": "*",
     "querystring": "*",
     "react-native": "*",
-    "react-native-communications": "^0.1.0"
+    "react-native-communications": "^1.0.1"
   }
 }

@@ -6,12 +6,11 @@ import Communications from 'react-native-communications';
 const { 
     StyleSheet,
     Image,
+    Linking,
     TouchableHighlight,
     View,
     Text,
-    Component,
-    LinkingIOS,
-    Linking
+    Component
 } = React;
 
 const styles = StyleSheet.create({
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     address: {
-        fontSize: 18,
+        fontSize: 10,
         marginTop: 10
     },
     reviewCount: {
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
 class SingleResult extends Component {
     viewYelp() {
         const url = this.props.result[0].mobile_url;
-        LinkingIOS.openURL(url);
+        Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
 
     callLocation() {
@@ -94,10 +93,11 @@ class SingleResult extends Component {
     }
 
     getDirections() {
+      console.log('directions requested');
       var lat = this.props.result[0].location.coordinate.latitude;
       var lon = this.props.result[0].location.coordinate.longitude;
       var url = 'http://maps.apple.com/?q=' + lat +',' + lon;
-      LinkingIOS.openURL(url);
+      Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
 
     render() {
@@ -117,6 +117,7 @@ class SingleResult extends Component {
             Get directions
           </Text>
           </TouchableHighlight>) : <Text></Text>;
+        console.log('rendered, hi');
         const picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
 
         return (
