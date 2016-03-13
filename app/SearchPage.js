@@ -105,7 +105,7 @@ class SearchPage extends Component {
                 size='large'/>) :
             (<View style={styles.indicator}/>);
         return (
-        <Image style={styles.container} source={require('./../images/Stray_Dog_Bahamas.jpg')}>
+        <Image style={styles.container} source={require('./../images/Stray_Dog_Bahamas.png')}>
             <View style={[styles.content, {marginBottom: this.state.keyboardMargin}]}>
                 <Text style={styles.bigTitle}>
                   Save a </Text>

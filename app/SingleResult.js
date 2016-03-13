@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     phoneText: {
-        fontSize: 25,
+        fontSize: 20,
         color: 'blue'
     },
     phoneButton: {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
     address: {
         fontSize: 18,
-        marginTop: 15
+        marginTop: 10
     },
     reviewCount: {
         fontSize: 18,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     },
     tapDirections: {
         marginTop: 5,
-        fontSize: 25,
+        fontSize: 20,
         color: 'blue'
     },
     yelpInfo: {
