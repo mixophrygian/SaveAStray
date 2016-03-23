@@ -77,7 +77,7 @@ class SearchPage extends Component {
             error => {
               console.log('error');
                 this.setState({
-                    message: 'There was a problem obtaining your location: ' + error
+                    message: 'GPS unavailable.'
                 });
                 console.log(error);
             });
