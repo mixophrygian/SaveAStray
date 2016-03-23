@@ -23,7 +23,7 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchString: 'Minneapolis',
+            searchString: '91405',
             isLoading: false,
             message: '',
             visibleHeight: Dimensions.get('window').height,
@@ -156,14 +156,17 @@ var ButtonUnderlayColor = 'rgba(171, 199, 212)';
 var styles = StyleSheet.create({
     bigTitle: {
         fontSize: 56,
+        fontFamily: 'Open Sans',
         textAlign: 'center',
         color: 'white',
         shadowColor: 'black',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
-        shadowRadius: 10
+        shadowRadius: 10,
+        marginBottom: 0
     },
     bigTitle2: {
+        fontFamily: 'Open Sans',
         fontSize: 56,
         textAlign: 'center',
         color: 'white',
@@ -172,9 +175,10 @@ var styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 10,
         lineHeight: 50,
-        marginBottom: 10
+        marginBottom: 13
     },
     description: {
+        fontFamily: 'Open Sans',
         fontSize: 20,
         textAlign: 'center',
         color: 'white',
@@ -206,6 +210,7 @@ var styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 18,
+        fontFamily: 'Open Sans',
         color: 'white',
         alignSelf: 'center'
     },
@@ -226,6 +231,7 @@ var styles = StyleSheet.create({
         padding: 4,
         marginRight: 8,
         flex: 4,
+        fontFamily: 'Open Sans',
         fontSize: 20,
         borderWidth: 1,
         borderColor: 'white',

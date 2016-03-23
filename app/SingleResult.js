@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     },
     yelpURLText: {
         color: 'blue',
-        fontSize: 14
+        fontSize: 14,
+        fontFamily: 'Open Sans'
     },
     image: {
         width: 400,
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 25,
+        fontFamily: 'Open Sans',
         fontWeight: 'bold',
         color: 'black',
         marginTop: 5,
@@ -50,6 +52,7 @@ const styles = StyleSheet.create({
     },
     phoneText: {
         fontSize: 20,
+        fontFamily: 'Open Sans',
         color: 'blue'
     },
     phoneButton: {
@@ -58,22 +61,26 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 18,
+        fontFamily: 'Open Sans',
         color: '#656565',
         borderColor: 'purple',
         borderWidth: 1
     },
     address: {
         fontSize: 10,
+        fontFamily: 'Open Sans',
         marginTop: 10
     },
     reviewCount: {
         fontSize: 18,
+        fontFamily: 'Open Sans',
         color: '#656565',
         marginBottom: 3
     },
     tapDirections: {
         marginTop: 5,
         fontSize: 20,
+        fontFamily: 'Open Sans',
         color: 'blue'
     },
     yelpInfo: {

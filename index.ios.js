@@ -13,7 +13,9 @@ class PetRescue extends React.Component {
                     title: 'Search',
                     component: SearchPage,
                     navigationBarHidden: true
-                }}/>
+                }}
+                tintColor="black"
+                />
         );
     }
 }

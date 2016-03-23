@@ -33,16 +33,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#dddddd'
     },
     header: {
-        fontSize: 20,
+        fontSize: 18,
+        fontFamily: 'Open Sans',
         fontWeight: 'bold',
-        color: '#555555'
+        color: 'black'
     },
     area: {
-        fontSize: 20,
+        fontSize: 14,
+        fontFamily: 'Open Sans',
         color: '#656565'
     },
     reviewCount: {
-        fontSize: 18,
+        fontSize: 10,
+        fontFamily: 'Open Sans',
         marginBottom: 4,
         color: '#656565'
     },
