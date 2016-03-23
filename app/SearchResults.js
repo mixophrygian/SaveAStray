@@ -51,8 +51,13 @@ const styles = StyleSheet.create({
     },
     rowContainer: {
         flexDirection: 'row',
+        flex: 1,
         padding: 13,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+    },
+    fatSeparator: {
+        height: 14,
+        backgroundColor: '#F7F7F7'
     }
 });
 
@@ -104,7 +109,6 @@ class SearchResults extends Component {
                         <Image style={styles.stars} source={{ uri: rowData.rating_img_url }} />
                     </View>
                 </View>
-                <View style={styles.separator}/>
             </View>
             </TouchableHighlight>
         );
@@ -114,7 +118,10 @@ class SearchResults extends Component {
         return (
             <ListView
                 dataSource={this.state.dataSource}
-                renderRow={this.renderRow.bind(this)}/>
+                renderRow={this.renderRow.bind(this)}
+                renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.fatSeparator} />}
+                />
+
         );
     }
 }
