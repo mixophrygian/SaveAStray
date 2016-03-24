@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         marginTop: 65
     },
     heading: {
-        backgroundColor: '#F8F8F8',
+        backgroundColor: 'white',
     },
     stars: {
         width: 84,
@@ -28,11 +28,16 @@ const styles = StyleSheet.create({
         height: 1,
         backgroundColor: '#DDDDDD'
     },
+    yelpText: {
+        flex: 1,
+        flexDirection: 'row',
+        marginTop: 7
+    },
     yelpURLButton: {
     },
     yelpURLText: {
         color: 'blue',
-        fontSize: 14,
+        fontSize: 10,
         fontFamily: 'Open Sans'
     },
     image: {
@@ -43,7 +48,7 @@ const styles = StyleSheet.create({
         margin: 10
     },
     name: {
-        fontSize: 25,
+        fontSize: 20,
         fontFamily: 'Open Sans',
         fontWeight: 'bold',
         color: 'black',
@@ -69,13 +74,14 @@ const styles = StyleSheet.create({
     address: {
         fontSize: 10,
         fontFamily: 'Open Sans',
-        marginTop: 10
+        marginTop: 0
     },
     reviewCount: {
-        fontSize: 18,
+        fontSize: 10,
         fontFamily: 'Open Sans',
         color: '#656565',
-        marginBottom: 3
+        marginBottom: 3,
+        marginRight: 5
     },
     tapDirections: {
         marginTop: 5,
@@ -114,9 +120,33 @@ class SingleResult extends Component {
         const starsURL = result.rating_img_url;
         const name = result.name;
         const displayPhone = result.display_phone ? result.display_phone.slice(3) : '';
-        const address = result.location.display_address.join('\n');
+        const displayAddress = result.location.display_address;
+        let address = displayAddress.join('\n');
+
+        //If the area name is redundant with the city name, strip it out.
+        switch (displayAddress.length) {
+          case 1:
+            break;
+          case 2:
+            if(displayAddress[0] == displayAddress[1].split(',')[0]){
+              address = displayAddress[1];
+            };
+              break;
+          case 3:
+              if(displayAddress[1] == displayAddress[2].split(',')[0]) {
+                address = [displayAddress[0], displayAddress[2]].join('\n');
+              };
+              break;
+          case 4:
+              if(displayAddress[2] == displayAddress[3].split(',')[0] ) {
+                address = [displayAddress[0], displayAddress[1], displayAddress[3]].join('\n');
+              };
+            break;
+          default:
+            break;
+         };
         const tempImage = require('./../images/catnose.jpg');
-        const directions = result.location.display_address[0].split(',')[0].search(/\d/) >= 0 ? (<TouchableHighlight
+        const directions = displayAddress[0].split(',')[0].search(/\d/) >= 0 ? (<TouchableHighlight
             underlayColor='white'
             onPress={this.getDirections.bind(this)}
           >
@@ -124,7 +154,6 @@ class SingleResult extends Component {
             Get directions
           </Text>
           </TouchableHighlight>) : <Text></Text>;
-        console.log('rendered, hi');
         const picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
 
         return (
@@ -135,32 +164,32 @@ class SingleResult extends Component {
                         defaultSource={{ tempImage }} />
                 <View style={styles.heading}>
                     <Text style={styles.name}>{name}</Text>
+                </View>
+                <View style={styles.textContainer}>
+                <View style={styles.yelpInfo}>
+                    <Image style={styles.stars} source={{ uri: result.rating_img_url }} />
+
+                  <View style={styles.yelpText}>
+                    <Text style={styles.reviewCount}>{reviews} Reviews</Text>
                     <TouchableHighlight
+                        style={styles.yelpURLButton}
+                        underlayColor='white'
+                        onPress={this.viewYelp.bind(this)}
+                        >
+                        <Text style={styles.yelpURLText}>View on Yelp</Text>
+                    </TouchableHighlight>
+                  </View>
+                </View>
+                  <Text style={styles.address}>{address}</Text>
+                  {directions}
+                </View>
+                <TouchableHighlight
                         style={styles.phoneButton}
                         underlayColor='white'
                         onPress={this.callLocation.bind(this)}
                         > 
                         <Text style={styles.phoneText}>{displayPhone}</Text>
-                    </TouchableHighlight>
-                    <View style={styles.separator}/>
-                </View>
-                <View style={styles.textContainer}>
-                <View style={styles.yelpInfo}>
-                  <Text style={styles.reviewCount}>{reviews} Reviews</Text>
-                  <Image style={styles.stars} source={{ uri: result.rating_img_url }} />
-
-                  <TouchableHighlight
-                      style={styles.yelpURLButton}
-                      underlayColor='white'
-                      onPress={this.viewYelp.bind(this)}
-                      >
-                      <Text style={styles.yelpURLText}>View on Yelp</Text>
-                  </TouchableHighlight>
-
-                </View>
-                  <Text style={styles.address}>{address}</Text>
-                  {directions}
-                </View>
+                </TouchableHighlight>
             </View>
         );
 
