@@ -15,7 +15,8 @@ const {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 65
+        flex: 1,
+        marginTop: 65,
     },
     heading: {
         backgroundColor: 'white',
@@ -37,6 +38,13 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row'
     },
+    ctaButtonContainer: {
+        position: 'absolute',
+        flex: 1,
+        bottom: 0,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
     yelpURLButton: {
     },
     yelpURLText: {
@@ -45,8 +53,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Open Sans'
     },
     image: {
-        width: 400,
-        height: 250
+        width: 375,
+        height: 250,
     },
     textContainer: {
         margin: 10
@@ -62,11 +70,13 @@ const styles = StyleSheet.create({
     phoneText: {
         fontSize: 20,
         fontFamily: 'Open Sans',
-        color: 'blue'
+        color: 'blue',
+        backgroundColor: 'pink'
     },
     phoneButton: {
-        marginLeft: 10,
-        marginBottom: 5
+        borderColor: 'blue',
+        borderWidth: 1,
+        padding: 5
     },
     description: {
         fontSize: 18,
@@ -105,10 +115,13 @@ const styles = StyleSheet.create({
         marginRight: 5
     },
     tapDirections: {
-        marginTop: 5,
         fontSize: 20,
+        padding: 5,
         fontFamily: 'Open Sans',
-        color: 'blue'
+        color: 'blue',
+        backgroundColor: 'green',
+        borderColor: 'blue',
+        borderWidth: 1
     },
     yelpInfo: {
         marginBottom: 10
@@ -174,7 +187,7 @@ class SingleResult extends Component {
             onPress={this.getDirections.bind(this)}
           >
           <Text style={styles.tapDirections}>
-            Get directions
+            Directions
           </Text>
           </TouchableHighlight>) : <Text></Text>;
         const picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
@@ -209,17 +222,19 @@ class SingleResult extends Component {
                 </View>
                 <View style={styles.staticInfoContainer}>
                   <Image style={styles.phoneGlyph} source={ phoneGlyph }/>
-                  <Text style={styles.staticPhone}>703-209-1234</Text>
+                  <Text style={styles.staticPhone}>{displayPhone}</Text>
                 </View>
-                  {directions}
                 </View>
-                <TouchableHighlight
-                        style={styles.phoneButton}
-                        underlayColor='white'
-                        onPress={this.callLocation.bind(this)}
-                        > 
-                        <Text style={styles.phoneText}>{displayPhone}</Text>
-                </TouchableHighlight>
+                <View style={styles.ctaButtonContainer}>
+                    {directions}
+                  <TouchableHighlight
+                          style={styles.phoneButton}
+                          underlayColor='white'
+                          onPress={this.callLocation.bind(this)}
+                          > 
+                          <Text style={styles.phoneText}>Call</Text>
+                  </TouchableHighlight>
+                </View>
             </View>
         );
 
