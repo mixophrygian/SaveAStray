@@ -27,6 +27,7 @@ class SearchPage extends Component {
             searchString: '91405',
             isLoading: false,
             message: '',
+            description: 'Search for rescue shelters by city or zip code',
             visibleHeight: Dimensions.get('window').height,
             keyboardMargin: 0
         };
@@ -58,7 +59,7 @@ class SearchPage extends Component {
             .catch(error =>
                 this.setState({
                     isLoading: false,
-                    message: 'Something bad happened ' + error
+                    message: 'Please try again. ' + error
                 }));
     }
 
@@ -79,14 +80,14 @@ class SearchPage extends Component {
             error => {
               console.log('error');
                 this.setState({
-                    message: 'GPS unavailable.'
+                    message: 'GPS currently unavailable.'
                 });
                 console.log(error);
             });
     }
 
     _handleResponse(response) {
-        this.setState({ isLoading: false, message: ''});
+        this.setState({ isLoading: false, message: '', description: 'Search for rescue shelters by city or zip code'});
         if (response.total > 0) {
             this.props.navigator.push({
                 title: 'Results',
@@ -94,7 +95,7 @@ class SearchPage extends Component {
                 passProps: { results: response.businesses }
             });
         } else {
-            this.setState({ message: 'Results not found; please try again.'});
+            this.setState({ description: 'Results not found; try broadening your search.'});
         }
     }
 
@@ -142,7 +143,7 @@ class SearchPage extends Component {
                      <Text style={styles.buttonText}>Current Location</Text>
                </TouchableHighlight> 
                 <Text style={styles.description}>
-                Search for rescue shelters by city or zip code
+                { this.state.description }
                 </Text>
                 <Text style={styles.description}>{this.state.message}</Text>
                 {spinner}
