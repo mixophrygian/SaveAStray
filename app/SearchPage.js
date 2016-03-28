@@ -15,7 +15,8 @@ const {
     Image,
     Component,
     Dimensions,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    LayoutAnimation
 } = React;
 
 class SearchPage extends Component {
@@ -40,10 +41,12 @@ class SearchPage extends Component {
     }
 
     showKeyboard(event) {
+      LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
       this.setState({ keyboardMargin: 180 });
     }
 
     hideKeyboard() {
+      LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
       this.setState({ keyboardMargin: 0 });
     }
 
@@ -62,7 +65,6 @@ class SearchPage extends Component {
     onSearchPressed() {
         var query = yelp.request_yelp(this.state.searchString);
         this._executeQuery(query);
-        //this._handleResponse(tempJson);
     }
 
     onLocationPressed() {
@@ -152,6 +154,33 @@ class SearchPage extends Component {
 
 var ButtonInputHeight = 46;
 var ButtonUnderlayColor = 'rgba(171, 199, 212)';
+
+var animations = {
+    layout: {
+        spring: {
+            duration: 400,
+            create: {
+              duration: 300,
+              type: LayoutAnimation.Types.easeInEaseOut,
+              property: LayoutAnimation.Properties.opacity,
+            },
+        update: {
+            type: LayoutAnimation.Types.spring,
+            springDamping: 400,
+          },
+    },
+    easeInEaseOut: {
+       duration: 400,
+       create: {
+         type: LayoutAnimation.Types.easeInEaseOut,
+         property: LayoutAnimation.Properties.scaleXY,
+       },
+       update: {
+        type: LayoutAnimation.Types.easeInEaseOut,
+        },
+     },
+    },
+};
                 
 var styles = StyleSheet.create({
     bigTitle: {
