@@ -22,9 +22,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		663A15721C96576500746CC0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 663A15711C96576500746CC0 /* assets */; };
-		663A15741C96576D00746CC0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 663A15731C96576D00746CC0 /* assets */; };
 		664FD2CE1CA244B1004999C7 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 664FD2CD1CA244B1004999C7 /* OpenSans-Regular.ttf */; };
 		6665BB731C8FEF10000987C7 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6665BB721C8FEF10000987C7 /* Base.lproj */; };
+		66D65A9A1CA8F2D700FE11B0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 66D65A991CA8F2D700FE11B0 /* assets */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -128,9 +128,9 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = iOS/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		663A15711C96576500746CC0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
-		663A15731C96576D00746CC0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		664FD2CD1CA244B1004999C7 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		6665BB721C8FEF10000987C7 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = iOS/Base.lproj; sourceTree = "<group>"; };
+		66D65A991CA8F2D700FE11B0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -239,7 +239,6 @@
 		13B07FAE1A68108700A75B9A /* PetRescue */ = {
 			isa = PBXGroup;
 			children = (
-				663A15731C96576D00746CC0 /* assets */,
 				6665BB721C8FEF10000987C7 /* Base.lproj */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -296,6 +295,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				66D65A991CA8F2D700FE11B0 /* assets */,
 				664FD2CD1CA244B1004999C7 /* OpenSans-Regular.ttf */,
 				13B07FAE1A68108700A75B9A /* PetRescue */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -517,10 +517,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				663A15741C96576D00746CC0 /* assets in Resources */,
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				663A15721C96576500746CC0 /* assets in Resources */,
 				6665BB731C8FEF10000987C7 /* Base.lproj in Resources */,
+				66D65A9A1CA8F2D700FE11B0 /* assets in Resources */,
 				664FD2CE1CA244B1004999C7 /* OpenSans-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
