@@ -8,10 +8,13 @@ const {
     Image,
     Linking,
     TouchableHighlight,
+    Dimensions,
     View,
     Text,
     Component
 } = React;
+
+const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     container: {
@@ -39,17 +42,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     ctaButtonContainer: {
+        width: width,
         position: 'absolute',
-        flex: 1,
         bottom: 0,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        alignItems: 'center',
+        justifyContent: 'center',
+
     },
     yelpURLButton: {
     },
     yelpURLText: {
-        color: 'blue',
-        fontSize: 10,
+        color:'#4775B7',
+        fontSize: 11,
         fontFamily: 'Open Sans'
     },
     image: {
@@ -67,17 +72,6 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginLeft: 10
     },
-    phoneText: {
-        fontSize: 20,
-        fontFamily: 'Open Sans',
-        color: 'blue',
-        backgroundColor: 'pink'
-    },
-    phoneButton: {
-        borderColor: 'blue',
-        borderWidth: 1,
-        padding: 5
-    },
     description: {
         fontSize: 18,
         fontFamily: 'Open Sans',
@@ -86,14 +80,20 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     address: {
-        fontSize: 10,
+        fontSize: 11,
         fontFamily: 'Open Sans',
         marginTop: 0,
     },
     staticPhone: {
-        fontSize: 10,
+        fontSize: 11,
         fontFamily: 'Open Sans',
         marginTop: 5,
+    },
+    phoneUnavailable: {
+        fontSize: 11,
+        fontFamily: 'Open Sans',
+        marginTop: 5,
+        color: 'gray'
     },
     pinGlyph: {
         width: 12,
@@ -105,23 +105,53 @@ const styles = StyleSheet.create({
         height: 12,
         marginRight: 6,
         marginTop: 5,
-
     }, 
     reviewCount: {
-        fontSize: 10,
+        fontSize: 11,
         fontFamily: 'Open Sans',
         color: '#656565',
         marginBottom: 3,
         marginRight: 5
     },
     tapDirections: {
+        width: width / 2,
+        height: 52,
+        paddingTop:10,
         fontSize: 20,
-        padding: 5,
         fontFamily: 'Open Sans',
-        color: 'blue',
-        backgroundColor: 'green',
-        borderColor: 'blue',
-        borderWidth: 1
+        color: 'white',
+        backgroundColor: '#6B97D3',
+        textAlign: 'center'
+    },
+    tapDirectionsDisabled: {
+        width: width / 2,
+        height: 52,
+        paddingTop:10,
+        fontSize: 20,
+        fontFamily: 'Open Sans',
+        color: '#818181',
+        backgroundColor: '#DDDCDD',
+        textAlign: 'center'
+    },
+    phoneButton: {            
+        width: width / 2,
+        height: 52,
+        paddingTop:10,
+        fontSize: 20,
+        fontFamily: 'Open Sans',
+        color: 'white',
+        backgroundColor: '#2C599C',
+        textAlign: 'center'
+    },
+    phoneButtonDisabled: {
+        width: width / 2,
+        height: 52,
+        paddingTop:10,
+        fontSize: 20,
+        fontFamily: 'Open Sans',
+        backgroundColor: '#A0A0A0',
+        color: '#DADADA',
+        textAlign: 'center'
     },
     yelpInfo: {
         marginBottom: 10
@@ -153,12 +183,18 @@ class SingleResult extends Component {
         const reviews = result.review_count;
         const starsURL = result.rating_img_url;
         const name = result.name;
-        const displayPhone = result.display_phone ? result.display_phone.slice(3) : '';
+        const displayPhone = result.display_phone ? 
+            (<Text style={styles.staticPhone}>{result.display_phone.slice(3)}</Text>)
+          : (<Text style={styles.phoneUnavailable}>Phone Number Unavailable</Text>);
+        
         const displayAddress = result.location.display_address;
         let address = displayAddress.join(', ');
 
         //If the area name is redundant with the city name, strip it out.
         switch (displayAddress.length) {
+          case 0:
+            address = "Address Unavailable";
+            break;
           case 1:
             break;
           case 2:
@@ -174,6 +210,8 @@ class SingleResult extends Component {
           case 4:
               if(displayAddress[2] == displayAddress[3].split(',')[0] ) {
                 address = [displayAddress[0], displayAddress[1], displayAddress[3]].join(', ');
+              } else {
+                address = [displayAddress[0], displayAddress[1], displayAddress[2]].join(', ') + '\n' + displayAddress[3];
               };
             break;
           default:
@@ -182,6 +220,14 @@ class SingleResult extends Component {
         const tempImage = require('./../images/catnose.jpg');
         const pinGlyph = require('./../images/pin.png');
         const phoneGlyph = require('./../images/phone.png');
+        const phoneNumber = '';
+        const phoneButton = result.display_phone ? (<TouchableHighlight
+                          underlayColor='white'
+                          onPress={this.callLocation.bind(this)}
+                          > 
+                          <Text style={styles.phoneButton}>Call</Text>
+                  </TouchableHighlight>) : 
+          (<Text style={styles.phoneButtonDisabled}>Call</Text>);
         const directions = displayAddress[0].split(',')[0].search(/\d/) >= 0 ? (<TouchableHighlight
             underlayColor='white'
             onPress={this.getDirections.bind(this)}
@@ -189,7 +235,7 @@ class SingleResult extends Component {
           <Text style={styles.tapDirections}>
             Directions
           </Text>
-          </TouchableHighlight>) : <Text></Text>;
+          </TouchableHighlight>) : <Text style={styles.tapDirectionsDisabled}>Directions</Text>;
         const picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
 
         return (
@@ -222,18 +268,12 @@ class SingleResult extends Component {
                 </View>
                 <View style={styles.staticInfoContainer}>
                   <Image style={styles.phoneGlyph} source={ phoneGlyph }/>
-                  <Text style={styles.staticPhone}>{displayPhone}</Text>
+                  {displayPhone}
                 </View>
                 </View>
                 <View style={styles.ctaButtonContainer}>
+                    {phoneButton}
                     {directions}
-                  <TouchableHighlight
-                          style={styles.phoneButton}
-                          underlayColor='white'
-                          onPress={this.callLocation.bind(this)}
-                          > 
-                          <Text style={styles.phoneText}>Call</Text>
-                  </TouchableHighlight>
                 </View>
             </View>
         );
