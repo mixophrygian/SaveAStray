@@ -4,7 +4,7 @@ import SearchPage from './app/SearchPage';
 
 //the navigationBarHidden thing depends on a change to react-native code: from this.props.navigationBarHidden to route.navigationBarHidden.  Within node_modules/react-native/Libraries/Components/Navigation/NavigatorIOS.ios.js. 
 
-class PetRescue extends React.Component {
+class StrayRescue extends React.Component {
     render() {
         return ( 
             <React.NavigatorIOS 
@@ -20,7 +20,7 @@ class PetRescue extends React.Component {
     }
 }
 
-React.AppRegistry.registerComponent('PetRescue', function() { return PetRescue });
+React.AppRegistry.registerComponent('Stray Rescue', function() { return StrayRescue });
 
 const styles = React.StyleSheet.create({
     container: {
