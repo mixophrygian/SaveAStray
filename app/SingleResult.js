@@ -50,9 +50,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     addressAndNumber: {
-        borderColor: 'red',
-        borderWidth: 1,
-        bottom: 0
+        bottom: 0,
+        marginTop: 5,
     },
     ctaButtonContainer: {
         width: width - 20,
@@ -70,10 +69,12 @@ const styles = StyleSheet.create({
     },
     image: {
         width: width - 20,
-        height: (height / 3),
+        height: (height / 2.7),
     },
     textContainer: {
-        margin: 10
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 6
     },
     name: {
         fontSize: 20,
@@ -81,13 +82,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
         marginTop: 5,
-        marginLeft: 10
+        marginLeft: 10,
+        marginBottom: 4
     },
     description: {
         fontSize: 11,
         fontFamily: 'Open Sans',
         color: '#656565',
-        marginTop: 10,
+        marginBottom: 10,
     },
     address: {
         fontSize: 11,
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     yelpInfo: {
-        marginBottom: 10
+        marginBottom: 10,
     }
 });
 
@@ -190,7 +192,7 @@ class SingleResult extends Component {
     }
 
     render() {
-      console.log('height: ' + height);
+        console.log('height: ' + height);
         const result = this.props.result[0];
         console.log(result);
         const reviews = result.review_count;
@@ -202,6 +204,7 @@ class SingleResult extends Component {
         
         const displayAddress = result.location.display_address;
         let address = displayAddress.join(', ');
+        console.log('address: ' + address);
 
         //If the area name is redundant with the city name, strip it out.
         switch (displayAddress.length) {
@@ -209,6 +212,7 @@ class SingleResult extends Component {
             address = "Address Unavailable";
             break;
           case 1:
+            //address = displayAddress[0].split(', ').join('\n');
             break;
           case 2:
             if(displayAddress[0] == displayAddress[1].split(',')[0]){
@@ -219,15 +223,23 @@ class SingleResult extends Component {
               if(displayAddress[1] == displayAddress[2].split(',')[0]) {
                 address = [displayAddress[0], displayAddress[2]].join(', ');
               };
+              if(displayAddress[1].length + displayAddress[2].length + displayAddress[0].length > 40) {
+                address = [displayAddress[0], displayAddress[1]].join(', ') + '\n' + displayAddress[2];
+              };
               break;
           case 4:
               if(displayAddress[2] == displayAddress[3].split(',')[0] ) {
                 address = [displayAddress[0], displayAddress[1], displayAddress[3]].join(', ');
-              } else {
+              }else {
                 address = [displayAddress[0], displayAddress[1], displayAddress[2]].join(', ') + '\n' + displayAddress[3];
               };
             break;
+          case 5:
+            address = [displayAddress[0], displayAddress[1], displayAddress[2]].join(', ') + '\n' + [displayAddress[3], displayAddress[4]].join(', ');
+            break;
+
           default:
+                
             break;
          };
         const tempImage = require('./../images/catnose.jpg');
@@ -243,7 +255,7 @@ class SingleResult extends Component {
           (<Text style={styles.phoneButtonDisabled}>Call</Text>);
         const warningBlurb = height > 500 ? (<View> 
                     <Text style={styles.description}>
-                        Warning this result has not been verified
+                    Call to verify hours of business and policies. Check out the humane society for tips on how to catch a stray. 
                     </Text>
                   </View>) : (<View></View>);
         const directions = displayAddress[0].split(',')[0].search(/\d/) >= 0 ? (<TouchableHighlight
