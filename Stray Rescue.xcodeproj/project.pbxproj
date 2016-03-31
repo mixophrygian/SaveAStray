@@ -24,6 +24,7 @@
 		663A15721C96576500746CC0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 663A15711C96576500746CC0 /* assets */; };
 		664FD2CE1CA244B1004999C7 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 664FD2CD1CA244B1004999C7 /* OpenSans-Regular.ttf */; };
 		6665BB731C8FEF10000987C7 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6665BB721C8FEF10000987C7 /* Base.lproj */; };
+		667A71771CACD59600BFC2D3 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 667A71761CACD59600BFC2D3 /* main.jsbundle */; };
 		66D65A9A1CA8F2D700FE11B0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 66D65A991CA8F2D700FE11B0 /* assets */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -130,6 +131,7 @@
 		663A15711C96576500746CC0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		664FD2CD1CA244B1004999C7 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		6665BB721C8FEF10000987C7 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = iOS/Base.lproj; sourceTree = "<group>"; };
+		667A71761CACD59600BFC2D3 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		66D65A991CA8F2D700FE11B0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				667A71761CACD59600BFC2D3 /* main.jsbundle */,
 				66D65A991CA8F2D700FE11B0 /* assets */,
 				664FD2CD1CA244B1004999C7 /* OpenSans-Regular.ttf */,
 				13B07FAE1A68108700A75B9A /* PetRescue */,
@@ -522,6 +525,7 @@
 				6665BB731C8FEF10000987C7 /* Base.lproj in Resources */,
 				66D65A9A1CA8F2D700FE11B0 /* assets in Resources */,
 				664FD2CE1CA244B1004999C7 /* OpenSans-Regular.ttf in Resources */,
+				667A71771CACD59600BFC2D3 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,7 +24,7 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchString: '91405',
+            searchString: 'Manhattan',
             isLoading: false,
             message: '',
             description: 'Search for rescue shelters by city or zip code',
