@@ -108,7 +108,7 @@ class SearchPage extends Component {
                 size='large'/>) :
             (<View style={styles.indicator}/>);
         return (
-        <Image style={styles.container} source={require('./../images/Stray_Dog_Bahamas.png')}>
+        <Image style={styles.container} source={{ uri: 'crosswalk', isStatic: true}}>
             <View style={[styles.content, {marginBottom: this.state.keyboardMargin}]}>
                 <Text style={styles.bigTitle}>
                   Save a </Text>

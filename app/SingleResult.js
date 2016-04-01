@@ -242,9 +242,9 @@ class SingleResult extends Component {
                 
             break;
          };
-        const tempImage = require('./../images/catnose.jpg');
-        const pinGlyph = require('./../images/pin.png');
-        const phoneGlyph = require('./../images/phone.png');
+        const tempImage = { uri: 'catnose', isStatic: true};
+        const pinGlyph = { uri: 'Pin', isStatic: true};
+        const phoneGlyph = { uri: 'Phone', isStatic: true};
         const phoneNumber = '';
         const phoneButton = result.display_phone ? (<TouchableHighlight
                           underlayColor='white'
