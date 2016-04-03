@@ -85,7 +85,7 @@ class SearchResults extends Component {
     renderRow(rowData, sectionID, rowID) {
         const name = rowData.name;
         const reviewCount = rowData.review_count;
-        const reviews = reviewCount + (reviewCount > 1 ? ' Reviews' : ' Review');
+        const reviews = reviewCount + (reviewCount != 1 ? ' Reviews' : ' Review');
         const rating = rowData.rating;
         const number = rowData.phone;
         let area = (rowData.location.neighborhoods || rowData.location.city);

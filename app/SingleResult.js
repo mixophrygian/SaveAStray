@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Open Sans',
         color: '#656565',
         marginBottom: 10,
+        marginTop: 5
     },
     address: {
         fontSize: 11,
@@ -196,11 +197,11 @@ class SingleResult extends Component {
         const result = this.props.result[0];
         console.log(result);
         const reviewCount = result.review_count;
-        const reviews = reviewCount + (reviewCount > 1 ? ' Reviews' : 'Review');
+        const reviews = reviewCount + (reviewCount != 1 ? ' Reviews' : ' Review');
         const starsURL = result.rating_img_url;
         const name = result.name;
         const displayPhone = result.display_phone ? 
-            (<Text style={styles.staticPhone}>{result.display_phone.slice(3)}</Text>)
+            (<Text style={styles.staticPhone}>{result.display_phone}</Text>)
           : (<Text style={styles.phoneUnavailable}>Phone Number Unavailable</Text>);
         
         const displayAddress = result.location.display_address;
