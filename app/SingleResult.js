@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         color: 'black',
         marginTop: 5,
         marginLeft: 10,
-        marginBottom: 4
+        marginBottom: 2
     },
     description: {
         fontSize: 11,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     yelpInfo: {
-        marginBottom: 10,
+        marginBottom: 0,
     }
 });
 
@@ -195,7 +195,8 @@ class SingleResult extends Component {
         console.log('height: ' + height);
         const result = this.props.result[0];
         console.log(result);
-        const reviews = result.review_count;
+        const reviewCount = result.review_count;
+        const reviews = reviewCount + (reviewCount > 1 ? ' Reviews' : 'Review');
         const starsURL = result.rating_img_url;
         const name = result.name;
         const displayPhone = result.display_phone ? 
@@ -283,7 +284,7 @@ class SingleResult extends Component {
                       <Image style={styles.stars} source={{ uri: result.rating_img_url }} />
 
                     <View style={styles.yelpText}>
-                      <Text style={styles.reviewCount}>{reviews} Reviews</Text>
+                      <Text style={styles.reviewCount}>{reviews}</Text>
                       <TouchableHighlight
                           style={styles.yelpURLButton}
                           underlayColor='white'
