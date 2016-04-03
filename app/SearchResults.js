@@ -90,7 +90,7 @@ class SearchResults extends Component {
         const number = rowData.phone;
         let area = (rowData.location.neighborhoods || rowData.location.city);
         area += ', ' + rowData.location.state_code;
-        const tempImage = require('./../images/catnose.jpg');
+        const tempImage = { uri: 'catnose', isStatic: true};
         const picture = rowData.image_url ? { uri: rowData.image_url } : tempImage;
 
         return (
