@@ -21,6 +21,41 @@ const {
 
 var windowHeight = Dimensions.get('window').height;
 
+var KEYBOARD_MARGIN = 220;
+
+var DESCRIPTION_MARGIN = 5;
+var DESCRIPTION_FONT = 16;
+var INPUTS_MARGIN = 0;
+var TITLE_MARGIN = 160;
+var TITLE_FONT_SIZE = 52;
+console.log(windowHeight);
+
+if(windowHeight <=  480) {
+  //iphone 4s size is default, 480 pixels
+};
+
+if(windowHeight > 480 && windowHeight <= 568) {
+  //iphone 5: 568 pixels
+    TITLE_MARGIN = 195;
+    TITLE_FONT_SIZE = 60;
+};
+
+if(windowHeight > 568 && windowHeight <= 667 ) {
+  //iphone 6: 667 pixels
+    TITLE_MARGIN = 255;
+    TITLE_FONT_SIZE = 70;
+    DESCRIPTION_MARGIN = 10;
+};
+
+if(windowHeight > 667 && windowHeight <= 736) {
+  //iphone 6 plus: 736 pixels
+    TITLE_MARGIN = 310;
+    TITLE_FONT_SIZE = 74;
+    DESCRIPTION_MARGIN = 40;
+    DESCRIPTION_FONT = 20;
+};
+ 
+
 class SearchPage extends Component {
 
     constructor(props) {
@@ -31,7 +66,8 @@ class SearchPage extends Component {
             message: '',
             description: 'Search for rescue shelters by city or zip code',
             visibleHeight: windowHeight,
-            keyboardMargin: 0
+            keyboardMargin: 0,
+            titleMargin: TITLE_MARGIN 
         };
     }
     componentWillMount() {
@@ -45,12 +81,18 @@ class SearchPage extends Component {
 
     showKeyboard(event) {
       LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
-      this.setState({ keyboardMargin: 180 });
+      this.setState({ 
+        keyboardMargin: KEYBOARD_MARGIN,
+        titleMargin: TITLE_MARGIN - KEYBOARD_MARGIN
+      });
     }
 
     hideKeyboard() {
       LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
-      this.setState({ keyboardMargin: 0 });
+      this.setState({ 
+        keyboardMargin: 0,
+        titleMargin: TITLE_MARGIN
+      });
     }
 
     _executeQuery(query) {
@@ -114,7 +156,7 @@ class SearchPage extends Component {
             <View style={[styles.content, {marginBottom: this.state.keyboardMargin}]}>
                 <Text style={styles.bigTitle}>
                   Save a </Text>
-                  <Text style={styles.bigTitle2}>
+                  <Text style={[styles.bigTitle2, {marginBottom: this.state.titleMargin}]}>
                   stray
                 </Text>
                 {spinner}
@@ -147,10 +189,11 @@ class SearchPage extends Component {
                     onPress={this.onLocationPressed.bind(this)}>
                      <Text style={styles.buttonText}>Current Location</Text>
                </TouchableHighlight> 
-                <Text style={styles.description}>
-                { this.state.description }
-                </Text>
-                <Text style={styles.description}>{this.state.message}</Text>
+               <View style={styles.descriptionContainer}>
+                  <Text style={styles.description}>
+                  { this.state.description }
+                  </Text>
+                </View>
             </View>
             </Image>
         );
@@ -189,44 +232,7 @@ var animations = {
 
   
 
-//4s: TITLE_MARGIN = 133, and FONT_SIZE = 55, DESCRIPTION_MARGIN = 0,
-//DESCRIPTION_FONT: 16
-//5: TITLE_MARGIN = 195, FONT_SIZE = 60, DESCRIPTION_MARGIN = 0, DESCRIPTION_FONT: 16
-//6: TITLE_MARGIN = 255, FONT_SIZE = 70, DESCRIPTION_MARGIN = 10, DESCRIPTION_FONT: 16
-//6+: TITLE_MARGIN = 290, FONT_SIZE = 74, DESCRIPTION_MARGIN = 10, DESCRIPTION_FONT: 20
-
-var DESCRIPTION_MARGIN = 0;
-var DESCRIPTION_FONT = 16;
-var INPUTS_MARGIN = 0;
-var TITLE_MARGIN = 133;
-var TITLE_FONT_SIZE = 55;
-console.log(windowHeight);
-
-if(windowHeight <=  480) {
-  //iphone 4s size is default, 480 pixels
-};
-
-if(windowHeight > 480 && windowHeight <= 568) {
-  //iphone 5: 568 pixels
-    TITLE_MARGIN = 195;
-    TITLE_FONT_SIZE = 60;
-};
-
-if(windowHeight > 568 && windowHeight <= 667 ) {
-  //iphone 6: 667 pixels
-    TITLE_MARGIN = 255;
-    TITLE_FONT_SIZE = 70;
-    DESCRIPTION_MARGIN = 10;
-};
-
-if(windowHeight > 667 && windowHeight <= 736) {
-  //iphone 6 plus: 736 pixels
-    TITLE_MARGIN = 290;
-    TITLE_FONT_SIZE = 74;
-    DESCRIPTION_MARGIN = 10;
-    DESCRIPTION_FONT = 20;
-};
-  
+ 
 var styles = StyleSheet.create({
     bigTitle: {
         fontSize: TITLE_FONT_SIZE,
@@ -250,19 +256,22 @@ var styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 12,
         lineHeight: TITLE_FONT_SIZE - 5, 
-        marginBottom: TITLE_MARGIN,
-
+    },
+    descriptionContainer: {
+        flex: 1,
+        backgroundColor: 'rgba(255, 251, 246, 0.4)',
+        paddingTop: 3,
+        marginTop: 0,
+        marginBottom: DESCRIPTION_MARGIN,
+        alignSelf: 'stretch',
+        justifyContent: 'center'
     },
     description: {
         fontFamily: 'Open Sans',
         fontSize: DESCRIPTION_FONT,
         textAlign: 'center',
         color: 'rgba(25, 19, 15, 1)',
-        shadowColor: 'white',
-        shadowOffset: {width: 0, height: 0},
-        shadowOpacity: 1,
-        shadowRadius: 6,
-        marginBottom: DESCRIPTION_MARGIN
+        lineHeight: DESCRIPTION_FONT
     },
     container: {
         flex: 1,
@@ -296,7 +305,7 @@ var styles = StyleSheet.create({
         height: ButtonInputHeight,
         backgroundColor: 'rgba(1,1,1,0.5)',
         borderRadius: 2,
-        marginBottom: 10,
+        marginBottom: 8,
         alignSelf: 'stretch',
         justifyContent: 'center'
     },
