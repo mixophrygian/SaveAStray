@@ -19,16 +19,18 @@ const {
     LayoutAnimation
 } = React;
 
+var windowHeight = Dimensions.get('window').height;
+
 class SearchPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            searchString: 'Manhattan',
+            searchString: '',
             isLoading: false,
             message: '',
             description: 'Search for rescue shelters by city or zip code',
-            visibleHeight: Dimensions.get('window').height,
+            visibleHeight: windowHeight,
             keyboardMargin: 0
         };
     }
@@ -112,9 +114,10 @@ class SearchPage extends Component {
             <View style={[styles.content, {marginBottom: this.state.keyboardMargin}]}>
                 <Text style={styles.bigTitle}>
                   Save a </Text>
-                <Text style={styles.bigTitle2}>
-                stray
+                  <Text style={styles.bigTitle2}>
+                  stray
                 </Text>
+                {spinner}
                     <View style={styles.flowRight}>
                     <TextInput
                         ref="TextInput"
@@ -127,8 +130,10 @@ class SearchPage extends Component {
                         onFocus={this.showKeyboard.bind(this)}
                         keyboardType={"default"}
                         keyboardAppearance={"dark"}
-                        placeholderTextColor='white'
+                        placeholderTextColor= 'rgba(171, 163, 149, 1)'
+                        selectionColor= 'rgba(255, 251, 246, 1)'
                         placeholder='City or zip code'/>
+
 
                     <TouchableHighlight 
                       onPress={this.onSearchPressed.bind(this)}
@@ -146,7 +151,6 @@ class SearchPage extends Component {
                 { this.state.description }
                 </Text>
                 <Text style={styles.description}>{this.state.message}</Text>
-                {spinner}
             </View>
             </Image>
         );
@@ -182,40 +186,83 @@ var animations = {
      },
     },
 };
-                
+
+  
+
+//4s: TITLE_MARGIN = 133, and FONT_SIZE = 55, DESCRIPTION_MARGIN = 0,
+//DESCRIPTION_FONT: 16
+//5: TITLE_MARGIN = 195, FONT_SIZE = 60, DESCRIPTION_MARGIN = 0, DESCRIPTION_FONT: 16
+//6: TITLE_MARGIN = 255, FONT_SIZE = 70, DESCRIPTION_MARGIN = 10, DESCRIPTION_FONT: 16
+//6+: TITLE_MARGIN = 290, FONT_SIZE = 74, DESCRIPTION_MARGIN = 10, DESCRIPTION_FONT: 20
+
+var DESCRIPTION_MARGIN = 0;
+var DESCRIPTION_FONT = 16;
+var INPUTS_MARGIN = 0;
+var TITLE_MARGIN = 133;
+var TITLE_FONT_SIZE = 55;
+console.log(windowHeight);
+
+if(windowHeight <=  480) {
+  //iphone 4s size is default, 480 pixels
+};
+
+if(windowHeight > 480 && windowHeight <= 568) {
+  //iphone 5: 568 pixels
+    TITLE_MARGIN = 195;
+    TITLE_FONT_SIZE = 60;
+};
+
+if(windowHeight > 568 && windowHeight <= 667 ) {
+  //iphone 6: 667 pixels
+    TITLE_MARGIN = 255;
+    TITLE_FONT_SIZE = 70;
+    DESCRIPTION_MARGIN = 10;
+};
+
+if(windowHeight > 667 && windowHeight <= 736) {
+  //iphone 6 plus: 736 pixels
+    TITLE_MARGIN = 290;
+    TITLE_FONT_SIZE = 74;
+    DESCRIPTION_MARGIN = 10;
+    DESCRIPTION_FONT = 20;
+};
+  
 var styles = StyleSheet.create({
     bigTitle: {
-        fontSize: 56,
+        fontSize: TITLE_FONT_SIZE,
         fontFamily: 'Open Sans',
         textAlign: 'center',
-        color: 'white',
+        color: 'rgba(255, 251, 246, 1)',
         shadowColor: 'black',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
-        shadowRadius: 10,
-        marginBottom: 0
+        shadowRadius: 12,
+        paddingBottom: 0,
+        
     },
     bigTitle2: {
         fontFamily: 'Open Sans',
-        fontSize: 56,
+        fontSize: TITLE_FONT_SIZE,
         textAlign: 'center',
-        color: 'white',
+        color: 'rgba(255, 251, 246, 1)',
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 0},
         shadowOpacity: 1,
-        shadowRadius: 10,
-        lineHeight: 50,
-        marginBottom: 13
+        shadowRadius: 12,
+        lineHeight: TITLE_FONT_SIZE - 5, 
+        marginBottom: TITLE_MARGIN,
+
     },
     description: {
         fontFamily: 'Open Sans',
-        fontSize: 20,
+        fontSize: DESCRIPTION_FONT,
         textAlign: 'center',
-        color: 'white',
-        shadowColor: 'black',
+        color: 'rgba(25, 19, 15, 1)',
+        shadowColor: 'white',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
-        shadowRadius: 6
+        shadowRadius: 6,
+        marginBottom: DESCRIPTION_MARGIN
     },
     container: {
         flex: 1,
@@ -226,32 +273,29 @@ var styles = StyleSheet.create({
         resizeMode: 'cover'
     },
     content: {
-        padding: 30,
-        paddingBottom: 0,
-        paddingTop: 0,
+        paddingLeft: 30,
+        paddingRight: 30,
         backgroundColor: 'rgba(0,0,0,0)',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     flowRight: {
         flexDirection: 'row',
         alignItems: 'center',
-        alignSelf: 'stretch'
+        alignSelf: 'stretch',
     },
     buttonText: {
         fontSize: 18,
         fontFamily: 'Open Sans',
-        color: 'white',
+        color: 'rgba(255, 251, 246, 1)',
         alignSelf: 'center'
     },
     button: {
         flex: 1,
         flexDirection: 'row',
         height: ButtonInputHeight,
-        backgroundColor: 'rgba(1,1,1,0.7)',
-        borderColor: 'white',
-        borderWidth: 1,
-        borderRadius: 8,
+        backgroundColor: 'rgba(1,1,1,0.5)',
+        borderRadius: 2,
         marginBottom: 10,
         alignSelf: 'stretch',
         justifyContent: 'center'
@@ -263,12 +307,10 @@ var styles = StyleSheet.create({
         flex: 4,
         fontFamily: 'Open Sans',
         fontSize: 20,
-        borderWidth: 1,
-        borderColor: 'white',
-        backgroundColor: 'rgba(1,1,1,0.4)',
-        borderRadius: 8,
-        color: 'white',
-        paddingLeft: 15
+        backgroundColor: 'rgba(1,1,1,0.5)',
+        borderRadius: 2,
+        color: 'rgba(255, 251, 246, 1)',
+        paddingLeft: 15,
     },
     indicator: {
         marginTop: 0,
