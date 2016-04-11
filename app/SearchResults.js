@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         width: 90,
         height: 90,
         marginRight: 10,
-        backgroundColor: 'gray'
+        backgroundColor: 'rgb(204, 204, 204)'
     },
     textContainer: {
         flex: 1
