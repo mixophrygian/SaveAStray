@@ -44,7 +44,8 @@ if(windowHeight > 568 && windowHeight <= 667 ) {
   //iphone 6: 667 pixels
     TITLE_MARGIN = 255;
     TITLE_FONT_SIZE = 70;
-    DESCRIPTION_MARGIN = 10;
+    DESCRIPTION_FONT = 18;
+    DESCRIPTION_MARGIN = 24;
 };
 
 if(windowHeight > 667 && windowHeight <= 736) {
@@ -259,7 +260,6 @@ var styles = StyleSheet.create({
     },
     descriptionContainer: {
         flex: 1,
-        backgroundColor: 'rgba(255, 251, 246, 0.4)',
         paddingTop: 3,
         marginTop: 0,
         marginBottom: DESCRIPTION_MARGIN,
@@ -270,7 +270,11 @@ var styles = StyleSheet.create({
         fontFamily: 'Open Sans',
         fontSize: DESCRIPTION_FONT,
         textAlign: 'center',
-        color: 'rgba(25, 19, 15, 1)',
+        color: 'rgba(255, 251, 246, 1)',
+        shadowColor: 'rgba(25, 19, 15, 1)',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 1,
+        shadowRadius: 4,
         lineHeight: DESCRIPTION_FONT
     },
     container: {
