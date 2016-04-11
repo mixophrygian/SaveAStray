@@ -38,6 +38,7 @@ if(windowHeight > 480 && windowHeight <= 568) {
   //iphone 5: 568 pixels
     TITLE_MARGIN = 195;
     TITLE_FONT_SIZE = 60;
+    DESCRIPTION_MARGIN = 8;
 };
 
 if(windowHeight > 568 && windowHeight <= 667 ) {
@@ -62,7 +63,7 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchString: '',
+            searchString: 'Edinburgh',
             isLoading: false,
             message: '',
             description: 'Search for rescue shelters by city or zip code',

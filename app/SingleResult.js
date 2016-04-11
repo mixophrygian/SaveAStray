@@ -63,8 +63,6 @@ const styles = StyleSheet.create({
         left: 0,
         flexDirection: 'row',
     },
-    yelpURLButton: {
-    },
     yelpURLText: {
         color:'#4775B7',
         fontSize: 11,
@@ -182,6 +180,11 @@ class SingleResult extends Component {
         Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
 
+    viewHumaneSociety() {
+      const url = 'http://www.humanesociety.org/animals/resources/tips/what_to_do_stray_pet.html';
+      Linking.openURL(url).catch(err => console.error('An error occurred', err));
+    }
+
     callLocation() {
         const phone = this.props.result[0].phone;
         Communications.phonecall(phone, true);
@@ -221,7 +224,13 @@ class SingleResult extends Component {
           (<Text style={styles.phoneButtonDisabled}>Call</Text>);
         const warningBlurb = height > 500 ? (<View> 
                     <Text style={styles.description}>
-                    Call to verify hours of business and policies. Check out the humane society for tips on how to catch a stray. 
+                    Call to verify hours of business and policies. Check out <Text
+                      style={styles.yelpURLText}
+                      underlayColor='white' 
+                      onPress={this.viewHumaneSociety.bind(this)}
+                      >
+                       the humane society </Text>
+                     for tips on how to catch a stray. 
                     </Text>
                   </View>) : (<View></View>);
         const directions = displayAddress[0].split(',')[0].search(/\d/) >= 0 ? (<TouchableHighlight
@@ -251,7 +260,6 @@ class SingleResult extends Component {
                     <View style={styles.yelpText}>
                       <Text style={styles.reviewCount}>{reviews}</Text>
                       <TouchableHighlight
-                          style={styles.yelpURLButton}
                           underlayColor='white'
                           onPress={this.viewYelp.bind(this)}
                           >
