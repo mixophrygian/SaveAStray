@@ -3,6 +3,9 @@
 import React from 'react-native';
 import Communications from 'react-native-communications';
 
+import DisplayAddressParser from './../lib/display_address_parser';
+
+
 const { 
     StyleSheet,
     Image,
@@ -203,47 +206,8 @@ class SingleResult extends Component {
         const displayPhone = result.display_phone ? 
             (<Text style={styles.staticPhone}>{result.display_phone}</Text>)
           : (<Text style={styles.phoneUnavailable}>Phone Number Unavailable</Text>);
-        
-        const displayAddress = result.location.display_address;
-        let address = displayAddress.join(', ');
-        console.log('address: ' + address);
-
-        //If the area name is redundant with the city name, strip it out.
-        switch (displayAddress.length) {
-          case 0:
-            address = "Address Unavailable";
-            break;
-          case 1:
-            //address = displayAddress[0].split(', ').join('\n');
-            break;
-          case 2:
-            if(displayAddress[0] == displayAddress[1].split(',')[0]){
-              address = displayAddress[1];
-            };
-              break;
-          case 3:
-              if(displayAddress[1] == displayAddress[2].split(',')[0]) {
-                address = [displayAddress[0], displayAddress[2]].join(', ');
-              };
-              if(displayAddress[1].length + displayAddress[2].length + displayAddress[0].length > 40) {
-                address = [displayAddress[0], displayAddress[1]].join(', ') + '\n' + displayAddress[2];
-              };
-              break;
-          case 4:
-              if(displayAddress[2] == displayAddress[3].split(',')[0] ) {
-                address = [displayAddress[0], displayAddress[1], displayAddress[3]].join(', ');
-              }else {
-                address = [displayAddress[0], displayAddress[1], displayAddress[2]].join(', ') + '\n' + displayAddress[3];
-              };
-            break;
-          case 5:
-            address = [displayAddress[0], displayAddress[1], displayAddress[2]].join(', ') + '\n' + [displayAddress[3], displayAddress[4]].join(', ');
-            break;
-
-          default:
-                
-            break;
-         };
+         
+        const displayAddress = DisplayAddressParser(result.location.display_address);
         const tempImage = { uri: 'catnose', isStatic: true};
         const pinGlyph = { uri: 'Pin', isStatic: true};
         const phoneGlyph = { uri: 'Phone', isStatic: true};
@@ -299,7 +263,7 @@ class SingleResult extends Component {
                 <View style={styles.addressAndNumber}>
                     <View style={styles.staticInfoContainer}>
                       <Image style={styles.pinGlyph} source={ pinGlyph }/>
-                      <Text style={styles.address}>{address}</Text>
+                      <Text style={styles.address}>{displayAddress}</Text>
                     </View>
                     <View style={styles.staticInfoContainer}>
                       <Image style={styles.phoneGlyph} source={ phoneGlyph }/>
