@@ -43,6 +43,12 @@ if(height > 568 && height <= 667) {
 
 if(height > 667 && height <= 736) {
   //iphone 6 plus
+  YELP_INFO_MARGIN_BOTTOM = 12;
+  WARNING_MARGIN_BOTTOM = 20;
+  SMALLER_FONT = 12;
+  DESCRIPTION_FONT = 16;
+  NAME_FONT = 24;
+
 };
 
 const styles = StyleSheet.create({
