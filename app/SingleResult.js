@@ -20,6 +20,31 @@ const {
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
+let WARNING_MARGIN_TOP = 5;
+let WARNING_MARGIN_BOTTOM = 10;
+let ADDRESS_MARGIN = 5;
+let YELP_INFO_MARGIN_BOTTOM = 0;
+let DESCRIPTION_FONT = 11;
+let SMALLER_FONT = 11;
+let NAME_FONT = 20;
+
+if(height <= 568) {
+  //styling defaults for iPhone 4s and 5
+};
+
+if(height > 568 && height <= 667) {
+  //iphone 6 styles
+  YELP_INFO_MARGIN_BOTTOM = 12;
+  WARNING_MARGIN_BOTTOM = 20;
+  DESCRIPTION_FONT = 14;
+  NAME_FONT = 22;
+
+};
+
+if(height > 667 && height <= 736) {
+  //iphone 6 plus
+};
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -38,23 +63,20 @@ const styles = StyleSheet.create({
     stars: {
         width: 84,
         height: 17,
-    },
-    separator: {
-        height: 1,
-        backgroundColor: '#DDDDDD'
-    },
+    }, 
     yelpText: {
         flex: 1,
         flexDirection: 'row',
-        marginTop: 5
+        marginTop: 5,
+        marginBottom: YELP_INFO_MARGIN_BOTTOM,
     },
     staticInfoContainer: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     addressAndNumber: {
         bottom: 0,
-        marginTop: 5,
+        marginTop: ADDRESS_MARGIN,
     },
     ctaButtonContainer: {
         width: width - 20,
@@ -65,7 +87,12 @@ const styles = StyleSheet.create({
     },
     yelpURLText: {
         color:'#4775B7',
-        fontSize: 11,
+        fontSize: SMALLER_FONT,
+        fontFamily: 'Open Sans'
+    },
+    humaneSocietyURL: {
+        color: '#4775B7',
+        fontSize: DESCRIPTION_FONT,
         fontFamily: 'Open Sans'
     },
     image: {
@@ -78,7 +105,7 @@ const styles = StyleSheet.create({
         marginTop: 6
     },
     name: {
-        fontSize: 20,
+        fontSize: NAME_FONT,
         fontFamily: 'Open Sans',
         fontWeight: 'bold',
         color: 'black',
@@ -87,24 +114,24 @@ const styles = StyleSheet.create({
         marginBottom: 2
     },
     description: {
-        fontSize: 11,
+        fontSize: DESCRIPTION_FONT,
         fontFamily: 'Open Sans',
         color: '#656565',
-        marginBottom: 10,
-        marginTop: 5
+        marginBottom: WARNING_MARGIN_BOTTOM,
+        marginTop: WARNING_MARGIN_TOP,
     },
     address: {
-        fontSize: 11,
+        fontSize: SMALLER_FONT,
         fontFamily: 'Open Sans',
         marginTop: 0,
     },
     staticPhone: {
-        fontSize: 11,
+        fontSize: SMALLER_FONT,
         fontFamily: 'Open Sans',
         marginTop: 5,
     },
     phoneUnavailable: {
-        fontSize: 11,
+        fontSize: DESCRIPTION_FONT,
         fontFamily: 'Open Sans',
         marginTop: 5,
         color: 'gray'
@@ -121,7 +148,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     }, 
     reviewCount: {
-        fontSize: 11,
+        fontSize: SMALLER_FONT,
         fontFamily: 'Open Sans',
         color: '#656565',
         marginBottom: 3,
@@ -225,7 +252,7 @@ class SingleResult extends Component {
         const warningBlurb = height > 500 ? (<View> 
                     <Text style={styles.description}>
                     Call to verify hours of business and policies. Check out <Text
-                      style={styles.yelpURLText}
+                      style={styles.humaneSocietyURL}
                       underlayColor='white' 
                       onPress={this.viewHumaneSociety.bind(this)}
                       >
