@@ -93,6 +93,8 @@ const styles = StyleSheet.create({
     },
     yelpURLText: {
         color:'#4775B7',
+        paddingRight: 10,
+        paddingBottom: 4,
         fontSize: SMALLER_FONT,
         fontFamily: 'Open Sans'
     },
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     phoneUnavailable: {
-        fontSize: DESCRIPTION_FONT,
+        fontSize: SMALLER_FONT,
         fontFamily: 'Open Sans',
         marginTop: 5,
         color: 'gray'

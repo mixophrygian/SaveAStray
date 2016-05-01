@@ -67,9 +67,11 @@ class SearchPage extends Component {
             isLoading: false,
             message: '',
             description: 'Search for rescue shelters by city or zip code',
+            descriptionStyle: styles.description,
             visibleHeight: windowHeight,
             keyboardMargin: 0,
-            titleMargin: TITLE_MARGIN 
+            titleMargin: TITLE_MARGIN
+
         };
     }
     componentWillMount() {
@@ -133,7 +135,7 @@ class SearchPage extends Component {
     }
 
     _handleResponse(response) {
-        this.setState({ isLoading: false, message: '', description: 'Search for rescue shelters by city or zip code'});
+        this.setState({ isLoading: false, message: '', description: 'Search for rescue shelters by city or zip code', descriptionStyle: styles.description});
         if (response.total > 0) {
             this.props.navigator.push({
                 title: 'Results',
@@ -141,7 +143,7 @@ class SearchPage extends Component {
                 passProps: { results: response.businesses }
             });
         } else {
-            this.setState({ description: 'Results not found; try broadening your search.'});
+            this.setState({ description: 'Results not found; try broadening your search.', descriptionStyle: styles.tryAgain});
         }
     }
 
@@ -192,7 +194,7 @@ class SearchPage extends Component {
                      <Text style={styles.buttonText}>Current Location</Text>
                </TouchableHighlight> 
                <View style={styles.descriptionContainer}>
-                  <Text style={styles.description}>
+                  <Text style={this.state.descriptionStyle}>
                   { this.state.description }
                   </Text>
                 </View>
@@ -271,13 +273,25 @@ var styles = StyleSheet.create({
         fontFamily: 'Open Sans',
         fontSize: DESCRIPTION_FONT,
         textAlign: 'center',
-        color: 'rgba(255, 251, 246, 1)',
+        color: 'white',
         shadowColor: 'rgba(25, 19, 15, 1)',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
         shadowRadius: 4,
         lineHeight: DESCRIPTION_FONT
     },
+    tryAgain: {
+        fontFamily: 'Open Sans',
+        fontSize: DESCRIPTION_FONT,
+        textAlign: 'center',
+        color: 'white',
+        shadowColor: '#6B97D3',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        lineHeight: DESCRIPTION_FONT
+    },
+
     container: {
         flex: 1,
         flexDirection: 'column',
