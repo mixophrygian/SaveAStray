@@ -174,7 +174,7 @@ class SearchPage extends Component {
                         onChange={this.onSearchTextChanged.bind(this)}
                         returnKeyType={'search'}
                         onFocus={this.showKeyboard.bind(this)}
-                        keyboardType={"default"}
+                        keyboardType={"web-search"}
                         keyboardAppearance={"dark"}
                         placeholderTextColor= 'rgba(171, 163, 149, 1)'
                         selectionColor= 'rgba(255, 251, 246, 1)'
