@@ -2,6 +2,7 @@
 
 import React from 'react-native';
 import SingleResult from './SingleResult';
+import DisplayAddressParser from './../lib/display_address_parser';
 
 const {
     StyleSheet,
@@ -63,13 +64,24 @@ const styles = StyleSheet.create({
 
 class SearchResults extends Component {
 
+
     constructor(props) {
         super(props);
+        
+        var goodResults = this.props.results.filter(this.hasAddressOrNumber);
+
         let dataSource = new ListView.DataSource(
             {rowHasChanged: (r1, r2) => r1.id !== r2.id });
         this.state = {
-            dataSource: dataSource.cloneWithRows(this.props.results)
+            dataSource: dataSource.cloneWithRows(goodResults)
         };
+    }
+
+    hasAddressOrNumber(result){
+      var address = DisplayAddressParser(result.location.display_address);
+      var reachableAddress = address[0].split(',')[0].search(/\d/) >= 0 ? true : false;
+      var phone = result.display_phone || false;
+      return (reachableAddress || phone);
     }
 
     rowPressed(property) {
