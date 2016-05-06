@@ -20,12 +20,12 @@ const {
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-let WARNING_MARGIN_TOP = 5;
-let WARNING_MARGIN_BOTTOM = 10;
+let WARNING_MARGIN_TOP = 3;
+let WARNING_MARGIN_BOTTOM = 3;
 let ADDRESS_MARGIN = 5;
 let YELP_INFO_MARGIN_BOTTOM = 0;
-let DESCRIPTION_FONT = 11;
-let SMALLER_FONT = 11;
+let DESCRIPTION_FONT = 12;
+let SMALLER_FONT = 12;
 let NAME_FONT = 20;
 
 if(height <= 568) {
@@ -36,7 +36,7 @@ if(height > 568 && height <= 667) {
   //iphone 6 styles
   YELP_INFO_MARGIN_BOTTOM = 12;
   WARNING_MARGIN_BOTTOM = 20;
-  DESCRIPTION_FONT = 14;
+  DESCRIPTION_FONT = 15;
   NAME_FONT = 22;
 
 };
@@ -45,7 +45,7 @@ if(height > 667 && height <= 736) {
   //iphone 6 plus
   YELP_INFO_MARGIN_BOTTOM = 12;
   WARNING_MARGIN_BOTTOM = 20;
-  SMALLER_FONT = 12;
+  SMALLER_FONT = 14;
   DESCRIPTION_FONT = 16;
   NAME_FONT = 24;
 
@@ -67,13 +67,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     stars: {
-        width: 84,
-        height: 17,
+        width: 83,
+        height: 15,
     }, 
     yelpText: {
         flex: 1,
         flexDirection: 'row',
-        marginTop: 5,
+        marginTop: 3,
         marginBottom: YELP_INFO_MARGIN_BOTTOM,
     },
     staticInfoContainer: {
@@ -114,12 +114,12 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: NAME_FONT,
+        lineHeight: NAME_FONT + 2,
         fontFamily: 'Open Sans',
         fontWeight: 'bold',
         color: 'black',
-        marginTop: 5,
+        marginTop: 8,
         marginLeft: 10,
-        marginBottom: 2
     },
     description: {
         fontSize: DESCRIPTION_FONT,
@@ -239,7 +239,7 @@ class SingleResult extends Component {
         console.log(result);
         const reviewCount = result.review_count;
         const reviews = reviewCount + (reviewCount != 1 ? ' Reviews' : ' Review');
-        const starsURL = result.rating_img_url;
+        const starsURL = result.rating_img_url_large;
         const name = result.name;
         const displayPhone = result.display_phone ? 
             (<Text style={styles.staticPhone}>{result.display_phone}</Text>)
@@ -290,8 +290,7 @@ class SingleResult extends Component {
                   </View>
                   <View style={styles.textContainer}>
                   <View style={styles.yelpInfo}>
-                      <Image style={styles.stars} source={{ uri: result.rating_img_url }} />
-
+                    <Image style={styles.stars} source={{ uri: starsURL }} />
                     <View style={styles.yelpText}>
                       <Text style={styles.reviewCount}>{reviews}</Text>
                       <TouchableHighlight

@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     stars: {
-        width: 84,
-        height: 17,
+        width: 83,
+        height: 15,
         paddingLeft: 3
     },
     separator: {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         color: '#656565'
     },
     reviewCount: {
-        fontSize: 11,
+        fontSize: 13,
         fontFamily: 'Open Sans',
         marginBottom: 4,
         color: '#656565'
@@ -96,7 +96,7 @@ class SearchResults extends Component {
         return (
             <TouchableHighlight 
                 onPress={() => this.rowPressed(rowData)}
-                underlayColor='#dddddd'>
+                underlayColor='gray'>
             <View>
                 <View style={styles.rowContainer}>
                     <Image style={styles.thumb} defaultSource={{tempImage}} source={picture} />
@@ -106,7 +106,7 @@ class SearchResults extends Component {
                         <Text style={styles.reviewCount}
                             numberOfLines={1}>{reviews}
                         </Text>
-                        <Image style={styles.stars} source={{ uri: rowData.rating_img_url }} />
+                        <Image style={styles.stars} source={{ uri: rowData.rating_img_url_large }} />
                     </View>
                 </View>
             </View>
