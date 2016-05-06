@@ -36,8 +36,9 @@ if(height > 568 && height <= 667) {
   //iphone 6 styles
   YELP_INFO_MARGIN_BOTTOM = 12;
   WARNING_MARGIN_BOTTOM = 20;
-  DESCRIPTION_FONT = 15;
-  NAME_FONT = 22;
+  DESCRIPTION_FONT = 14;
+  SMALLER_FONT = 14
+  NAME_FONT = 23;
 
 };
 
