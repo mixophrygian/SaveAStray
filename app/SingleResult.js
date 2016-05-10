@@ -241,7 +241,10 @@ class SingleResult extends Component {
         const reviewCount = result.review_count;
         const reviews = reviewCount + (reviewCount != 1 ? ' Reviews' : ' Review');
         const starsURL = result.rating_img_url_large;
-        const name = result.name;
+        let name = result.name;
+        if(name.length > 50){
+          name = name.substring(0,50) + '...';
+        };
         const displayPhone = result.display_phone ? 
             (<Text style={styles.staticPhone}>{result.display_phone}</Text>)
           : (<Text style={styles.phoneUnavailable}>Phone Number Unavailable</Text>);
