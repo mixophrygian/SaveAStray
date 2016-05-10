@@ -81702,7 +81702,7 @@ SearchPage=function(_Component){babelHelpers.inherits(SearchPage,_Component);
 function SearchPage(props){babelHelpers.classCallCheck(this,SearchPage);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(SearchPage).call(this,
 props));
 _this.state={
-searchString:'22309',
+searchString:'',
 isLoading:false,
 message:'',
 description:'Search for rescue shelters by city or zip code',
@@ -89021,8 +89021,9 @@ if(height>568&&height<=667){
 
 YELP_INFO_MARGIN_BOTTOM=12;
 WARNING_MARGIN_BOTTOM=20;
-DESCRIPTION_FONT=15;
-NAME_FONT=22;}
+DESCRIPTION_FONT=14;
+SMALLER_FONT=14;
+NAME_FONT=23;}
 
 ;
 

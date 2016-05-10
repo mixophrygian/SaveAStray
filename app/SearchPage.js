@@ -63,7 +63,7 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchString: '22309',
+            searchString: '',
             isLoading: false,
             message: '',
             description: 'Search for rescue shelters by city or zip code',
@@ -120,7 +120,6 @@ class SearchPage extends Component {
         navigator.geolocation.getCurrentPosition(
             location => {
                 const search = location.coords.latitude + ',' + location.coords.longitude;
-                console.log(search);
                 this.setState({ searchString: ''});
                 const query = yelp.request_yelp(search);
                 this._executeQuery(query);
@@ -156,7 +155,7 @@ class SearchPage extends Component {
                 size='large'/>) :
             (<View style={styles.indicator}/>);
         return (
-        <Image style={styles.container} source={{ uri: 'tanpuppy', isStatic: true}}>
+        <Image style={styles.container} source={{ uri: 'bluepuppy', isStatic: true}}>
             <View style={[styles.content, {marginBottom: this.state.keyboardMargin}]}>
                 <Text style={styles.bigTitle}>
                   Save a </Text>
@@ -174,10 +173,10 @@ class SearchPage extends Component {
                         onChange={this.onSearchTextChanged.bind(this)}
                         returnKeyType={'search'}
                         onFocus={this.showKeyboard.bind(this)}
+                        blurOnSubmit={false}
                         keyboardType={"web-search"}
-                        keyboardAppearance={"dark"}
-                        placeholderTextColor= 'rgba(171, 163, 149, 1)'
-                        selectionColor= 'rgba(255, 251, 246, 1)'
+                        keyboardAppearance={"default"}
+                        placeholderTextColor= 'rgb(199,193,183)'
                         placeholder='City or zip code'/>
 
 
@@ -242,7 +241,7 @@ var styles = StyleSheet.create({
         fontSize: TITLE_FONT_SIZE,
         fontFamily: 'Open Sans',
         textAlign: 'center',
-        color: 'rgba(255, 251, 246, 1)',
+        color: 'white',
         shadowColor: 'black',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
@@ -254,7 +253,7 @@ var styles = StyleSheet.create({
         fontFamily: 'Open Sans',
         fontSize: TITLE_FONT_SIZE,
         textAlign: 'center',
-        color: 'rgba(255, 251, 246, 1)',
+        color: 'white',
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 0},
         shadowOpacity: 1,
@@ -315,14 +314,14 @@ var styles = StyleSheet.create({
     buttonText: {
         fontSize: 18,
         fontFamily: 'Open Sans',
-        color: 'rgba(255, 251, 246, 1)',
+        color: 'white',
         alignSelf: 'center'
     },
     button: {
         flex: 1,
         flexDirection: 'row',
         height: ButtonInputHeight,
-        backgroundColor: 'rgba(1,1,1,0.5)',
+        backgroundColor: 'rgba(107,151,212,0.7)',
         borderRadius: 2,
         marginBottom: 8,
         alignSelf: 'stretch',
@@ -335,9 +334,9 @@ var styles = StyleSheet.create({
         flex: 4,
         fontFamily: 'Open Sans',
         fontSize: 20,
-        backgroundColor: 'rgba(1,1,1,0.5)',
+        backgroundColor: 'rgba(18,44,93,0.7)',
         borderRadius: 2,
-        color: 'rgba(255, 251, 246, 1)',
+        color: 'white',
         paddingLeft: 15,
     },
     indicator: {
