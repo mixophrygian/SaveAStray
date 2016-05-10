@@ -81759,7 +81759,6 @@ this._executeQuery(query);}},{key:'onLocationPressed',value:function onLocationP
 navigator.geolocation.getCurrentPosition(
 function(location){
 var search=location.coords.latitude+','+location.coords.longitude;
-console.log(search);
 _this3.setState({searchString:''});
 var query=_yelp_api2.default.request_yelp(search);
 _this3._executeQuery(query);},
@@ -81795,7 +81794,7 @@ hidden:'true',
 size:'large'}):
 _reactNative2.default.createElement(View,{style:styles.indicator});
 return (
-_reactNative2.default.createElement(Image,{style:styles.container,source:{uri:'tanpuppy',isStatic:true}},
+_reactNative2.default.createElement(Image,{style:styles.container,source:{uri:'bluepuppy',isStatic:true}},
 _reactNative2.default.createElement(View,{style:[styles.content,{marginBottom:this.state.keyboardMargin}]},
 _reactNative2.default.createElement(Text,{style:styles.bigTitle},'Save a '),
 
@@ -81813,10 +81812,10 @@ onSubmitEditing:this.onSearchPressed.bind(this),
 onChange:this.onSearchTextChanged.bind(this),
 returnKeyType:'search',
 onFocus:this.showKeyboard.bind(this),
+blurOnSubmit:false,
 keyboardType:"web-search",
-keyboardAppearance:"dark",
-placeholderTextColor:'rgba(171, 163, 149, 1)',
-selectionColor:'rgba(255, 251, 246, 1)',
+keyboardAppearance:"default",
+placeholderTextColor:'rgb(199,193,183)',
 placeholder:'City or zip code'}),
 
 
@@ -81881,7 +81880,7 @@ bigTitle:{
 fontSize:TITLE_FONT_SIZE,
 fontFamily:'Open Sans',
 textAlign:'center',
-color:'rgba(255, 251, 246, 1)',
+color:'white',
 shadowColor:'black',
 shadowOffset:{width:0,height:0},
 shadowOpacity:1,
@@ -81893,7 +81892,7 @@ bigTitle2:{
 fontFamily:'Open Sans',
 fontSize:TITLE_FONT_SIZE,
 textAlign:'center',
-color:'rgba(255, 251, 246, 1)',
+color:'white',
 shadowColor:'black',
 shadowOffset:{width:0,height:0},
 shadowOpacity:1,
@@ -81954,14 +81953,14 @@ alignSelf:'stretch'},
 buttonText:{
 fontSize:18,
 fontFamily:'Open Sans',
-color:'rgba(255, 251, 246, 1)',
+color:'white',
 alignSelf:'center'},
 
 button:{
 flex:1,
 flexDirection:'row',
 height:ButtonInputHeight,
-backgroundColor:'rgba(1,1,1,0.5)',
+backgroundColor:'rgba(107,151,212,0.7)',
 borderRadius:2,
 marginBottom:8,
 alignSelf:'stretch',
@@ -81974,9 +81973,9 @@ marginRight:8,
 flex:4,
 fontFamily:'Open Sans',
 fontSize:20,
-backgroundColor:'rgba(1,1,1,0.5)',
+backgroundColor:'rgba(18,44,93,0.7)',
 borderRadius:2,
-color:'rgba(255, 251, 246, 1)',
+color:'white',
 paddingLeft:15},
 
 indicator:{
@@ -89227,6 +89226,9 @@ var reviewCount=result.review_count;
 var reviews=reviewCount+(reviewCount!=1?' Reviews':' Review');
 var starsURL=result.rating_img_url_large;
 var name=result.name;
+if(name.length>50){
+name=name.substring(0,50)+'...';}
+;
 var displayPhone=result.display_phone?
 _reactNative2.default.createElement(Text,{style:styles.staticPhone},result.display_phone):
 _reactNative2.default.createElement(Text,{style:styles.phoneUnavailable},'Phone Number Unavailable');
