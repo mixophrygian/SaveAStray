@@ -204,7 +204,7 @@ class SearchPage extends Component {
 };
 
 var ButtonInputHeight = 46;
-var ButtonUnderlayColor = 'rgba(171, 199, 212)';
+var ButtonUnderlayColor = 'rgba(18,44,93,0.7)';
 
 var animations = {
     layout: {

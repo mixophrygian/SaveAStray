@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     image: {
         width: width - 20,
         height: (height / 2.7),
+        backgroundColor: 'rgba(204,204,204,0.5)'
     },
     textContainer: {
         marginLeft: 10,
