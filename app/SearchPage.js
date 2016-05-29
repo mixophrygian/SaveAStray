@@ -19,16 +19,15 @@ const {
     LayoutAnimation
 } = React;
 
-var windowHeight = Dimensions.get('window').height;
+let windowHeight = Dimensions.get('window').height;
+let KEYBOARD_MARGIN = 220;
 
-var KEYBOARD_MARGIN = 220;
-
-var DESCRIPTION_MARGIN = 5;
-var DESCRIPTION_FONT = 16;
-var INPUTS_MARGIN = 0;
-var TITLE_MARGIN = 160;
-var TITLE_FONT_SIZE = 52;
-console.log(windowHeight);
+let DESCRIPTION_MARGIN = 5;
+let DESCRIPTION_FONT = 16;
+let INPUTS_MARGIN = 0;
+let TITLE_MARGIN = 160;
+let TITLE_FONT_SIZE = 52;
+console.log('window height', windowHeight);
 
 if(windowHeight <=  480) {
   //iphone 4s size is default, 480 pixels
@@ -85,17 +84,15 @@ class SearchPage extends Component {
 
     showKeyboard(event) {
       LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
-      this.setState({ 
-        keyboardMargin: KEYBOARD_MARGIN,
-        titleMargin: TITLE_MARGIN - KEYBOARD_MARGIN
+      this.setState({
+        keyboardMargin: KEYBOARD_MARGIN
       });
     }
 
     hideKeyboard() {
       LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
       this.setState({ 
-        keyboardMargin: 0,
-        titleMargin: TITLE_MARGIN
+        keyboardMargin: 0
       });
     }
 
@@ -142,7 +139,7 @@ class SearchPage extends Component {
                 passProps: { results: response.businesses }
             });
         } else {
-            this.setState({ description: 'Results not found; try broadening your search.', descriptionStyle: styles.tryAgain});
+            this.setState({ description: 'Hmmm that didn\'t work. Try again.', descriptionStyle: styles.tryAgain});
         }
     }
 
@@ -156,14 +153,15 @@ class SearchPage extends Component {
             (<View style={styles.indicator}/>);
         return (
         <Image style={styles.container} source={{ uri: 'bluepuppy', isStatic: true}}>
-            <View style={[styles.content, {marginBottom: this.state.keyboardMargin}]}>
-                <Text style={styles.bigTitle}>
-                  Save a </Text>
-                  <Text style={[styles.bigTitle2, {marginBottom: this.state.titleMargin}]}>
-                  stray
-                </Text>
+            <View style={[styles.content], {marginBottom: this.state.keyboardMargin}}>
+
                 {spinner}
-                    <View style={styles.flowRight}>
+
+                <TouchableHighlight style={styles.button} onPress={this.onLocationPressed.bind(this)}>
+                    <Text style={styles.currentLocationText}>CURRENT LOCATION</Text>
+                </TouchableHighlight> 
+
+                <View style={styles.flowRight}>
                     <TextInput
                         ref="TextInput"
                         style={styles.searchInput}
@@ -176,23 +174,17 @@ class SearchPage extends Component {
                         blurOnSubmit={false}
                         keyboardType={"web-search"}
                         keyboardAppearance={"default"}
-                        placeholderTextColor= 'rgb(199,193,183)'
-                        placeholder='City or zip code'/>
-
+                        placeholderTextColor= 'gray'
+                        placeholder='City or zip code'
+                    />
 
                     <TouchableHighlight 
                       onPress={this.onSearchPressed.bind(this)}
-                      style={styles.button}>
-                        <Text 
-                            style={styles.buttonText}
-                        >Go</Text>
+                      style={styles.goButton}>
+                        <Text style={styles.buttonText}>Go</Text>
                     </TouchableHighlight>
                 </View>
-                <TouchableHighlight style={styles.button}
-                    onPress={this.onLocationPressed.bind(this)}>
-                     <Text style={styles.buttonText}>Current Location</Text>
-               </TouchableHighlight> 
-               <View style={styles.descriptionContainer}>
+                <View style={styles.descriptionContainer}>
                   <Text style={this.state.descriptionStyle}>
                   { this.state.description }
                   </Text>
@@ -234,32 +226,9 @@ var animations = {
 };
 
   
-
+let PADDING = 40;
  
-var styles = StyleSheet.create({
-    bigTitle: {
-        fontSize: TITLE_FONT_SIZE,
-        fontFamily: 'Open Sans',
-        textAlign: 'center',
-        color: 'white',
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 0},
-        shadowOpacity: 1,
-        shadowRadius: 12,
-        paddingBottom: 0,
-        
-    },
-    bigTitle2: {
-        fontFamily: 'Open Sans',
-        fontSize: TITLE_FONT_SIZE,
-        textAlign: 'center',
-        color: 'white',
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 0},
-        shadowOpacity: 1,
-        shadowRadius: 12,
-        lineHeight: TITLE_FONT_SIZE - 5, 
-    },
+let styles = StyleSheet.create({
     descriptionContainer: {
         flex: 1,
         paddingTop: 3,
@@ -273,6 +242,9 @@ var styles = StyleSheet.create({
         fontSize: DESCRIPTION_FONT,
         textAlign: 'center',
         color: 'white',
+        paddingLeft: PADDING,
+        paddingRight: PADDING,
+        backgroundColor: 'transparent',
         shadowColor: 'rgba(25, 19, 15, 1)',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
@@ -284,6 +256,9 @@ var styles = StyleSheet.create({
         fontSize: DESCRIPTION_FONT,
         textAlign: 'center',
         color: 'white',
+        backgroundColor: 'transparent',
+        paddingLeft: PADDING,
+        paddingRight: PADDING,
         shadowColor: '#6B97D3',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
@@ -300,16 +275,20 @@ var styles = StyleSheet.create({
         resizeMode: 'cover'
     },
     content: {
-        paddingLeft: 30,
-        paddingRight: 30,
-        backgroundColor: 'rgba(0,0,0,0)',
         flexDirection: 'column',
         alignItems: 'center',
     },
     flowRight: {
         flexDirection: 'row',
         alignItems: 'center',
-        alignSelf: 'stretch',
+        marginRight: PADDING,
+        marginLeft: PADDING,
+    },
+    currentLocationText: {
+        color: '#122c5d',
+        fontSize: 18,
+        fontFamily: 'Open Sans',
+        alignSelf: 'center'
     },
     buttonText: {
         fontSize: 18,
@@ -317,12 +296,25 @@ var styles = StyleSheet.create({
         color: 'white',
         alignSelf: 'center'
     },
+    goButton: {
+        flex: 1,
+        flexDirection: 'row',
+        height: ButtonInputHeight,
+        backgroundColor: 'rgb(107,151,212)',
+        borderRadius: 40,
+        marginBottom: 8,
+        marginLeft: 8,
+        alignSelf: 'stretch',
+        justifyContent: 'center'
+    },
     button: {
         flex: 1,
         flexDirection: 'row',
         height: ButtonInputHeight,
-        backgroundColor: 'rgba(107,151,212,0.7)',
-        borderRadius: 2,
+        backgroundColor: '#b9c6d9',
+        borderRadius: 1,
+        marginRight: PADDING,
+        marginLeft: PADDING,
         marginBottom: 8,
         alignSelf: 'stretch',
         justifyContent: 'center'
@@ -330,13 +322,12 @@ var styles = StyleSheet.create({
     searchInput: {
         height: ButtonInputHeight,
         padding: 4,
-        marginRight: 8,
-        flex: 4,
+        flex: 6,
         fontFamily: 'Open Sans',
         fontSize: 20,
-        backgroundColor: 'rgba(18,44,93,0.7)',
+        backgroundColor: 'white',
         borderRadius: 2,
-        color: 'white',
+        color: 'black',
         paddingLeft: 15,
     },
     indicator: {
