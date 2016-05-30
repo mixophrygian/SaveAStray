@@ -2,10 +2,12 @@
   "images" : [
     {
       "idiom" : "iphone",
+      "filename" : "finalDog640x1136.png",
       "scale" : "1x"
     },
     {
       "idiom" : "iphone",
+      "filename" : "finalDog750x1334-alt.png",
       "scale" : "2x"
     },
     {

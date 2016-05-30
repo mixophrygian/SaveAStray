@@ -4,7 +4,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "736h",
-      "filename" : "SplashDogDraft-1242x2208.png",
+      "filename" : "finalDog1242x2208-Splash.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "3x"
@@ -13,8 +13,25 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "667h",
-      "filename" : "bluepuppy-750x1334.png",
+      "filename" : "finalDog750x1334-alt-Splash.png",
       "minimum-system-version" : "8.0",
+      "orientation" : "portrait",
+      "scale" : "2x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "iphone",
+      "filename" : "finalDog640x960-Splash.png",
+      "extent" : "full-screen",
+      "minimum-system-version" : "7.0",
+      "scale" : "2x"
+    },
+    {
+      "extent" : "full-screen",
+      "idiom" : "iphone",
+      "subtype" : "retina4",
+      "filename" : "finalDog640x1136-Splash.png",
+      "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
     }

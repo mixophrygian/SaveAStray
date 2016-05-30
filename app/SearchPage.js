@@ -22,38 +22,46 @@ const {
 let windowHeight = Dimensions.get('window').height;
 let KEYBOARD_MARGIN = 220;
 
-let DESCRIPTION_MARGIN = 5;
+let DESCRIPTION_MARGIN = 15;
 let DESCRIPTION_FONT = 16;
 let INPUTS_MARGIN = 0;
-let TITLE_MARGIN = 160;
-let TITLE_FONT_SIZE = 52;
+let INPUT_FLEX = 4;
+let BUTTON_INPUT_HEIGHT = 40;
+let BUTTON_INPUT_FONT = 16;
+let PADDING = 40;
+
 console.log('window height', windowHeight);
 
 if(windowHeight <=  480) {
   //iphone 4s size is default, 480 pixels
+  
 };
 
 if(windowHeight > 480 && windowHeight <= 568) {
   //iphone 5: 568 pixels
-    TITLE_MARGIN = 195;
-    TITLE_FONT_SIZE = 60;
-    DESCRIPTION_MARGIN = 8;
+    DESCRIPTION_MARGIN = 45;
+    INPUT_FLEX = 4;
+    BUTTON_INPUT_HEIGHT = 40;
+    BUTTON_INPUT_FONT = 16;
 };
 
 if(windowHeight > 568 && windowHeight <= 667 ) {
   //iphone 6: 667 pixels
-    TITLE_MARGIN = 255;
-    TITLE_FONT_SIZE = 70;
-    DESCRIPTION_FONT = 18;
-    DESCRIPTION_MARGIN = 24;
+    DESCRIPTION_FONT = 16;
+    DESCRIPTION_MARGIN = 70;
+    INPUT_FLEX = 5;
+    BUTTON_INPUT_HEIGHT = 40;
+    BUTTON_INPUT_FONT = 18;
+    PADDING = 50;
 };
 
 if(windowHeight > 667 && windowHeight <= 736) {
   //iphone 6 plus: 736 pixels
-    TITLE_MARGIN = 310;
-    TITLE_FONT_SIZE = 74;
     DESCRIPTION_MARGIN = 40;
     DESCRIPTION_FONT = 20;
+    INPUT_FLEX = 6;
+    BUTTON_INPUT_HEIGHT = 46;
+    BUTTON_INPUT_FONT = 20;
 };
  
 
@@ -69,8 +77,6 @@ class SearchPage extends Component {
             descriptionStyle: styles.description,
             visibleHeight: windowHeight,
             keyboardMargin: 0,
-            titleMargin: TITLE_MARGIN
-
         };
     }
     componentWillMount() {
@@ -157,7 +163,12 @@ class SearchPage extends Component {
 
                 {spinner}
 
-                <TouchableHighlight style={styles.button} onPress={this.onLocationPressed.bind(this)}>
+                <TouchableHighlight 
+                    style={styles.button} 
+                    onPress={this.onLocationPressed.bind(this)}
+
+                    underlayColor={'rgb(33,68,124)'}
+                    >
                     <Text style={styles.currentLocationText}>CURRENT LOCATION</Text>
                 </TouchableHighlight> 
 
@@ -179,8 +190,10 @@ class SearchPage extends Component {
                     />
 
                     <TouchableHighlight 
-                      onPress={this.onSearchPressed.bind(this)}
-                      style={styles.goButton}>
+                        onPress={this.onSearchPressed.bind(this)}
+                        style={styles.goButton}
+                        underlayColor={'rgb(33,68,124)'}
+                      >
                         <Text style={styles.buttonText}>Go</Text>
                     </TouchableHighlight>
                 </View>
@@ -195,8 +208,6 @@ class SearchPage extends Component {
     }
 };
 
-var ButtonInputHeight = 46;
-var ButtonUnderlayColor = 'rgba(18,44,93,0.7)';
 
 var animations = {
     layout: {
@@ -226,7 +237,7 @@ var animations = {
 };
 
   
-let PADDING = 40;
+var UNDERLAY_COLOR = 'rgb(33,68,124)';
  
 let styles = StyleSheet.create({
     descriptionContainer: {
@@ -245,7 +256,7 @@ let styles = StyleSheet.create({
         paddingLeft: PADDING,
         paddingRight: PADDING,
         backgroundColor: 'transparent',
-        shadowColor: 'rgba(25, 19, 15, 1)',
+        shadowColor: 'rgb(25, 19, 15)',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
         shadowRadius: 4,
@@ -259,7 +270,7 @@ let styles = StyleSheet.create({
         backgroundColor: 'transparent',
         paddingLeft: PADDING,
         paddingRight: PADDING,
-        shadowColor: '#6B97D3',
+        shadowColor: '#b9c6d9',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
         shadowRadius: 4,
@@ -286,12 +297,12 @@ let styles = StyleSheet.create({
     },
     currentLocationText: {
         color: '#122c5d',
-        fontSize: 18,
+        fontSize: BUTTON_INPUT_FONT,
         fontFamily: 'Open Sans',
         alignSelf: 'center'
     },
     buttonText: {
-        fontSize: 18,
+        fontSize: BUTTON_INPUT_FONT,
         fontFamily: 'Open Sans',
         color: 'white',
         alignSelf: 'center'
@@ -299,7 +310,7 @@ let styles = StyleSheet.create({
     goButton: {
         flex: 1,
         flexDirection: 'row',
-        height: ButtonInputHeight,
+        height: BUTTON_INPUT_HEIGHT,
         backgroundColor: 'rgb(107,151,212)',
         borderRadius: 40,
         marginBottom: 8,
@@ -310,7 +321,7 @@ let styles = StyleSheet.create({
     button: {
         flex: 1,
         flexDirection: 'row',
-        height: ButtonInputHeight,
+        height: BUTTON_INPUT_HEIGHT,
         backgroundColor: '#b9c6d9',
         borderRadius: 1,
         marginRight: PADDING,
@@ -320,11 +331,11 @@ let styles = StyleSheet.create({
         justifyContent: 'center'
     },
     searchInput: {
-        height: ButtonInputHeight,
+        height: BUTTON_INPUT_HEIGHT,
         padding: 4,
-        flex: 6,
+        flex: INPUT_FLEX,
         fontFamily: 'Open Sans',
-        fontSize: 20,
+        fontSize: BUTTON_INPUT_FONT,
         backgroundColor: 'white',
         borderRadius: 2,
         color: 'black',
