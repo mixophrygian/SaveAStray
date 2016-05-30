@@ -22,24 +22,25 @@ const {
 let windowHeight = Dimensions.get('window').height;
 let KEYBOARD_MARGIN = 220;
 
-let DESCRIPTION_MARGIN = 15;
+let DESCRIPTION_MARGIN = 0;
 let DESCRIPTION_FONT = 16;
 let INPUTS_MARGIN = 0;
 let INPUT_FLEX = 4;
 let BUTTON_INPUT_HEIGHT = 40;
 let BUTTON_INPUT_FONT = 16;
 let PADDING = 40;
+let INDICATOR_SIZE = 38;
 
 console.log('window height', windowHeight);
 
 if(windowHeight <=  480) {
   //iphone 4s size is default, 480 pixels
-  
+    INDICATOR_SIZE = 0; 
 };
 
 if(windowHeight > 480 && windowHeight <= 568) {
   //iphone 5: 568 pixels
-    DESCRIPTION_MARGIN = 45;
+    DESCRIPTION_MARGIN = 0;
     INPUT_FLEX = 4;
     BUTTON_INPUT_HEIGHT = 40;
     BUTTON_INPUT_FONT = 16;
@@ -48,7 +49,7 @@ if(windowHeight > 480 && windowHeight <= 568) {
 if(windowHeight > 568 && windowHeight <= 667 ) {
   //iphone 6: 667 pixels
     DESCRIPTION_FONT = 16;
-    DESCRIPTION_MARGIN = 70;
+    DESCRIPTION_MARGIN = 35;
     INPUT_FLEX = 5;
     BUTTON_INPUT_HEIGHT = 40;
     BUTTON_INPUT_FONT = 18;
@@ -57,7 +58,7 @@ if(windowHeight > 568 && windowHeight <= 667 ) {
 
 if(windowHeight > 667 && windowHeight <= 736) {
   //iphone 6 plus: 736 pixels
-    DESCRIPTION_MARGIN = 40;
+    DESCRIPTION_MARGIN = 0;
     DESCRIPTION_FONT = 20;
     INPUT_FLEX = 6;
     BUTTON_INPUT_HEIGHT = 46;
@@ -161,8 +162,6 @@ class SearchPage extends Component {
         <Image style={styles.container} source={{ uri: 'bluepuppy', isStatic: true}}>
             <View style={[styles.content], {marginBottom: this.state.keyboardMargin}}>
 
-                {spinner}
-
                 <TouchableHighlight 
                     style={styles.button} 
                     onPress={this.onLocationPressed.bind(this)}
@@ -197,11 +196,14 @@ class SearchPage extends Component {
                         <Text style={styles.buttonText}>Go</Text>
                     </TouchableHighlight>
                 </View>
+
                 <View style={styles.descriptionContainer}>
                   <Text style={this.state.descriptionStyle}>
-                  { this.state.description }
+                    { this.state.description }
                   </Text>
+                    {spinner}
                 </View>
+
             </View>
             </Image>
         );
@@ -246,7 +248,8 @@ let styles = StyleSheet.create({
         marginTop: 0,
         marginBottom: DESCRIPTION_MARGIN,
         alignSelf: 'stretch',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     description: {
         fontFamily: 'Open Sans',
@@ -326,7 +329,7 @@ let styles = StyleSheet.create({
         borderRadius: 1,
         marginRight: PADDING,
         marginLeft: PADDING,
-        marginBottom: 8,
+        marginBottom: 12,
         alignSelf: 'stretch',
         justifyContent: 'center'
     },
@@ -342,10 +345,9 @@ let styles = StyleSheet.create({
         paddingLeft: 15,
     },
     indicator: {
-        marginTop: 0,
-        marginBottom: 10,
-        width: 38,
-        height: 38
+        marginTop: 10,
+        width: INDICATOR_SIZE,
+        height: INDICATOR_SIZE
     }
 });
 
