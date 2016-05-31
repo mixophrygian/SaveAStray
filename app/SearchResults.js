@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         width: 83,
         height: 15,
         paddingLeft: 3,
-        marginTop: 4
+        marginTop: 5
     },
     yelpContainer: {
         flex: 1,

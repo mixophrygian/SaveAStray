@@ -70,21 +70,20 @@ const styles = StyleSheet.create({
     stars: {
         width: 83,
         height: 15,
+        marginTop: 6,
+        marginRight: 3
     }, 
     yelpText: {
         flex: 1,
         flexDirection: 'row',
-        marginTop: 3,
     },
     yelpText2: {
         flex: 1,
-        marginTop: 3,
         marginBottom: YELP_INFO_MARGIN_BOTTOM
     },
     yelpLogo: {
         width: 50,
         height: 25,
-        marginTop: 1
     },
     staticInfoContainer: {
         flex: 1,
@@ -103,8 +102,7 @@ const styles = StyleSheet.create({
     },
     yelpURLText: {
         color:'#4775B7',
-        paddingRight: 10,
-        paddingBottom: 4,
+        marginLeft: 5,
         fontSize: SMALLER_FONT,
         fontFamily: 'Open Sans'
     },
@@ -170,8 +168,8 @@ const styles = StyleSheet.create({
         fontSize: SMALLER_FONT,
         fontFamily: 'Open Sans',
         color: '#656565',
-        marginBottom: 3,
-        marginTop: 6
+        marginTop: 6,
+        marginLeft: 3
     },
     tapDirections: {
         width: (width / 2) - 10,
@@ -238,9 +236,9 @@ class SingleResult extends Component {
 
     getDirections() {
       console.log('directions requested');
-      var lat = this.props.result[0].location.coordinate.latitude;
-      var lon = this.props.result[0].location.coordinate.longitude;
-      var url = 'http://maps.apple.com/?q=' + lat +',' + lon;
+      const lat = this.props.result[0].location.coordinate.latitude;
+      const lon = this.props.result[0].location.coordinate.longitude;
+      const url = 'http://maps.apple.com/?q=' + lat +',' + lon;
       Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
 
@@ -294,46 +292,61 @@ class SingleResult extends Component {
 
         return (
             <View style={styles.container}>
+
                 <View style={styles.allContent}>
                   <Image style={styles.image}
                           resizeMode='cover'
                           source={ picture } 
                           defaultSource={{ tempImage }} />
+
                   <View style={styles.heading}>
                       <Text style={styles.name}>{name}</Text>
                   </View>
+
                   <View style={styles.textContainer}>
-                  <View style={styles.yelpInfo}>
-                    <Image style={styles.stars} source={{ uri: starsURL }} />
-                    <View style={styles.yelpText}>
-                      <Text style={styles.reviewCount}>{reviews} on </Text>
-                      <Image style={styles.yelpLogo} source={{uri: 'yelpLogo', isStatic: true}} />
+
+                    <View style={styles.yelpInfo}>
+
+                      <View style={styles.yelpText}>
+                          <Image style={styles.stars} source={{ uri: starsURL }} />
+                          <Text style={styles.reviewCount}>{reviews} on </Text>
+                          <Image style={styles.yelpLogo} source={{uri: 'yelpLogo', isStatic: true}} />
+                      </View>
+
+                      <View style={styles.yelpText2}>
+                        <TouchableHighlight
+                            underlayColor='white'
+                            onPress={this.viewYelp.bind(this)}
+                            >
+                            <Text style={styles.yelpURLText}>View on Yelp</Text>
+                        </TouchableHighlight>
+                      </View>
+
                     </View>
-                    <View style={styles.yelpText2}>
-                      <TouchableHighlight
-                          underlayColor='white'
-                          onPress={this.viewYelp.bind(this)}
-                          >
-                          <Text style={styles.yelpURLText}>View on Yelp</Text>
-                      </TouchableHighlight>
-                    </View>
+
                   </View>
+
                   {warningBlurb} 
+
                 <View style={styles.addressAndNumber}>
+
                     <View style={styles.staticInfoContainer}>
                       <Image style={styles.pinGlyph} source={ pinGlyph }/>
                       <Text style={styles.address}>{displayAddress}</Text>
                     </View>
+
                     <View style={styles.staticInfoContainer}>
                       <Image style={styles.phoneGlyph} source={ phoneGlyph }/>
                       {displayPhone}
                     </View>
-                    </View>
-                  </View>
-                  <View style={styles.ctaButtonContainer}>
+
+                </View>
+
+                <View style={styles.ctaButtonContainer}>
                       {phoneButton}
                       {directions}
-                  </View>
+                </View>
+
               </View>
             </View>
         );
