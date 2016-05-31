@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     stars: {
         width: 83,
         height: 15,
-        marginTop: 6,
+        marginTop: 7,
         marginRight: 3
     }, 
     yelpText: {
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         fontSize: SMALLER_FONT,
         fontFamily: 'Open Sans',
         color: '#656565',
-        marginTop: 6,
+        marginTop: 5,
         marginLeft: 3
     },
     tapDirections: {
