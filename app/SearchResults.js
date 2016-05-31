@@ -27,7 +27,17 @@ const styles = StyleSheet.create({
     stars: {
         width: 83,
         height: 15,
-        paddingLeft: 3
+        paddingLeft: 3,
+        marginTop: 4
+    },
+    yelpContainer: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    yelpLogo: {
+        width: 50,
+        height: 25,
+        marginLeft: 3,
     },
     separator: {
         height: 1,
@@ -42,13 +52,15 @@ const styles = StyleSheet.create({
     area: {
         fontSize: 14,
         fontFamily: 'Open Sans',
-        color: '#656565'
+        color: '#656565',
+        marginTop: 5
     },
     reviewCount: {
         fontSize: 13,
         fontFamily: 'Open Sans',
         marginBottom: 4,
-        color: '#656565'
+        color: '#656565',
+        marginTop: 6
     },
     rowContainer: {
         flexDirection: 'row',
@@ -115,9 +127,10 @@ class SearchResults extends Component {
                     <View style={styles.textContainer}>
                         <Text style={styles.header}>{name}</Text>
                         <Text style={styles.area}>{area}</Text>
-                        <Text style={styles.reviewCount}
-                            numberOfLines={1}>{reviews}
-                        </Text>
+                        <View style={styles.yelpContainer}>
+                            <Text style={styles.reviewCount} numberOfLines={1}>{reviews} on</Text>
+                            <Image style={styles.yelpLogo} source= {{ uri: 'yelpLogo', isStatic: true }}/>
+                        </View>
                         <Image style={styles.stars} source={{ uri: rowData.rating_img_url_large }} />
                     </View>
                 </View>

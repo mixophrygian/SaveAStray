@@ -75,7 +75,16 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         marginTop: 3,
-        marginBottom: YELP_INFO_MARGIN_BOTTOM,
+    },
+    yelpText2: {
+        flex: 1,
+        marginTop: 3,
+        marginBottom: YELP_INFO_MARGIN_BOTTOM
+    },
+    yelpLogo: {
+        width: 50,
+        height: 25,
+        marginTop: 1
     },
     staticInfoContainer: {
         flex: 1,
@@ -162,7 +171,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Open Sans',
         color: '#656565',
         marginBottom: 3,
-        marginRight: 5
+        marginTop: 6
     },
     tapDirections: {
         width: (width / 2) - 10,
@@ -297,7 +306,10 @@ class SingleResult extends Component {
                   <View style={styles.yelpInfo}>
                     <Image style={styles.stars} source={{ uri: starsURL }} />
                     <View style={styles.yelpText}>
-                      <Text style={styles.reviewCount}>{reviews}</Text>
+                      <Text style={styles.reviewCount}>{reviews} on </Text>
+                      <Image style={styles.yelpLogo} source={{uri: 'yelpLogo', isStatic: true}} />
+                    </View>
+                    <View style={styles.yelpText2}>
                       <TouchableHighlight
                           underlayColor='white'
                           onPress={this.viewYelp.bind(this)}
