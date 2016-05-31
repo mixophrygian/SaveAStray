@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     addressAndNumber: {
         bottom: 0,
         marginTop: ADDRESS_MARGIN,
+        marginLeft: 10
     },
     ctaButtonContainer: {
         width: width - 20,
@@ -136,6 +137,7 @@ const styles = StyleSheet.create({
         color: '#656565',
         marginBottom: WARNING_MARGIN_BOTTOM,
         marginTop: WARNING_MARGIN_TOP,
+        marginLeft: 10
     },
     address: {
         fontSize: SMALLER_FONT,
