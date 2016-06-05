@@ -227,7 +227,7 @@ class SingleResult extends Component {
     }
 
     viewHumaneSociety() {
-      const url = 'http://www.humanesociety.org/animals/resources/tips/what_to_do_stray_pet.html';
+      const url = 'http://saveastrayapp.com/#tips';
       Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
 
@@ -278,8 +278,8 @@ class SingleResult extends Component {
                       underlayColor='white' 
                       onPress={this.viewHumaneSociety.bind(this)}
                       >
-                       the humane society </Text>
-                     for tips on how to catch a stray. 
+                       tips from the humane society </Text>
+                     on how to catch a stray. 
                     </Text>
                   </View>) : (<View></View>);
         const directions = displayAddress[0].split(',')[0].search(/\d/) >= 0 ? (<TouchableHighlight
