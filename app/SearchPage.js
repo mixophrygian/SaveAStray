@@ -31,8 +31,6 @@ let BUTTON_INPUT_FONT = 16;
 let PADDING = 40;
 let INDICATOR_SIZE = 38;
 
-console.log('window height', windowHeight);
-
 if(windowHeight <=  480) {
   //iphone 4s size is default, 480 pixels
     INDICATOR_SIZE = 0; 
@@ -80,6 +78,7 @@ class SearchPage extends Component {
             keyboardMargin: 0,
         };
     }
+
     componentWillMount() {
       DeviceEventEmitter.addListener('keyboardWillShow', this.showKeyboard.bind(this));
       DeviceEventEmitter.addListener('keyboardWillHide', this.hideKeyboard.bind(this));
@@ -242,6 +241,7 @@ var animations = {
 var UNDERLAY_COLOR = 'rgb(33,68,124)';
  
 let styles = StyleSheet.create({
+
     descriptionContainer: {
         flex: 1,
         paddingTop: 3,
@@ -352,5 +352,3 @@ let styles = StyleSheet.create({
 });
 
 module.exports = SearchPage;
-
-               //<Image source={require('image!doghelp')} style={styles.image}/>

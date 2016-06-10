@@ -102,13 +102,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     yelpURLText: {
-        color:'#4775B7',
+        color:'#325280',
         marginLeft: 5,
         fontSize: SMALLER_FONT,
         fontFamily: 'Open Sans'
     },
     humaneSocietyURL: {
-        color: '#4775B7',
+        color:'#325280',
+        textDecorationLine: 'underline',
         fontSize: DESCRIPTION_FONT,
         fontFamily: 'Open Sans'
     },

@@ -33294,34 +33294,6 @@ __d('StrayRescue/app/tempJson.json',function(global, require, module, exports) {
 
 ;
 });
-__d('StrayRescue/index.ios.js',function(global, require, module, exports) {  'use strict';
-var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _SearchPage=require('StrayRescue/app/SearchPage.js');var _SearchPage2=babelHelpers.interopRequireDefault(_SearchPage);var 
-
-
-
-StrayRescue=function(_React$Component){babelHelpers.inherits(StrayRescue,_React$Component);function StrayRescue(){babelHelpers.classCallCheck(this,StrayRescue);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(StrayRescue).apply(this,arguments));}babelHelpers.createClass(StrayRescue,[{key:'render',value:function render()
-{
-return (
-_reactNative2.default.createElement(_reactNative2.default.NavigatorIOS,{
-style:styles.container,
-initialRoute:{
-title:'Search',
-component:_SearchPage2.default,
-navigationBarHidden:true},
-
-tintColor:'black'}));}}]);return StrayRescue;}(_reactNative2.default.Component);
-
-
-
-
-
-_reactNative2.default.AppRegistry.registerComponent('Stray Rescue',function(){return StrayRescue;});
-
-var styles=_reactNative2.default.StyleSheet.create({
-container:{
-flex:1}});
-});
 __d('react-native/Libraries/react-native/react-native.js',function(global, require, module, exports) {  'use strict';
 
 
@@ -81642,418 +81614,6 @@ return ReactMount.getNodeFromInstance(componentOrElement);}
 
 module.exports=findDOMNode;
 });
-__d('StrayRescue/app/SearchPage.js',function(global, require, module, exports) {  'use strict';
-
-var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _yelp_api=require('StrayRescue/lib/yelp_api.js');var _yelp_api2=babelHelpers.interopRequireDefault(_yelp_api);
-var _SearchResults=require('StrayRescue/app/SearchResults.js');var _SearchResults2=babelHelpers.interopRequireDefault(_SearchResults);
-var _tempJson=require('StrayRescue/app/tempJson.json');var _tempJson2=babelHelpers.interopRequireDefault(_tempJson);var 
-
-
-StyleSheet=_reactNative2.default.StyleSheet;var 
-Text=_reactNative2.default.Text;var 
-TextInput=_reactNative2.default.TextInput;var 
-View=_reactNative2.default.View;var 
-TouchableHighlight=_reactNative2.default.TouchableHighlight;var 
-ActivityIndicatorIOS=_reactNative2.default.ActivityIndicatorIOS;var 
-Image=_reactNative2.default.Image;var 
-Component=_reactNative2.default.Component;var 
-Dimensions=_reactNative2.default.Dimensions;var 
-DeviceEventEmitter=_reactNative2.default.DeviceEventEmitter;var 
-LayoutAnimation=_reactNative2.default.LayoutAnimation;
-
-
-var windowHeight=Dimensions.get('window').height;
-var KEYBOARD_MARGIN=220;
-
-var DESCRIPTION_MARGIN=0;
-var DESCRIPTION_FONT=16;
-var INPUTS_MARGIN=0;
-var INPUT_FLEX=4;
-var BUTTON_INPUT_HEIGHT=40;
-var BUTTON_INPUT_FONT=16;
-var PADDING=40;
-var INDICATOR_SIZE=38;
-
-console.log('window height',windowHeight);
-
-if(windowHeight<=480){
-
-INDICATOR_SIZE=0;}
-;
-
-if(windowHeight>480&&windowHeight<=568){
-
-DESCRIPTION_MARGIN=0;
-INPUT_FLEX=4;
-BUTTON_INPUT_HEIGHT=40;
-BUTTON_INPUT_FONT=16;}
-;
-
-if(windowHeight>568&&windowHeight<=667){
-
-DESCRIPTION_FONT=16;
-DESCRIPTION_MARGIN=35;
-INPUT_FLEX=5;
-BUTTON_INPUT_HEIGHT=40;
-BUTTON_INPUT_FONT=18;
-PADDING=50;}
-;
-
-if(windowHeight>667&&windowHeight<=736){
-
-DESCRIPTION_MARGIN=0;
-DESCRIPTION_FONT=20;
-INPUT_FLEX=6;
-BUTTON_INPUT_HEIGHT=46;
-BUTTON_INPUT_FONT=20;}
-;var 
-
-
-SearchPage=function(_Component){babelHelpers.inherits(SearchPage,_Component);
-
-function SearchPage(props){babelHelpers.classCallCheck(this,SearchPage);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(SearchPage).call(this,
-props));
-_this.state={
-searchString:'',
-isLoading:false,
-message:'',
-description:'Search for rescue shelters by city or zip code',
-descriptionStyle:styles.description,
-visibleHeight:windowHeight,
-keyboardMargin:0};return _this;}babelHelpers.createClass(SearchPage,[{key:'componentWillMount',value:function componentWillMount()
-
-
-{
-DeviceEventEmitter.addListener('keyboardWillShow',this.showKeyboard.bind(this));
-DeviceEventEmitter.addListener('keyboardWillHide',this.hideKeyboard.bind(this));}},{key:'onSearchTextChanged',value:function onSearchTextChanged(
-
-
-event){
-this.setState({searchString:event.nativeEvent.text});}},{key:'showKeyboard',value:function showKeyboard(
-
-
-event){
-LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
-this.setState({
-keyboardMargin:KEYBOARD_MARGIN});}},{key:'hideKeyboard',value:function hideKeyboard()
-
-
-
-{
-LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
-this.setState({
-keyboardMargin:0});}},{key:'_executeQuery',value:function _executeQuery(
-
-
-
-query){var _this2=this;
-this.setState({isLoading:true});
-fetch(query).
-then(function(response){return response.json();}).
-then(function(json){return _this2._handleResponse(json);}).
-catch(function(error){return (
-_this2.setState({
-isLoading:false,
-message:'Please try again. '+error}));});}},{key:'onSearchPressed',value:function onSearchPressed()
-
-
-
-{
-var query=_yelp_api2.default.request_yelp(this.state.searchString);
-this._executeQuery(query);}},{key:'onLocationPressed',value:function onLocationPressed()
-
-
-{var _this3=this;
-navigator.geolocation.getCurrentPosition(
-function(location){
-var search=location.coords.latitude+','+location.coords.longitude;
-_this3.setState({searchString:''});
-var query=_yelp_api2.default.request_yelp(search);
-_this3._executeQuery(query);},
-
-function(error){
-console.log('error');
-_this3.setState({
-message:'GPS currently unavailable.'});
-
-console.log(error);});}},{key:'_handleResponse',value:function _handleResponse(
-
-
-
-response){
-this.setState({isLoading:false,message:'',description:'Search for rescue shelters by city or zip code',descriptionStyle:styles.description});
-if(response.total>0){
-this.props.navigator.push({
-title:'Results',
-component:_SearchResults2.default,
-passProps:{results:response.businesses}});}else 
-
-{
-this.setState({description:'Hmmm that didn\'t work. Try again.',descriptionStyle:styles.tryAgain});}}},{key:'render',value:function render()
-
-
-
-{
-var spinner=this.state.isLoading?
-_reactNative2.default.createElement(ActivityIndicatorIOS,{
-color:'white',
-style:styles.indicator,
-hidden:'true',
-size:'large'}):
-_reactNative2.default.createElement(View,{style:styles.indicator});
-return (
-_reactNative2.default.createElement(Image,{style:styles.container,source:{uri:'bluepuppy',isStatic:true}},
-_reactNative2.default.createElement(View,{style:([styles.content],{marginBottom:this.state.keyboardMargin})},
-
-_reactNative2.default.createElement(TouchableHighlight,{
-style:styles.button,
-onPress:this.onLocationPressed.bind(this),
-
-underlayColor:'rgb(33,68,124)'},
-
-_reactNative2.default.createElement(Text,{style:styles.currentLocationText},'CURRENT LOCATION')),
-
-
-_reactNative2.default.createElement(View,{style:styles.flowRight},
-_reactNative2.default.createElement(TextInput,{
-ref:'TextInput',
-style:styles.searchInput,
-value:this.state.searchString,
-autoCorrect:false,
-onSubmitEditing:this.onSearchPressed.bind(this),
-onChange:this.onSearchTextChanged.bind(this),
-returnKeyType:'search',
-onFocus:this.showKeyboard.bind(this),
-blurOnSubmit:false,
-keyboardType:"web-search",
-keyboardAppearance:"default",
-placeholderTextColor:'gray',
-placeholder:'City or zip code'}),
-
-
-_reactNative2.default.createElement(TouchableHighlight,{
-onPress:this.onSearchPressed.bind(this),
-style:styles.goButton,
-underlayColor:'rgb(33,68,124)'},
-
-_reactNative2.default.createElement(Text,{style:styles.buttonText},'Go'))),
-
-
-
-_reactNative2.default.createElement(View,{style:styles.descriptionContainer},
-_reactNative2.default.createElement(Text,{style:this.state.descriptionStyle},
-this.state.description),
-
-spinner))));}}]);return SearchPage;}(Component);
-
-
-
-
-
-
-;
-
-
-var animations={
-layout:{
-spring:{
-duration:400,
-create:{
-duration:300,
-type:LayoutAnimation.Types.easeInEaseOut,
-property:LayoutAnimation.Properties.opacity},
-
-update:{
-type:LayoutAnimation.Types.spring,
-springDamping:400}},
-
-
-easeInEaseOut:{
-duration:400,
-create:{
-type:LayoutAnimation.Types.easeInEaseOut,
-property:LayoutAnimation.Properties.scaleXY},
-
-update:{
-type:LayoutAnimation.Types.easeInEaseOut}}}};
-
-
-
-
-
-
-var UNDERLAY_COLOR='rgb(33,68,124)';
-
-var styles=StyleSheet.create({
-descriptionContainer:{
-flex:1,
-paddingTop:3,
-marginTop:0,
-marginBottom:DESCRIPTION_MARGIN,
-alignSelf:'stretch',
-justifyContent:'center',
-alignItems:'center'},
-
-description:{
-fontFamily:'Open Sans',
-fontSize:DESCRIPTION_FONT,
-textAlign:'center',
-color:'white',
-paddingLeft:PADDING,
-paddingRight:PADDING,
-backgroundColor:'transparent',
-shadowColor:'rgb(25, 19, 15)',
-shadowOffset:{width:0,height:0},
-shadowOpacity:1,
-shadowRadius:4,
-lineHeight:DESCRIPTION_FONT},
-
-tryAgain:{
-fontFamily:'Open Sans',
-fontSize:DESCRIPTION_FONT,
-textAlign:'center',
-color:'white',
-backgroundColor:'transparent',
-paddingLeft:PADDING,
-paddingRight:PADDING,
-shadowColor:'#b9c6d9',
-shadowOffset:{width:0,height:0},
-shadowOpacity:1,
-shadowRadius:4,
-lineHeight:DESCRIPTION_FONT},
-
-
-container:{
-flex:1,
-flexDirection:'column',
-justifyContent:'flex-end',
-width:null,
-height:null,
-resizeMode:'cover'},
-
-content:{
-flexDirection:'column',
-alignItems:'center'},
-
-flowRight:{
-flexDirection:'row',
-alignItems:'center',
-marginRight:PADDING,
-marginLeft:PADDING},
-
-currentLocationText:{
-color:'#122c5d',
-fontSize:BUTTON_INPUT_FONT,
-fontFamily:'Open Sans',
-alignSelf:'center'},
-
-buttonText:{
-fontSize:BUTTON_INPUT_FONT,
-fontFamily:'Open Sans',
-color:'white',
-alignSelf:'center'},
-
-goButton:{
-flex:1,
-flexDirection:'row',
-height:BUTTON_INPUT_HEIGHT,
-backgroundColor:'rgb(107,151,212)',
-borderRadius:40,
-marginBottom:8,
-marginLeft:8,
-alignSelf:'stretch',
-justifyContent:'center'},
-
-button:{
-flex:1,
-flexDirection:'row',
-height:BUTTON_INPUT_HEIGHT,
-backgroundColor:'#b9c6d9',
-borderRadius:2,
-marginRight:PADDING,
-marginLeft:PADDING,
-marginBottom:12,
-alignSelf:'stretch',
-justifyContent:'center'},
-
-searchInput:{
-height:BUTTON_INPUT_HEIGHT,
-padding:4,
-flex:INPUT_FLEX,
-fontFamily:'Open Sans',
-fontSize:BUTTON_INPUT_FONT,
-backgroundColor:'white',
-borderRadius:1,
-color:'black',
-paddingLeft:15},
-
-indicator:{
-marginTop:10,
-width:INDICATOR_SIZE,
-height:INDICATOR_SIZE}});
-
-
-
-module.exports=SearchPage;
-});
-__d('StrayRescue/lib/yelp_api.js',function(global, require, module, exports) {  var _querystring=require('querystring/index.js');var _querystring2=babelHelpers.interopRequireDefault(_querystring);
-var _lodash=require('lodash/lodash.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);
-var _nonce=require('StrayRescue/lib/nonce.js');var _nonce2=babelHelpers.interopRequireDefault(_nonce);
-var _timestamp=require('StrayRescue/lib/timestamp.js');var _timestamp2=babelHelpers.interopRequireDefault(_timestamp);
-var _config=require('StrayRescue/lib/config.js');var _config2=babelHelpers.interopRequireDefault(_config);
-var _oauthSignature=require('oauth-signature/src/app/oauth-signature.js');var _oauthSignature2=babelHelpers.interopRequireDefault(_oauthSignature);
-
-function request_yelp(get_location){
-
-var httpMethod='GET';
-
-var url='http://api.yelp.com/v2/search';
-
-var default_parameters={
-category_filter:'animalshelters',
-sort:'2',
-term:'rescue'};
-
-
-function locationOrCoords(get_location){
-var result=get_location.split(',').map(Number);
-if(result[1]){
-default_parameters.ll=get_location;}else 
-{
-default_parameters.location=get_location;}
-;}
-;
-
-locationOrCoords(get_location);
-
-var required_parameters={
-oauth_consumer_key:_config2.default.key,
-oauth_nonce:(0,_nonce2.default)(16),
-oauth_signature_method:'HMAC-SHA1',
-oauth_timestamp:(0,_timestamp2.default)(),
-oauth_token:_config2.default.token,
-oauth_version:'1.0'};
-
-
-var parameters=_lodash2.default.assign(default_parameters,required_parameters);;
-
-var consumerSecret=_config2.default.consumerSecret;
-var tokenSecret=_config2.default.tokenSecret;
-var signature=_oauthSignature2.default.generate(httpMethod,url,parameters,consumerSecret,tokenSecret,{encodeSignature:false});
-
-parameters.oauth_signature=signature;
-
-var paramURL=_querystring2.default.stringify(parameters);
-var apiURL=url+'?'+paramURL;
-
-console.log(apiURL);
-return apiURL;}
-
-;
-
-exports.request_yelp=request_yelp;
-});
 __d('querystring/index.js',function(global, require, module, exports) {  'use strict';
 
 exports.decode=exports.parse=require('querystring/decode.js');
@@ -88849,160 +88409,617 @@ C.RabbitLegacy=StreamCipher._createHelper(RabbitLegacy);})();
 
 return CryptoJS.RabbitLegacy;});
 });
-__d('StrayRescue/app/SearchResults.js',function(global, require, module, exports) {  'use strict';
+__d('react-native-communications/AKCommunications.js',function(global, require, module, exports) {  'use strict';
+var React=require('react-native/Libraries/react-native/react-native.js');var 
+
+
+Linking=
+
+React.Linking;var Platform=React.Platform;
+
+var communication={
+phonecall:function phonecall(phoneNumber,prompt){
+if(arguments.length!==2){
+console.log('you must supply exactly 2 arguments');
+return;}
+
+
+if(!isCorrectType('String',phoneNumber)){
+console.log('the phone number must be provided as a String value');
+return;}
+
+
+if(!isCorrectType('Boolean',prompt)){
+console.log('the prompt parameter must be a Boolean');
+return;}
+
+
+var url;
+
+if(Platform.OS!=='android'){
+url=prompt?'telprompt:':'tel:';}else 
+
+{
+url='tel:';}
+
+
+url+=phoneNumber;
+
+LaunchURL(url);},
+
+
+email:function email(to,cc,bcc,subject,body){
+var url='mailto:';
+var argLength=arguments.length;
+
+switch(argLength){
+case 0:
+LaunchURL(url);
+return;
+case 5:
+break;
+default:
+console.log('you must supply either 0 or 5 arguments. You supplied '+argLength);
+return;}
+
+
+
+
+var valueAdded=false;
+
+if(isCorrectType('Array',arguments[0])){
+var validAddresses=getValidArgumentsFromArray(arguments[0],'String');
+
+if(validAddresses.length>0){
+url+=validAddresses.join(',');}}
+
+
+
+url+='?';
+
+if(isCorrectType('Array',arguments[1])){
+var validAddresses=getValidArgumentsFromArray(arguments[1],'String');
+
+if(validAddresses.length>0){
+valueAdded=true;
+url+='cc='+validAddresses.join(',');}}
+
+
+
+if(isCorrectType('Array',arguments[2])){
+if(valueAdded){
+url+='&';}
+
+
+var validAddresses=getValidArgumentsFromArray(arguments[2],'String');
+
+if(validAddresses.length>0){
+valueAdded=true;
+url+='bcc='+validAddresses.join(',');}}
+
+
+
+if(isCorrectType('String',arguments[3])){
+if(valueAdded){
+url+='&';}
+
+
+valueAdded=true;
+url+='subject='+arguments[3];}
+
+
+if(isCorrectType('String',arguments[4])){
+if(valueAdded){
+url+='&';}
+
+
+url+='body='+arguments[4];}
+
+
+url=encodeURI(url);
+
+LaunchURL(url);},
+
+
+text:function text(phoneNumber){
+if(arguments.length>1){
+console.log('you supplied too many arguments. You can either supply 0 or 1');
+return;}
+
+
+var url='sms:';
+
+if(arguments.length!==0){
+if(isCorrectType('String',phoneNumber)){
+url+=phoneNumber;}else 
+{
+console.log('the phone number should be provided as a string. It was provided as '+
+Object.prototype.toString.call(phoneNumber).slice(8,-1)+
+',ignoring the value provided');}}
+
+
+
+LaunchURL(url);},
+
+web:function web(address){
+if(!address){
+console.log('Missing address argument');
+return;}
+
+if(!isCorrectType('String',address)){
+console.log('address was not provided as a string, it was provided as '+
+Object.prototype.toString.call(address).slice(8,-1));
+return;}
+
+LaunchURL(address);}};
+
+
+
+var LaunchURL=function LaunchURL(url){
+Linking.canOpenURL(url).then(function(supported){
+if(!supported){
+console.log('Can\'t handle url: '+url);}else 
+{
+return Linking.openURL(url);}}).
+
+catch(function(err){return console.error('An unexpected error happened',err);});};
+
+
+var getValidArgumentsFromArray=function getValidArgumentsFromArray(array,type){
+var validValues=[];
+array.forEach(function(value){
+if(isCorrectType(type,value)){
+validValues.push(value);}});
+
+
+
+return validValues;};
+
+
+var isCorrectType=function isCorrectType(expected,actual){
+return Object.prototype.toString.call(actual).slice(8,-1)===expected;};
+
+
+module.exports=communication;
+});
+__d('StrayRescue/index.ios.js',function(global, require, module, exports) {  'use strict';
+var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
+var _SearchPage=require('StrayRescue/app/SearchPage.js');var _SearchPage2=babelHelpers.interopRequireDefault(_SearchPage);var 
+
+
+
+StrayRescue=function(_React$Component){babelHelpers.inherits(StrayRescue,_React$Component);function StrayRescue(){babelHelpers.classCallCheck(this,StrayRescue);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(StrayRescue).apply(this,arguments));}babelHelpers.createClass(StrayRescue,[{key:'render',value:function render()
+{
+return (
+_reactNative2.default.createElement(_reactNative2.default.NavigatorIOS,{
+style:styles.container,
+initialRoute:{
+title:'Search',
+component:_SearchPage2.default,
+navigationBarHidden:true},
+
+tintColor:'black'}));}}]);return StrayRescue;}(_reactNative2.default.Component);
+
+
+
+
+
+_reactNative2.default.AppRegistry.registerComponent('Stray Rescue',function(){return StrayRescue;});
+
+var styles=_reactNative2.default.StyleSheet.create({
+container:{
+flex:1}});
+});
+__d('StrayRescue/lib/yelp_api.js',function(global, require, module, exports) {  var _querystring=require('querystring/index.js');var _querystring2=babelHelpers.interopRequireDefault(_querystring);
+var _lodash=require('lodash/lodash.js');var _lodash2=babelHelpers.interopRequireDefault(_lodash);
+var _nonce=require('StrayRescue/lib/nonce.js');var _nonce2=babelHelpers.interopRequireDefault(_nonce);
+var _timestamp=require('StrayRescue/lib/timestamp.js');var _timestamp2=babelHelpers.interopRequireDefault(_timestamp);
+var _config=require('StrayRescue/lib/config.js');var _config2=babelHelpers.interopRequireDefault(_config);
+var _oauthSignature=require('oauth-signature/src/app/oauth-signature.js');var _oauthSignature2=babelHelpers.interopRequireDefault(_oauthSignature);
+
+function request_yelp(get_location){
+
+var httpMethod='GET';
+
+var url='http://api.yelp.com/v2/search';
+
+var default_parameters={
+category_filter:'animalshelters',
+sort:'1'};
+
+
+function locationOrCoords(get_location){
+var result=get_location.split(',').map(Number);
+if(result[1]){
+default_parameters.ll=get_location;}else 
+{
+default_parameters.location=get_location;}
+;}
+;
+
+locationOrCoords(get_location);
+
+var required_parameters={
+oauth_consumer_key:_config2.default.key,
+oauth_nonce:(0,_nonce2.default)(16),
+oauth_signature_method:'HMAC-SHA1',
+oauth_timestamp:(0,_timestamp2.default)(),
+oauth_token:_config2.default.token,
+oauth_version:'1.0'};
+
+
+var parameters=_lodash2.default.assign(default_parameters,required_parameters);;
+
+var consumerSecret=_config2.default.consumerSecret;
+var tokenSecret=_config2.default.tokenSecret;
+var signature=_oauthSignature2.default.generate(httpMethod,url,parameters,consumerSecret,tokenSecret,{encodeSignature:false});
+
+parameters.oauth_signature=signature;
+
+var paramURL=_querystring2.default.stringify(parameters);
+var apiURL=url+'?'+paramURL;
+
+console.log(apiURL);
+return apiURL;}
+
+;
+
+exports.request_yelp=request_yelp;
+});
+__d('StrayRescue/app/SearchPage.js',function(global, require, module, exports) {  'use strict';
 
 var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
-var _SingleResult=require('StrayRescue/app/SingleResult.js');var _SingleResult2=babelHelpers.interopRequireDefault(_SingleResult);
-var _display_address_parser=require('StrayRescue/lib/display_address_parser.js');var _display_address_parser2=babelHelpers.interopRequireDefault(_display_address_parser);var 
+var _yelp_api=require('StrayRescue/lib/yelp_api.js');var _yelp_api2=babelHelpers.interopRequireDefault(_yelp_api);
+var _SearchResults=require('StrayRescue/app/SearchResults.js');var _SearchResults2=babelHelpers.interopRequireDefault(_SearchResults);
+var _tempJson=require('StrayRescue/app/tempJson.json');var _tempJson2=babelHelpers.interopRequireDefault(_tempJson);var 
 
 
 StyleSheet=_reactNative2.default.StyleSheet;var 
-Image=_reactNative2.default.Image;var 
+Text=_reactNative2.default.Text;var 
+TextInput=_reactNative2.default.TextInput;var 
 View=_reactNative2.default.View;var 
 TouchableHighlight=_reactNative2.default.TouchableHighlight;var 
-ListView=_reactNative2.default.ListView;var 
-Text=_reactNative2.default.Text;var 
-Component=_reactNative2.default.Component;
+ActivityIndicatorIOS=_reactNative2.default.ActivityIndicatorIOS;var 
+Image=_reactNative2.default.Image;var 
+Component=_reactNative2.default.Component;var 
+Dimensions=_reactNative2.default.Dimensions;var 
+DeviceEventEmitter=_reactNative2.default.DeviceEventEmitter;var 
+LayoutAnimation=_reactNative2.default.LayoutAnimation;
 
 
-var styles=StyleSheet.create({
-thumb:{
-width:90,
-height:90,
-marginRight:10,
-backgroundColor:'rgb(204, 204, 204)'},
+var windowHeight=Dimensions.get('window').height;
+var KEYBOARD_MARGIN=220;
 
-textContainer:{
-flex:1},
+var DESCRIPTION_MARGIN=0;
+var DESCRIPTION_FONT=16;
+var INPUTS_MARGIN=0;
+var INPUT_FLEX=4;
+var BUTTON_INPUT_HEIGHT=40;
+var BUTTON_INPUT_FONT=16;
+var PADDING=40;
+var INDICATOR_SIZE=38;
 
-stars:{
-width:83,
-height:15,
-paddingLeft:3,
-marginTop:5},
+if(windowHeight<=480){
 
-yelpContainer:{
-flex:1,
-flexDirection:'row'},
+INDICATOR_SIZE=0;}
+;
 
-yelpLogo:{
-width:50,
-height:25,
-marginLeft:3},
+if(windowHeight>480&&windowHeight<=568){
 
-separator:{
-height:1,
-backgroundColor:'#dddddd'},
+DESCRIPTION_MARGIN=0;
+INPUT_FLEX=4;
+BUTTON_INPUT_HEIGHT=40;
+BUTTON_INPUT_FONT=16;}
+;
 
-header:{
-fontSize:18,
-fontFamily:'Open Sans',
-fontWeight:'bold',
-color:'black'},
+if(windowHeight>568&&windowHeight<=667){
 
-area:{
-fontSize:14,
-fontFamily:'Open Sans',
-color:'#656565',
-marginTop:5},
+DESCRIPTION_FONT=16;
+DESCRIPTION_MARGIN=35;
+INPUT_FLEX=5;
+BUTTON_INPUT_HEIGHT=40;
+BUTTON_INPUT_FONT=18;
+PADDING=50;}
+;
 
-reviewCount:{
-fontSize:13,
-fontFamily:'Open Sans',
-marginBottom:4,
-color:'#656565',
-marginTop:6},
+if(windowHeight>667&&windowHeight<=736){
 
-rowContainer:{
-flexDirection:'row',
-flex:1,
-padding:13,
-backgroundColor:'white'},
-
-fatSeparator:{
-height:14,
-backgroundColor:'#F7F7F7'}});var 
+DESCRIPTION_MARGIN=0;
+DESCRIPTION_FONT=20;
+INPUT_FLEX=6;
+BUTTON_INPUT_HEIGHT=46;
+BUTTON_INPUT_FONT=20;}
+;var 
 
 
+SearchPage=function(_Component){babelHelpers.inherits(SearchPage,_Component);
 
-SearchResults=function(_Component){babelHelpers.inherits(SearchResults,_Component);
-
-
-function SearchResults(props){babelHelpers.classCallCheck(this,SearchResults);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(SearchResults).call(this,
+function SearchPage(props){babelHelpers.classCallCheck(this,SearchPage);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(SearchPage).call(this,
 props));
-
-var goodResults=_this.props.results.filter(_this.hasAddressOrNumber);
-
-var dataSource=new ListView.DataSource(
-{rowHasChanged:function rowHasChanged(r1,r2){return r1.id!==r2.id;}});
 _this.state={
-dataSource:dataSource.cloneWithRows(goodResults)};return _this;}babelHelpers.createClass(SearchResults,[{key:'hasAddressOrNumber',value:function hasAddressOrNumber(
-
-
-
-result){
-var address=(0,_display_address_parser2.default)(result.location.display_address);
-var reachableAddress=address[0].split(',')[0].search(/\d/)>=0?true:false;
-var phone=result.display_phone||false;
-return reachableAddress||phone;}},{key:'rowPressed',value:function rowPressed(
-
-
-property){
-var result=this.props.results.filter(function(prop){return prop.id===property.id;});
-
-this.props.navigator.push({
-title:'',
-component:_SingleResult2.default,
-passProps:{result:result}});}},{key:'renderRow',value:function renderRow(
-
-
-
-rowData,sectionID,rowID){var _this2=this;
-var name=rowData.name;
-var reviewCount=rowData.review_count;
-var reviews=reviewCount+(reviewCount!=1?' Reviews':' Review');
-var rating=rowData.rating;
-var number=rowData.phone;
-var area=rowData.location.neighborhoods||rowData.location.city;
-area+=', '+rowData.location.state_code;
-var tempImage={uri:'catnose',isStatic:true};
-var picture=rowData.image_url?{uri:rowData.image_url}:tempImage;
-
-return (
-_reactNative2.default.createElement(TouchableHighlight,{
-onPress:function onPress(){return _this2.rowPressed(rowData);},
-underlayColor:'gray'},
-_reactNative2.default.createElement(View,null,
-_reactNative2.default.createElement(View,{style:styles.rowContainer},
-_reactNative2.default.createElement(Image,{style:styles.thumb,defaultSource:{tempImage:tempImage},source:picture}),
-_reactNative2.default.createElement(View,{style:styles.textContainer},
-_reactNative2.default.createElement(Text,{style:styles.header},name),
-_reactNative2.default.createElement(Text,{style:styles.area},area),
-_reactNative2.default.createElement(View,{style:styles.yelpContainer},
-_reactNative2.default.createElement(Text,{style:styles.reviewCount,numberOfLines:1},reviews,' on'),
-_reactNative2.default.createElement(Image,{style:styles.yelpLogo,source:{uri:'yelpLogo',isStatic:true}})),
-
-_reactNative2.default.createElement(Image,{style:styles.stars,source:{uri:rowData.rating_img_url_large}}))))));}},{key:'render',value:function render()
-
-
-
-
+searchString:'',
+isLoading:false,
+message:'',
+description:'Search for rescue shelters by city or zip code',
+descriptionStyle:styles.description,
+visibleHeight:windowHeight,
+keyboardMargin:0};return _this;}babelHelpers.createClass(SearchPage,[{key:'componentWillMount',value:function componentWillMount()
 
 
 
 {
+DeviceEventEmitter.addListener('keyboardWillShow',this.showKeyboard.bind(this));
+DeviceEventEmitter.addListener('keyboardWillHide',this.hideKeyboard.bind(this));}},{key:'onSearchTextChanged',value:function onSearchTextChanged(
+
+
+event){
+this.setState({searchString:event.nativeEvent.text});}},{key:'showKeyboard',value:function showKeyboard(
+
+
+event){
+LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
+this.setState({
+keyboardMargin:KEYBOARD_MARGIN});}},{key:'hideKeyboard',value:function hideKeyboard()
+
+
+
+{
+LayoutAnimation.configureNext(animations.layout.easeInEaseOut);
+this.setState({
+keyboardMargin:0});}},{key:'_executeQuery',value:function _executeQuery(
+
+
+
+query){var _this2=this;
+this.setState({isLoading:true});
+fetch(query).
+then(function(response){return response.json();}).
+then(function(json){return _this2._handleResponse(json);}).
+catch(function(error){return (
+_this2.setState({
+isLoading:false,
+message:'Please try again. '+error}));});}},{key:'onSearchPressed',value:function onSearchPressed()
+
+
+
+{
+var query=_yelp_api2.default.request_yelp(this.state.searchString);
+this._executeQuery(query);}},{key:'onLocationPressed',value:function onLocationPressed()
+
+
+{var _this3=this;
+navigator.geolocation.getCurrentPosition(
+function(location){
+var search=location.coords.latitude+','+location.coords.longitude;
+_this3.setState({searchString:''});
+var query=_yelp_api2.default.request_yelp(search);
+_this3._executeQuery(query);},
+
+function(error){
+console.log('error');
+_this3.setState({
+message:'GPS currently unavailable.'});
+
+console.log(error);});}},{key:'_handleResponse',value:function _handleResponse(
+
+
+
+response){
+this.setState({isLoading:false,message:'',description:'Search for rescue shelters by city or zip code',descriptionStyle:styles.description});
+if(response.total>0){
+this.props.navigator.push({
+title:'Results',
+component:_SearchResults2.default,
+passProps:{results:response.businesses}});}else 
+
+{
+this.setState({description:'Hmmm that didn\'t work. Try again.',descriptionStyle:styles.tryAgain});}}},{key:'render',value:function render()
+
+
+
+{
+var spinner=this.state.isLoading?
+_reactNative2.default.createElement(ActivityIndicatorIOS,{
+color:'white',
+style:styles.indicator,
+hidden:'true',
+size:'large'}):
+_reactNative2.default.createElement(View,{style:styles.indicator});
 return (
-_reactNative2.default.createElement(ListView,{
-dataSource:this.state.dataSource,
-renderRow:this.renderRow.bind(this),
-renderSeparator:function renderSeparator(sectionID,rowID){return _reactNative2.default.createElement(View,{key:sectionID+'-'+rowID,style:styles.fatSeparator});}}));}}]);return SearchResults;}(Component);
+_reactNative2.default.createElement(Image,{style:styles.container,source:{uri:'bluepuppy',isStatic:true}},
+_reactNative2.default.createElement(View,{style:([styles.content],{marginBottom:this.state.keyboardMargin})},
+
+_reactNative2.default.createElement(TouchableHighlight,{
+style:styles.button,
+onPress:this.onLocationPressed.bind(this),
+
+underlayColor:'rgb(33,68,124)'},
+
+_reactNative2.default.createElement(Text,{style:styles.currentLocationText},'CURRENT LOCATION')),
+
+
+_reactNative2.default.createElement(View,{style:styles.flowRight},
+_reactNative2.default.createElement(TextInput,{
+ref:'TextInput',
+style:styles.searchInput,
+value:this.state.searchString,
+autoCorrect:false,
+onSubmitEditing:this.onSearchPressed.bind(this),
+onChange:this.onSearchTextChanged.bind(this),
+returnKeyType:'search',
+onFocus:this.showKeyboard.bind(this),
+blurOnSubmit:false,
+keyboardType:"web-search",
+keyboardAppearance:"default",
+placeholderTextColor:'gray',
+placeholder:'City or zip code'}),
+
+
+_reactNative2.default.createElement(TouchableHighlight,{
+onPress:this.onSearchPressed.bind(this),
+style:styles.goButton,
+underlayColor:'rgb(33,68,124)'},
+
+_reactNative2.default.createElement(Text,{style:styles.buttonText},'Go'))),
+
+
+
+_reactNative2.default.createElement(View,{style:styles.descriptionContainer},
+_reactNative2.default.createElement(Text,{style:this.state.descriptionStyle},
+this.state.description),
+
+spinner))));}}]);return SearchPage;}(Component);
 
 
 
 
 
 
-module.exports=SearchResults;
+;
+
+
+var animations={
+layout:{
+spring:{
+duration:400,
+create:{
+duration:300,
+type:LayoutAnimation.Types.easeInEaseOut,
+property:LayoutAnimation.Properties.opacity},
+
+update:{
+type:LayoutAnimation.Types.spring,
+springDamping:400}},
+
+
+easeInEaseOut:{
+duration:400,
+create:{
+type:LayoutAnimation.Types.easeInEaseOut,
+property:LayoutAnimation.Properties.scaleXY},
+
+update:{
+type:LayoutAnimation.Types.easeInEaseOut}}}};
+
+
+
+
+
+
+var UNDERLAY_COLOR='rgb(33,68,124)';
+
+var styles=StyleSheet.create({
+
+descriptionContainer:{
+flex:1,
+paddingTop:3,
+marginTop:0,
+marginBottom:DESCRIPTION_MARGIN,
+alignSelf:'stretch',
+justifyContent:'center',
+alignItems:'center'},
+
+description:{
+fontFamily:'Open Sans',
+fontSize:DESCRIPTION_FONT,
+textAlign:'center',
+color:'white',
+paddingLeft:PADDING,
+paddingRight:PADDING,
+backgroundColor:'transparent',
+shadowColor:'rgb(25, 19, 15)',
+shadowOffset:{width:0,height:0},
+shadowOpacity:1,
+shadowRadius:4,
+lineHeight:DESCRIPTION_FONT},
+
+tryAgain:{
+fontFamily:'Open Sans',
+fontSize:DESCRIPTION_FONT,
+textAlign:'center',
+color:'white',
+backgroundColor:'transparent',
+paddingLeft:PADDING,
+paddingRight:PADDING,
+shadowColor:'#b9c6d9',
+shadowOffset:{width:0,height:0},
+shadowOpacity:1,
+shadowRadius:4,
+lineHeight:DESCRIPTION_FONT},
+
+
+container:{
+flex:1,
+flexDirection:'column',
+justifyContent:'flex-end',
+width:null,
+height:null,
+resizeMode:'cover'},
+
+content:{
+flexDirection:'column',
+alignItems:'center'},
+
+flowRight:{
+flexDirection:'row',
+alignItems:'center',
+marginRight:PADDING,
+marginLeft:PADDING},
+
+currentLocationText:{
+color:'#122c5d',
+fontSize:BUTTON_INPUT_FONT,
+fontFamily:'Open Sans',
+alignSelf:'center'},
+
+buttonText:{
+fontSize:BUTTON_INPUT_FONT,
+fontFamily:'Open Sans',
+color:'white',
+alignSelf:'center'},
+
+goButton:{
+flex:1,
+flexDirection:'row',
+height:BUTTON_INPUT_HEIGHT,
+backgroundColor:'rgb(107,151,212)',
+borderRadius:40,
+marginBottom:8,
+marginLeft:8,
+alignSelf:'stretch',
+justifyContent:'center'},
+
+button:{
+flex:1,
+flexDirection:'row',
+height:BUTTON_INPUT_HEIGHT,
+backgroundColor:'#b9c6d9',
+borderRadius:2,
+marginRight:PADDING,
+marginLeft:PADDING,
+marginBottom:12,
+alignSelf:'stretch',
+justifyContent:'center'},
+
+searchInput:{
+height:BUTTON_INPUT_HEIGHT,
+padding:4,
+flex:INPUT_FLEX,
+fontFamily:'Open Sans',
+fontSize:BUTTON_INPUT_FONT,
+backgroundColor:'white',
+borderRadius:1,
+color:'black',
+paddingLeft:15},
+
+indicator:{
+marginTop:10,
+width:INDICATOR_SIZE,
+height:INDICATOR_SIZE}});
+
+
+
+module.exports=SearchPage;
 });
 __d('StrayRescue/app/SingleResult.js',function(global, require, module, exports) {  'use strict';
 
@@ -89108,13 +89125,14 @@ left:0,
 flexDirection:'row'},
 
 yelpURLText:{
-color:'#4775B7',
+color:'#325280',
 marginLeft:5,
 fontSize:SMALLER_FONT,
 fontFamily:'Open Sans'},
 
 humaneSocietyURL:{
-color:'#4775B7',
+color:'#325280',
+textDecorationLine:'underline',
 fontSize:DESCRIPTION_FONT,
 fontFamily:'Open Sans'},
 
@@ -89364,178 +89382,160 @@ directions))));}}]);return SingleResult;}(Component);
 
 module.exports=SingleResult;
 });
-__d('react-native-communications/AKCommunications.js',function(global, require, module, exports) {  'use strict';
-var React=require('react-native/Libraries/react-native/react-native.js');var 
+__d('StrayRescue/app/SearchResults.js',function(global, require, module, exports) {  'use strict';
+
+var _reactNative=require('react-native/Libraries/react-native/react-native.js');var _reactNative2=babelHelpers.interopRequireDefault(_reactNative);
+var _SingleResult=require('StrayRescue/app/SingleResult.js');var _SingleResult2=babelHelpers.interopRequireDefault(_SingleResult);
+var _display_address_parser=require('StrayRescue/lib/display_address_parser.js');var _display_address_parser2=babelHelpers.interopRequireDefault(_display_address_parser);var 
 
 
-Linking=
-
-React.Linking;var Platform=React.Platform;
-
-var communication={
-phonecall:function phonecall(phoneNumber,prompt){
-if(arguments.length!==2){
-console.log('you must supply exactly 2 arguments');
-return;}
+StyleSheet=_reactNative2.default.StyleSheet;var 
+Image=_reactNative2.default.Image;var 
+View=_reactNative2.default.View;var 
+TouchableHighlight=_reactNative2.default.TouchableHighlight;var 
+ListView=_reactNative2.default.ListView;var 
+Text=_reactNative2.default.Text;var 
+Component=_reactNative2.default.Component;
 
 
-if(!isCorrectType('String',phoneNumber)){
-console.log('the phone number must be provided as a String value');
-return;}
+var styles=StyleSheet.create({
+thumb:{
+width:90,
+height:90,
+marginRight:10,
+backgroundColor:'rgb(204, 204, 204)'},
+
+textContainer:{
+flex:1},
+
+stars:{
+width:83,
+height:15,
+paddingLeft:3,
+marginTop:5},
+
+yelpContainer:{
+flex:1,
+flexDirection:'row'},
+
+yelpLogo:{
+width:50,
+height:25,
+marginLeft:3},
+
+separator:{
+height:1,
+backgroundColor:'#dddddd'},
+
+header:{
+fontSize:18,
+fontFamily:'Open Sans',
+fontWeight:'bold',
+color:'black'},
+
+area:{
+fontSize:14,
+fontFamily:'Open Sans',
+color:'#656565',
+marginTop:5},
+
+reviewCount:{
+fontSize:13,
+fontFamily:'Open Sans',
+marginBottom:4,
+color:'#656565',
+marginTop:6},
+
+rowContainer:{
+flexDirection:'row',
+flex:1,
+padding:13,
+backgroundColor:'white'},
+
+fatSeparator:{
+height:14,
+backgroundColor:'#F7F7F7'}});var 
 
 
-if(!isCorrectType('Boolean',prompt)){
-console.log('the prompt parameter must be a Boolean');
-return;}
+
+SearchResults=function(_Component){babelHelpers.inherits(SearchResults,_Component);
 
 
-var url;
+function SearchResults(props){babelHelpers.classCallCheck(this,SearchResults);var _this=babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(SearchResults).call(this,
+props));
 
-if(Platform.OS!=='android'){
-url=prompt?'telprompt:':'tel:';}else 
+var goodResults=_this.props.results.filter(_this.hasAddressOrNumber);
+
+var dataSource=new ListView.DataSource(
+{rowHasChanged:function rowHasChanged(r1,r2){return r1.id!==r2.id;}});
+_this.state={
+dataSource:dataSource.cloneWithRows(goodResults)};return _this;}babelHelpers.createClass(SearchResults,[{key:'hasAddressOrNumber',value:function hasAddressOrNumber(
+
+
+
+result){
+var address=(0,_display_address_parser2.default)(result.location.display_address);
+var reachableAddress=address[0].split(',')[0].search(/\d/)>=0?true:false;
+var phone=result.display_phone||false;
+return reachableAddress||phone;}},{key:'rowPressed',value:function rowPressed(
+
+
+property){
+var result=this.props.results.filter(function(prop){return prop.id===property.id;});
+
+this.props.navigator.push({
+title:'',
+component:_SingleResult2.default,
+passProps:{result:result}});}},{key:'renderRow',value:function renderRow(
+
+
+
+rowData,sectionID,rowID){var _this2=this;
+var name=rowData.name;
+var reviewCount=rowData.review_count;
+var reviews=reviewCount+(reviewCount!=1?' Reviews':' Review');
+var rating=rowData.rating;
+var number=rowData.phone;
+var area=rowData.location.neighborhoods||rowData.location.city;
+area+=', '+rowData.location.state_code;
+var tempImage={uri:'catnose',isStatic:true};
+var picture=rowData.image_url?{uri:rowData.image_url}:tempImage;
+
+return (
+_reactNative2.default.createElement(TouchableHighlight,{
+onPress:function onPress(){return _this2.rowPressed(rowData);},
+underlayColor:'gray'},
+_reactNative2.default.createElement(View,null,
+_reactNative2.default.createElement(View,{style:styles.rowContainer},
+_reactNative2.default.createElement(Image,{style:styles.thumb,defaultSource:{tempImage:tempImage},source:picture}),
+_reactNative2.default.createElement(View,{style:styles.textContainer},
+_reactNative2.default.createElement(Text,{style:styles.header},name),
+_reactNative2.default.createElement(Text,{style:styles.area},area),
+_reactNative2.default.createElement(View,{style:styles.yelpContainer},
+_reactNative2.default.createElement(Text,{style:styles.reviewCount,numberOfLines:1},reviews,' on'),
+_reactNative2.default.createElement(Image,{style:styles.yelpLogo,source:{uri:'yelpLogo',isStatic:true}})),
+
+_reactNative2.default.createElement(Image,{style:styles.stars,source:{uri:rowData.rating_img_url_large}}))))));}},{key:'render',value:function render()
+
+
+
+
+
+
 
 {
-url='tel:';}
-
-
-url+=phoneNumber;
-
-LaunchURL(url);},
-
-
-email:function email(to,cc,bcc,subject,body){
-var url='mailto:';
-var argLength=arguments.length;
-
-switch(argLength){
-case 0:
-LaunchURL(url);
-return;
-case 5:
-break;
-default:
-console.log('you must supply either 0 or 5 arguments. You supplied '+argLength);
-return;}
+return (
+_reactNative2.default.createElement(ListView,{
+dataSource:this.state.dataSource,
+renderRow:this.renderRow.bind(this),
+renderSeparator:function renderSeparator(sectionID,rowID){return _reactNative2.default.createElement(View,{key:sectionID+'-'+rowID,style:styles.fatSeparator});}}));}}]);return SearchResults;}(Component);
 
 
 
 
-var valueAdded=false;
-
-if(isCorrectType('Array',arguments[0])){
-var validAddresses=getValidArgumentsFromArray(arguments[0],'String');
-
-if(validAddresses.length>0){
-url+=validAddresses.join(',');}}
 
 
-
-url+='?';
-
-if(isCorrectType('Array',arguments[1])){
-var validAddresses=getValidArgumentsFromArray(arguments[1],'String');
-
-if(validAddresses.length>0){
-valueAdded=true;
-url+='cc='+validAddresses.join(',');}}
-
-
-
-if(isCorrectType('Array',arguments[2])){
-if(valueAdded){
-url+='&';}
-
-
-var validAddresses=getValidArgumentsFromArray(arguments[2],'String');
-
-if(validAddresses.length>0){
-valueAdded=true;
-url+='bcc='+validAddresses.join(',');}}
-
-
-
-if(isCorrectType('String',arguments[3])){
-if(valueAdded){
-url+='&';}
-
-
-valueAdded=true;
-url+='subject='+arguments[3];}
-
-
-if(isCorrectType('String',arguments[4])){
-if(valueAdded){
-url+='&';}
-
-
-url+='body='+arguments[4];}
-
-
-url=encodeURI(url);
-
-LaunchURL(url);},
-
-
-text:function text(phoneNumber){
-if(arguments.length>1){
-console.log('you supplied too many arguments. You can either supply 0 or 1');
-return;}
-
-
-var url='sms:';
-
-if(arguments.length!==0){
-if(isCorrectType('String',phoneNumber)){
-url+=phoneNumber;}else 
-{
-console.log('the phone number should be provided as a string. It was provided as '+
-Object.prototype.toString.call(phoneNumber).slice(8,-1)+
-',ignoring the value provided');}}
-
-
-
-LaunchURL(url);},
-
-web:function web(address){
-if(!address){
-console.log('Missing address argument');
-return;}
-
-if(!isCorrectType('String',address)){
-console.log('address was not provided as a string, it was provided as '+
-Object.prototype.toString.call(address).slice(8,-1));
-return;}
-
-LaunchURL(address);}};
-
-
-
-var LaunchURL=function LaunchURL(url){
-Linking.canOpenURL(url).then(function(supported){
-if(!supported){
-console.log('Can\'t handle url: '+url);}else 
-{
-return Linking.openURL(url);}}).
-
-catch(function(err){return console.error('An unexpected error happened',err);});};
-
-
-var getValidArgumentsFromArray=function getValidArgumentsFromArray(array,type){
-var validValues=[];
-array.forEach(function(value){
-if(isCorrectType(type,value)){
-validValues.push(value);}});
-
-
-
-return validValues;};
-
-
-var isCorrectType=function isCorrectType(expected,actual){
-return Object.prototype.toString.call(actual).slice(8,-1)===expected;};
-
-
-module.exports=communication;
+module.exports=SearchResults;
 });
 __d('react-native/Libraries/CustomComponents/NavigationExperimental/back_chevron.png',function(global, require, module, exports) {  module.exports = require("AssetRegistry").registerAsset({"__packager_asset":true,"fileSystemLocation":"/Users/eweigert/Desktop/resume projects/PetRescueMobile/node_modules/react-native/Libraries/CustomComponents/NavigationExperimental","httpServerLocation":"/assets/node_modules/react-native/Libraries/CustomComponents/NavigationExperimental","width":26,"height":42,"scales":[1],"files":["/Users/eweigert/Desktop/resume projects/PetRescueMobile/node_modules/react-native/Libraries/CustomComponents/NavigationExperimental/back_chevron.png"],"hash":"ff62a71400a6f2c153edd030a2479ca7","name":"back_chevron","type":"png"});
 });
@@ -89691,4 +89691,4 @@ module.exports=NavigationHeader;
 });
 ;require("InitializeJavaScriptAppEngine");
 ;require("StrayRescue/index.ios.js");
-__SSTOKENSTRING = "@generated SignedSource<<4253706cc5ec597ae03f2308085cbd7e>>";
+__SSTOKENSTRING = "@generated SignedSource<<29975ed08d7c1d6478af0b3ad713989e>>";
