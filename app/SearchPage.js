@@ -1,11 +1,10 @@
 'use strict';
 
-import React from 'react-native';
-import yelp from './../lib/yelp_api';
-import SearchResults from './SearchResults';
-import tempJson from './tempJson.json';
+import React, {
+  Component
+} from 'react';
 
-const {
+import {
     StyleSheet,
     Text,
     TextInput,
@@ -13,11 +12,14 @@ const {
     TouchableHighlight,
     ActivityIndicatorIOS,
     Image,
-    Component,
     Dimensions,
     DeviceEventEmitter,
     LayoutAnimation
-} = React;
+} from 'react-native';
+
+import yelp from './../lib/yelp_api';
+import SearchResults from './SearchResults';
+import tempJson from './tempJson.json';
 
 let windowHeight = Dimensions.get('window').height;
 let KEYBOARD_MARGIN = 220;

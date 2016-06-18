@@ -1,18 +1,17 @@
 'use strict';
 
-import React from 'react-native';
-import SingleResult from './SingleResult';
-import DisplayAddressParser from './../lib/display_address_parser';
-
-const {
+import React, { Component } from 'react';
+import {
     StyleSheet,
     Image,
     View,
     TouchableHighlight,
     ListView,
     Text,
-    Component
-} = React;
+} from 'react-native';
+
+import SingleResult from './SingleResult';
+import DisplayAddressParser from './../lib/display_address_parser';
 
 const styles = StyleSheet.create({
     thumb: {

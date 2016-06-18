@@ -620,7 +620,7 @@
 				);
 				INFOPLIST_FILE = "PetRescue/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = ("-ObjC", "-lc++",);
 				PRODUCT_NAME = PetRescue;
 			};
 			name = Debug;
@@ -636,7 +636,7 @@
 				);
 				INFOPLIST_FILE = "PetRescue/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = ("-ObjC", "-lc++");
 				PRODUCT_NAME = PetRescue;
 			};
 			name = Release;

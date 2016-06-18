@@ -1,13 +1,19 @@
 'use strict'
-import React from 'react-native';
+import React, { Component, } from 'react';
+import {
+  AppRegistry,
+  NavigatorIOS,
+  StyleSheet
+} from 'react-native';
+
 import SearchPage from './app/SearchPage';
 
 //the navigationBarHidden thing depends on a change to react-native code: from this.props.navigationBarHidden to route.navigationBarHidden.  Within node_modules/react-native/Libraries/Components/Navigation/NavigatorIOS.ios.js. 
 
-class StrayRescue extends React.Component {
+class StrayRescue extends Component {
     render() {
         return ( 
-            <React.NavigatorIOS 
+            <NavigatorIOS 
                 style={styles.container}
                 initialRoute={{
                     title: 'Search',
@@ -20,9 +26,9 @@ class StrayRescue extends React.Component {
     }
 }
 
-React.AppRegistry.registerComponent('Stray Rescue', function() { return StrayRescue });
+AppRegistry.registerComponent('StrayRescue', ()=> StrayRescue);
 
-const styles = React.StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1
     }

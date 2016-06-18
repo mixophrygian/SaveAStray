@@ -1,12 +1,9 @@
 'use strict';
 
-import React from 'react-native';
-import Communications from 'react-native-communications';
-
-import DisplayAddressParser from './../lib/display_address_parser';
-
-
-const { 
+import React, {
+    Component,
+} from 'react';
+import {
     StyleSheet,
     Image,
     Linking,
@@ -14,8 +11,10 @@ const {
     Dimensions,
     View,
     Text,
-    Component
-} = React;
+} from 'react-native';
+
+import Communications from 'react-native-communications';
+import DisplayAddressParser from './../lib/display_address_parser';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
