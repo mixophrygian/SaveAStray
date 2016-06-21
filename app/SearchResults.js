@@ -44,19 +44,19 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 18,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         fontWeight: 'bold',
         color: 'black'
     },
     area: {
         fontSize: 14,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         color: '#656565',
         marginTop: 5
     },
     reviewCount: {
         fontSize: 13,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         marginBottom: 4,
         color: '#656565',
         marginTop: 6
@@ -113,7 +113,7 @@ class SearchResults extends Component {
         const number = rowData.phone;
         let area = (rowData.location.neighborhoods || rowData.location.city);
         area += ', ' + rowData.location.state_code;
-        const tempImage = { uri: 'catnose', isStatic: true};
+        const tempImage = require('./images/catnose.jpg');
         const picture = rowData.image_url ? { uri: rowData.image_url } : tempImage;
 
         return (
@@ -122,13 +122,13 @@ class SearchResults extends Component {
                 underlayColor='gray'>
             <View>
                 <View style={styles.rowContainer}>
-                    <Image style={styles.thumb} defaultSource={{tempImage}} source={picture} />
+                    <Image style={styles.thumb} defaultSource={tempImage} source={picture} />
                     <View style={styles.textContainer}>
                         <Text style={styles.header}>{name}</Text>
                         <Text style={styles.area}>{area}</Text>
                         <View style={styles.yelpContainer}>
                             <Text style={styles.reviewCount} numberOfLines={1}>{reviews} on</Text>
-                            <Image style={styles.yelpLogo} source= {{ uri: 'yelpLogo', isStatic: true }}/>
+                            <Image style={styles.yelpLogo} source={require('./images/yelpLogo.png')}/>
                         </View>
                         <Image style={styles.stars} source={{ uri: rowData.rating_img_url_large }} />
                     </View>

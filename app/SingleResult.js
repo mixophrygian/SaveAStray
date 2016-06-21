@@ -104,13 +104,13 @@ const styles = StyleSheet.create({
         color:'#325280',
         marginLeft: 5,
         fontSize: SMALLER_FONT,
-        fontFamily: 'Open Sans'
+        fontFamily: 'Avenir-Medium'
     },
     humaneSocietyURL: {
         color:'#325280',
         textDecorationLine: 'underline',
         fontSize: DESCRIPTION_FONT,
-        fontFamily: 'Open Sans'
+        fontFamily: 'Avenir-Medium'
     },
     image: {
         width: width - 20,
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     name: {
         fontSize: NAME_FONT,
         lineHeight: NAME_FONT + 2,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         fontWeight: 'bold',
         color: 'black',
         marginTop: 8,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: DESCRIPTION_FONT,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         color: '#656565',
         marginBottom: WARNING_MARGIN_BOTTOM,
         marginTop: WARNING_MARGIN_TOP,
@@ -141,17 +141,17 @@ const styles = StyleSheet.create({
     },
     address: {
         fontSize: SMALLER_FONT,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         marginTop: 0,
     },
     staticPhone: {
         fontSize: SMALLER_FONT,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         marginTop: 5,
     },
     phoneUnavailable: {
         fontSize: SMALLER_FONT,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         marginTop: 5,
         color: 'gray'
     },
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     }, 
     reviewCount: {
         fontSize: SMALLER_FONT,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         color: '#656565',
         marginTop: 5,
         marginLeft: 3
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingTop: 8,
         fontSize: 20,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         color: 'white',
         backgroundColor: '#6B97D3',
         textAlign: 'center'
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         height: 46,
         paddingTop: 8,
         fontSize: 20,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         color: '#818181',
         backgroundColor: '#DDDCDD',
         textAlign: 'center'
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
         height: 46,
         paddingTop: 8,
         fontSize: 20,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         color: 'white',
         backgroundColor: '#2C599C',
         textAlign: 'center',
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
         height: 46,
         paddingTop: 8,
         fontSize: 20,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         backgroundColor: '#A0A0A0',
         color: '#DADADA',
         textAlign: 'center'
@@ -260,9 +260,9 @@ class SingleResult extends Component {
           : (<Text style={styles.phoneUnavailable}>Phone Number Unavailable</Text>);
          
         const displayAddress = DisplayAddressParser(result.location.display_address);
-        const tempImage = { uri: 'catnose', isStatic: true};
-        const pinGlyph = { uri: 'Pin', isStatic: true};
-        const phoneGlyph = { uri: 'Phone', isStatic: true};
+        const tempImage = require('./images/catnose.jpg');
+        const pinGlyph = require('./images/pin.png');
+        const phoneGlyph = require('./images/phone.png');
         const phoneNumber = '';
         const phoneButton = result.display_phone ? (<TouchableHighlight
                           underlayColor='white'
@@ -299,7 +299,7 @@ class SingleResult extends Component {
                   <Image style={styles.image}
                           resizeMode='cover'
                           source={ picture } 
-                          defaultSource={{ tempImage }} />
+                          defaultSource={tempImage} />
 
                   <View style={styles.heading}>
                       <Text style={styles.name}>{name}</Text>
@@ -312,7 +312,7 @@ class SingleResult extends Component {
                       <View style={styles.yelpText}>
                           <Image style={styles.stars} source={{ uri: starsURL }} />
                           <Text style={styles.reviewCount}>{reviews} on </Text>
-                          <Image style={styles.yelpLogo} source={{uri: 'yelpLogo', isStatic: true}} />
+                          <Image style={styles.yelpLogo} source={require('./images/yelpLogo.png')} />
                       </View>
 
                       <View style={styles.yelpText2}>

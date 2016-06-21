@@ -13,7 +13,6 @@ import {
     ActivityIndicatorIOS,
     Image,
     Dimensions,
-    DeviceEventEmitter,
     LayoutAnimation
 } from 'react-native';
 
@@ -79,11 +78,6 @@ class SearchPage extends Component {
             visibleHeight: windowHeight,
             keyboardMargin: 0,
         };
-    }
-
-    componentWillMount() {
-      DeviceEventEmitter.addListener('keyboardWillShow', this.showKeyboard.bind(this));
-      DeviceEventEmitter.addListener('keyboardWillHide', this.hideKeyboard.bind(this));
     }
 
     onSearchTextChanged(event) {
@@ -160,7 +154,7 @@ class SearchPage extends Component {
                 size='large'/>) :
             (<View style={styles.indicator}/>);
         return (
-        <Image style={styles.container} source={{ uri: 'bluepuppy', isStatic: true}}>
+        <Image style={styles.container} source={require('./images/bluepuppy.png')}>
             <View style={[styles.content], {marginBottom: this.state.keyboardMargin}}>
 
                 <TouchableHighlight 
@@ -182,6 +176,7 @@ class SearchPage extends Component {
                         onChange={this.onSearchTextChanged.bind(this)}
                         returnKeyType={'search'}
                         onFocus={this.showKeyboard.bind(this)}
+                        onBlur={this.hideKeyboard.bind(this)}
                         blurOnSubmit={false}
                         keyboardType={"web-search"}
                         keyboardAppearance={"default"}
@@ -254,7 +249,7 @@ let styles = StyleSheet.create({
         alignItems: 'center'
     },
     description: {
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         fontSize: DESCRIPTION_FONT,
         textAlign: 'center',
         color: 'white',
@@ -268,7 +263,7 @@ let styles = StyleSheet.create({
         lineHeight: DESCRIPTION_FONT
     },
     tryAgain: {
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         fontSize: DESCRIPTION_FONT,
         textAlign: 'center',
         color: 'white',
@@ -303,12 +298,12 @@ let styles = StyleSheet.create({
     currentLocationText: {
         color: '#122c5d',
         fontSize: BUTTON_INPUT_FONT,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         alignSelf: 'center'
     },
     buttonText: {
         fontSize: BUTTON_INPUT_FONT,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         color: 'white',
         alignSelf: 'center'
     },
@@ -339,7 +334,7 @@ let styles = StyleSheet.create({
         height: BUTTON_INPUT_HEIGHT,
         padding: 4,
         flex: INPUT_FLEX,
-        fontFamily: 'Open Sans',
+        fontFamily: 'Avenir-Medium',
         fontSize: BUTTON_INPUT_FONT,
         backgroundColor: 'white',
         borderRadius: 1,
