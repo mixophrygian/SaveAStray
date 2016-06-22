@@ -13,6 +13,7 @@ import {
     ActivityIndicatorIOS,
     Image,
     Dimensions,
+    Keyboard,
     LayoutAnimation
 } from 'react-native';
 
@@ -78,6 +79,11 @@ class SearchPage extends Component {
             visibleHeight: windowHeight,
             keyboardMargin: 0,
         };
+    }
+
+    onComponentMounted() {
+      Keyboard.addListener('keyboardWillShow', this.showKeyboard.bind(this));
+      Keyboard.addListener('keyboardWillHide', this.hideKeyboard.bind(this));
     }
 
     onSearchTextChanged(event) {
@@ -176,7 +182,6 @@ class SearchPage extends Component {
                         onChange={this.onSearchTextChanged.bind(this)}
                         returnKeyType={'search'}
                         onFocus={this.showKeyboard.bind(this)}
-                        onBlur={this.hideKeyboard.bind(this)}
                         blurOnSubmit={false}
                         keyboardType={"web-search"}
                         keyboardAppearance={"default"}
