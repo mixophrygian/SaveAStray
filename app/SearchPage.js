@@ -10,7 +10,7 @@ import {
     TextInput,
     View,
     TouchableHighlight,
-    ActivityIndicatorIOS,
+    ActivityIndicator,
     Image,
     Dimensions,
     Keyboard,
@@ -153,7 +153,7 @@ class SearchPage extends Component {
 
     render() {
         var spinner = this.state.isLoading ?
-            ( <ActivityIndicatorIOS
+            ( <ActivityIndicator
                 color='white'
                 style={styles.indicator}
                 hidden='true'
@@ -326,7 +326,7 @@ let styles = StyleSheet.create({
     button: {
         flex: 1,
         flexDirection: 'row',
-        height: BUTTON_INPUT_HEIGHT,
+        //height: BUTTON_INPUT_HEIGHT,
         backgroundColor: '#b9c6d9',
         borderRadius: 2,
         marginRight: PADDING,
@@ -345,6 +345,7 @@ let styles = StyleSheet.create({
         borderRadius: 1,
         color: 'black',
         paddingLeft: 15,
+        marginBottom: 25
     },
     indicator: {
         marginTop: 10,
