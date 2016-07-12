@@ -40,7 +40,7 @@ if(windowHeight <=  480) {
 
 if(windowHeight > 480 && windowHeight <= 568) {
   //iphone 5: 568 pixels
-    DESCRIPTION_MARGIN = 0;
+    DESCRIPTION_MARGIN = 10;
     INPUT_FLEX = 4;
     BUTTON_INPUT_HEIGHT = 40;
     BUTTON_INPUT_FONT = 16;
@@ -71,7 +71,7 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchString: '',
+            searchString: '22309',
             isLoading: false,
             message: '',
             description: 'Search for rescue shelters by city or zip code',
@@ -139,6 +139,7 @@ class SearchPage extends Component {
     }
 
     _handleResponse(response) {
+        this.hideKeyboard();
         this.setState({ isLoading: false, message: '', description: 'Search for rescue shelters by city or zip code', descriptionStyle: styles.description});
         if (response.total > 0) {
             this.props.navigator.push({
@@ -245,13 +246,10 @@ var UNDERLAY_COLOR = 'rgb(33,68,124)';
 let styles = StyleSheet.create({
 
     descriptionContainer: {
-        flex: 1,
-        paddingTop: 3,
-        marginTop: 0,
         marginBottom: DESCRIPTION_MARGIN,
         alignSelf: 'stretch',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     description: {
         fontFamily: 'Avenir-Medium',
@@ -265,7 +263,8 @@ let styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
         shadowRadius: 4,
-        lineHeight: DESCRIPTION_FONT
+        lineHeight: DESCRIPTION_FONT,
+        marginTop: 8
     },
     tryAgain: {
         fontFamily: 'Avenir-Medium',
@@ -299,10 +298,12 @@ let styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: PADDING,
         marginLeft: PADDING,
+        paddingBottom: 0,
     },
     currentLocationText: {
         color: '#122c5d',
         fontSize: BUTTON_INPUT_FONT,
+        margin: 0,
         fontFamily: 'Avenir-Medium',
         alignSelf: 'center'
     },
@@ -314,7 +315,6 @@ let styles = StyleSheet.create({
     },
     goButton: {
         flex: 1,
-        flexDirection: 'row',
         height: BUTTON_INPUT_HEIGHT,
         backgroundColor: 'rgb(107,151,212)',
         borderRadius: 40,
@@ -324,16 +324,13 @@ let styles = StyleSheet.create({
         justifyContent: 'center'
     },
     button: {
-        flex: 1,
-        flexDirection: 'row',
-        //height: BUTTON_INPUT_HEIGHT,
         backgroundColor: '#b9c6d9',
         borderRadius: 2,
         marginRight: PADDING,
         marginLeft: PADDING,
         marginBottom: 12,
-        alignSelf: 'stretch',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: BUTTON_INPUT_HEIGHT
     },
     searchInput: {
         height: BUTTON_INPUT_HEIGHT,
@@ -345,7 +342,6 @@ let styles = StyleSheet.create({
         borderRadius: 1,
         color: 'black',
         paddingLeft: 15,
-        marginBottom: 25
     },
     indicator: {
         marginTop: 10,

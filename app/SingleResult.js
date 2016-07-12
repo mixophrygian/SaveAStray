@@ -21,7 +21,6 @@ const height = Dimensions.get('window').height;
 
 let WARNING_MARGIN_TOP = 3;
 let WARNING_MARGIN_BOTTOM = 3;
-let ADDRESS_MARGIN = 5;
 let YELP_INFO_MARGIN_BOTTOM = 0;
 let DESCRIPTION_FONT = 12;
 let SMALLER_FONT = 12;
@@ -34,7 +33,7 @@ if(height <= 568) {
 if(height > 568 && height <= 667) {
   //iphone 6 styles
   YELP_INFO_MARGIN_BOTTOM = 12;
-  WARNING_MARGIN_BOTTOM = 20;
+  WARNING_MARGIN_BOTTOM = 15;
   DESCRIPTION_FONT = 14;
   SMALLER_FONT = 14
   NAME_FONT = 23;
@@ -69,12 +68,17 @@ const styles = StyleSheet.create({
     stars: {
         width: 83,
         height: 15,
-        marginTop: 7,
         marginRight: 3
     }, 
     yelpText: {
         flex: 1,
         flexDirection: 'row',
+    },
+    reviewCount: {
+        fontSize: SMALLER_FONT,
+        fontFamily: 'Avenir-Medium',
+        color: '#656565',
+        marginLeft: 3
     },
     yelpText2: {
         flex: 1,
@@ -83,6 +87,7 @@ const styles = StyleSheet.create({
     yelpLogo: {
         width: 50,
         height: 25,
+        marginTop: -7
     },
     staticInfoContainer: {
         flex: 1,
@@ -90,8 +95,7 @@ const styles = StyleSheet.create({
     },
     addressAndNumber: {
         bottom: 0,
-        marginTop: ADDRESS_MARGIN,
-        marginLeft: 10
+        marginLeft: 10,
     },
     ctaButtonContainer: {
         width: width - 20,
@@ -102,7 +106,8 @@ const styles = StyleSheet.create({
     },
     yelpURLText: {
         color:'#325280',
-        marginLeft: 5,
+        marginLeft: 2,
+        marginTop: 2,
         fontSize: SMALLER_FONT,
         fontFamily: 'Avenir-Medium'
     },
@@ -137,17 +142,16 @@ const styles = StyleSheet.create({
         color: '#656565',
         marginBottom: WARNING_MARGIN_BOTTOM,
         marginTop: WARNING_MARGIN_TOP,
-        marginLeft: 10
+        marginLeft: 10,        
     },
     address: {
         fontSize: SMALLER_FONT,
         fontFamily: 'Avenir-Medium',
-        marginTop: 0,
     },
     staticPhone: {
         fontSize: SMALLER_FONT,
         fontFamily: 'Avenir-Medium',
-        marginTop: 5,
+        marginTop: 10,
     },
     phoneUnavailable: {
         fontSize: SMALLER_FONT,
@@ -164,15 +168,8 @@ const styles = StyleSheet.create({
         width: 12,
         height: 12,
         marginRight: 6,
-        marginTop: 5,
+        marginTop: 10,
     }, 
-    reviewCount: {
-        fontSize: SMALLER_FONT,
-        fontFamily: 'Avenir-Medium',
-        color: '#656565',
-        marginTop: 5,
-        marginLeft: 3
-    },
     tapDirections: {
         width: (width / 2) - 10,
         height: 46,
