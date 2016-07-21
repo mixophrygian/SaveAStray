@@ -96,6 +96,8 @@ const styles = StyleSheet.create({
     addressAndNumber: {
         bottom: 0,
         marginLeft: 10,
+        //borderWidth: 1,
+        //borderColor: 'pink'
     },
     ctaButtonContainer: {
         width: width - 20,
@@ -147,17 +149,26 @@ const styles = StyleSheet.create({
     address: {
         fontSize: SMALLER_FONT,
         fontFamily: 'Avenir-Medium',
+        paddingBottom: 1,
+        //borderWidth: 1,
+        //borderColor: 'red'
     },
     staticPhone: {
         fontSize: SMALLER_FONT,
         fontFamily: 'Avenir-Medium',
         marginTop: 10,
+        paddingBottom: 1
+        //borderWidth: 1,
+        //borderColor: 'blue'
     },
     phoneUnavailable: {
         fontSize: SMALLER_FONT,
         fontFamily: 'Avenir-Medium',
-        marginTop: 5,
-        color: 'gray'
+        marginTop: 10,
+        color: 'gray',
+        //borderWidth: 1,
+        //borderColor: 'green'
+
     },
     pinGlyph: {
         width: 12,

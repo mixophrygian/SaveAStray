@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         width: 50,
         height: 25,
         marginLeft: 3,
+        marginTop: -5
     },
     separator: {
         height: 1,
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 18,
+        margin: 0,
         fontFamily: 'Avenir-Medium',
         fontWeight: 'bold',
         color: 'black'
@@ -52,14 +54,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Avenir-Medium',
         color: '#656565',
-        marginTop: 5
+        marginTop: 2
     },
     reviewCount: {
         fontSize: 13,
         fontFamily: 'Avenir-Medium',
         marginBottom: 4,
         color: '#656565',
-        marginTop: 6
+        marginTop: 2
     },
     rowContainer: {
         flexDirection: 'row',
