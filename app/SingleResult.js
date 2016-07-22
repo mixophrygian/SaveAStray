@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     address: {
         fontSize: SMALLER_FONT,
         fontFamily: 'Avenir-Medium',
-        paddingBottom: 1,
+        paddingBottom: 3,
         //borderWidth: 1,
         //borderColor: 'red'
     },
