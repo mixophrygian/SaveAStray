@@ -138,7 +138,6 @@ class SearchPage extends Component {
     }
 
     _handleResponse(response) {
-        this.hideKeyboard();
         this.setState({ isLoading: false, message: '', description: 'Search for rescue shelters by city or zip code', descriptionStyle: styles.description});
         if (response.total > 0) {
             this.props.navigator.push({
@@ -146,6 +145,7 @@ class SearchPage extends Component {
                 component: SearchResults,
                 passProps: { results: response.businesses }
             });
+            this.hideKeyboard();
         } else {
             this.setState({ description: 'Hmmm that didn\'t work. Try again.', descriptionStyle: styles.tryAgain});
         }
