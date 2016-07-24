@@ -11,6 +11,7 @@ import {
     View,
     TouchableHighlight,
     ActivityIndicator,
+    AlertIOS,
     Image,
     Dimensions,
     Keyboard,
@@ -71,7 +72,7 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchString: '22309',
+            searchString: '',
             isLoading: false,
             message: '',
             description: 'Search for rescue shelters by city or zip code',
@@ -123,18 +124,16 @@ class SearchPage extends Component {
 
     onLocationPressed() {
         navigator.geolocation.getCurrentPosition(
-            location => {
+            (location) => {
                 const search = location.coords.latitude + ',' + location.coords.longitude;
-                this.setState({ searchString: ''});
                 const query = yelp.request_yelp(search);
                 this._executeQuery(query);
             },
-            error => {
-              console.log('error');
+            (error) => {
+              AlertIOS.alert('','To use Current Location, please allow Save a Stray to access your location.  Go to Settings > Privacy > Location Services > Save a Stray, and select \'While Using the App\'');
                 this.setState({
                     message: 'GPS currently unavailable.'
                 });
-                console.log(error);
             });
     }
 
