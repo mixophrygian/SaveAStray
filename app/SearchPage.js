@@ -273,11 +273,12 @@ let styles = StyleSheet.create({
         backgroundColor: 'transparent',
         paddingLeft: PADDING,
         paddingRight: PADDING,
-        shadowColor: '#b9c6d9',
+        shadowColor: 'black',
         shadowOffset: {width: 0, height: 0},
         shadowOpacity: 1,
         shadowRadius: 4,
-        lineHeight: DESCRIPTION_FONT
+        lineHeight: DESCRIPTION_FONT,
+        marginTop: 8
     },
 
     container: {
