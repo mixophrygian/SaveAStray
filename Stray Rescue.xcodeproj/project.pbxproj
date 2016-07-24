@@ -20,8 +20,10 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		6610C54F1D41D84E00867F38 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 6610C54E1D41D84E00867F38 /* main.jsbundle */; };
+		6610C5531D41D8B500867F38 /* main.jsbundle.meta in Resources */ = {isa = PBXBuildFile; fileRef = 6610C5511D41D8B500867F38 /* main.jsbundle.meta */; };
+		6610C5551D41D8D500867F38 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 6610C5541D41D8D500867F38 /* assets */; };
 		6665BB731C8FEF10000987C7 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6665BB721C8FEF10000987C7 /* Base.lproj */; };
-		6697EE341D0A8AFA0027BD88 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 6697EE331D0A8AFA0027BD88 /* main.jsbundle */; };
 		66BC42E91D165B090074C22F /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66BC42E81D165B090074C22F /* OpenSans-Regular.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -124,8 +126,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iOS/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = iOS/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		6610C54E1D41D84E00867F38 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		6610C5511D41D8B500867F38 /* main.jsbundle.meta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle.meta; sourceTree = "<group>"; };
+		6610C5541D41D8D500867F38 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		6665BB721C8FEF10000987C7 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = iOS/Base.lproj; sourceTree = "<group>"; };
-		6697EE331D0A8AFA0027BD88 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		66BC42E81D165B090074C22F /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -289,7 +293,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				6697EE331D0A8AFA0027BD88 /* main.jsbundle */,
+				6610C5541D41D8D500867F38 /* assets */,
+				6610C5511D41D8B500867F38 /* main.jsbundle.meta */,
+				6610C54E1D41D84E00867F38 /* main.jsbundle */,
 				66BC42E81D165B090074C22F /* OpenSans-Regular.ttf */,
 				13B07FAE1A68108700A75B9A /* PetRescue */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -513,8 +519,10 @@
 			files = (
 				6665BB731C8FEF10000987C7 /* Base.lproj in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				6610C5531D41D8B500867F38 /* main.jsbundle.meta in Resources */,
+				6610C5551D41D8D500867F38 /* assets in Resources */,
 				66BC42E91D165B090074C22F /* OpenSans-Regular.ttf in Resources */,
-				6697EE341D0A8AFA0027BD88 /* main.jsbundle in Resources */,
+				6610C54F1D41D84E00867F38 /* main.jsbundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
