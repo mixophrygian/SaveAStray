@@ -1,1 +1,6 @@
-Save A Stray - a mobile app for iOS and Android!  This is the iOS repo, Android repo will be public shortly, once I have time to gitignore the config file.  Ignore the Android folder in this repo, lots of reworking was done to optimize for Android, namely the navigation bar.
+##Save A Stray
+####a mobile (react-native) app for iOS and Android!  
+
+This is the iOS repo.  Ignore the Android folder in this repo, lots of reworking was done to optimize for Android, namely the navigation.
+
+What is this all about?  Visit http://saveastrayapp.com
