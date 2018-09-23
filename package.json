@@ -1,4 +1,4 @@
-{
+3
   "name": "StrayRescue",
   "version": "0.0.1",
   "private": true,
@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "lodash": "4.6.1",
-    "oauth-signature": "1.3.1",
+    "oauth-signature": "1.5.0",
     "querystring": "0.2.0",
     "react": "~15.2.0",
     "react-native": "^0.29.0",
