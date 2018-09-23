@@ -147,6 +147,7 @@ class SearchPage extends Component {
             });
             this.hideKeyboard();
         } else {
+          console.log('response', response);
             this.setState({ description: 'Hmmm that didn\'t work. Try again.', descriptionStyle: styles.tryAgain});
         }
     }
