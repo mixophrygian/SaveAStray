@@ -245,17 +245,15 @@ class SingleResult extends Component {
     }
 
     getDirections() {
-      console.log('directions requested');
-      const lat = this.props.result[0].location.coordinate.latitude;
-      const lon = this.props.result[0].location.coordinate.longitude;
+      
+      const lat = this.props.result[0].coordinates.latitude;
+      const lon = this.props.result[0].coordinates.longitude;
       const url = 'http://maps.apple.com/?q=' + lat +',' + lon;
       Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
 
     render() {
-        console.log('height: ' + height);
         const result = this.props.result[0];
-        console.log(result);
         const reviewCount = result.review_count;
         const reviews = reviewCount + (reviewCount != 1 ? ' Reviews' : ' Review');
         const starsURL = result.rating_img_url_large;
@@ -272,6 +270,7 @@ class SingleResult extends Component {
         const pinGlyph = require('./images/pin.png');
         const phoneGlyph = require('./images/phone.png');
         const phoneNumber = '';
+        
         const phoneButton = result.display_phone ? (<TouchableHighlight
                           underlayColor='white'
                           onPress={this.callLocation.bind(this)}
@@ -279,6 +278,7 @@ class SingleResult extends Component {
                           <Text style={styles.phoneButton}>Call</Text>
                   </TouchableHighlight>) : 
           (<Text style={styles.phoneButtonDisabled}>Call</Text>);
+          
         const warningBlurb = height > 500 ? (<View> 
                     <Text style={styles.description}>
                     Call to verify hours of business and policies. Check out <Text
