@@ -15,6 +15,7 @@ import {
 
 import Communications from 'react-native-communications';
 import DisplayAddressParser from './../lib/display_address_parser';
+import starsImages from './../lib/starsImages';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -243,6 +244,23 @@ class SingleResult extends Component {
         const phone = this.props.result[0].phone;
         Communications.phonecall(phone, true);
     }
+    
+    getStarRatingImage(rating) {
+      //not a util because 'require' gets weird as an export, and react-native wont let you do dynamic require strings. lame.
+      switch(rating) {
+        case 0: return require('./../assets/star_0@2x.png')
+        case 1: return require('./../assets/star_1@2x.png')
+        case 1.5: return require('./../assets/star_1_half@2x.png')
+        case 2: return require('./../assets/star_2@2x.png')
+        case 2.5: return require('./../assets/star_2_half@2x.png')
+        case 3: return require('./../assets/star_3@2x.png')
+        case 3.5: return require('./../assets/star_3_half@2x.png')
+        case 4: return require('./../assets/star_4@2x.png')
+        case 4.5: return require('./../assets/star_4_half@2x.png')
+        case 5: return require('./../assets/star_5@2x.png')
+        default: return require('./../assets/star_3@2x.png')
+      }
+    }
 
     getDirections() {
       
@@ -256,7 +274,8 @@ class SingleResult extends Component {
         const result = this.props.result[0];
         const reviewCount = result.review_count;
         const reviews = reviewCount + (reviewCount != 1 ? ' Reviews' : ' Review');
-        const starsURL = result.rating_img_url_large;
+        const starsURL = this.getStarRatingImage(result.rating);
+        console.log('starsURL', starsURL);
         let name = result.name;
         if(name.length > 50){
           name = name.substring(0,50) + '...';
@@ -266,9 +285,9 @@ class SingleResult extends Component {
           : (<Text style={styles.phoneUnavailable}>Phone Number Unavailable</Text>);
          
         const displayAddress = DisplayAddressParser(result.location.display_address);
-        const tempImage = require('./images/catnose.jpg');
-        const pinGlyph = require('./images/pin.png');
-        const phoneGlyph = require('./images/phone.png');
+        const tempImage = require('./../assets/catnose.jpg');
+        const pinGlyph = require('./../assets/pin.png');
+        const phoneGlyph = require('./../assets/phone.png');
         const phoneNumber = '';
         
         const phoneButton = result.display_phone ? (<TouchableHighlight
@@ -314,15 +333,13 @@ class SingleResult extends Component {
                   </View>
 
                   <View style={styles.textContainer}>
-
                     <View style={styles.yelpInfo}>
-
                       <View style={styles.yelpText}>
-                          <Image style={styles.stars} source={{ uri: starsURL }} />
+                          <Image style={styles.stars} source={starsURL} />
                           <Text style={styles.reviewCount}>{reviews} on </Text>
-                          <Image style={styles.yelpLogo} source={require('./images/yelpLogo.png')} />
+                          <Image style={styles.yelpLogo} source={require('./../assets/yelpLogo.png')} />
                       </View>
-
+                      
                       <View style={styles.yelpText2}>
                         <TouchableHighlight
                             underlayColor='white'

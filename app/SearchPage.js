@@ -165,7 +165,7 @@ class SearchPage extends Component {
                 size='large'/>) :
             (<View style={styles.indicator}/>);
         return (
-        <Image style={styles.container} source={require('./images/bluepuppy.png')}>
+        <Image style={styles.container} source={require('./../assets/bluepuppy.png')}>
             <View style={[styles.content], {marginBottom: this.state.keyboardMargin}}>
 
                 <TouchableHighlight 
