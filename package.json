@@ -11,6 +11,7 @@
     "querystring": "0.2.0",
     "react": "~15.2.0",
     "react-native": "^0.29.0",
-    "react-native-communications": "^1.0.1"
+    "react-native-communications": "^1.0.1",
+    "yelp-fusion": "^2.2.1"
   }
 }

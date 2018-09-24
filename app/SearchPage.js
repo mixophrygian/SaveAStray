@@ -18,6 +18,7 @@ import {
     LayoutAnimation
 } from 'react-native';
 
+import config from './../lib/config.js';
 import yelp from './../lib/yelp_api';
 import SearchResults from './SearchResults';
 import tempJson from './tempJson.json';
@@ -106,20 +107,24 @@ class SearchPage extends Component {
     }
 
     _executeQuery(query) {
-        this.setState({ isLoading: true });
-        fetch(query)
-            .then(response => response.json())
-            .then(json => this._handleResponse(json))
-            .catch(error =>
-                this.setState({
-                    isLoading: false,
-                    message: 'Please try again. ' + error
-                }));
-    }
+      this.setState({ isLoading: true });
+      fetch(query, {
+        headers: new Headers({
+          'Authorization': 'Bearer ' + config.apiKey, 
+        })
+      })
+      .then(response => response.json())
+      .then(json => this._handleResponse(json))
+      .catch(error => {
+        this.setState({
+          isLoading: false,
+          message: 'Please try again. ' + error
+        })});
+      }
 
-    onSearchPressed() {
-        var query = yelp.request_yelp(this.state.searchString);
-        this._executeQuery(query);
+    onSearchPressed(e) {
+      const query = yelp.request_yelp(this.state.searchString)
+      this._executeQuery(query);
     }
 
     onLocationPressed() {
@@ -147,7 +152,6 @@ class SearchPage extends Component {
             });
             this.hideKeyboard();
         } else {
-          console.log('response', response);
             this.setState({ description: 'Hmmm that didn\'t work. Try again.', descriptionStyle: styles.tryAgain});
         }
     }
