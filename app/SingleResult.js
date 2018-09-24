@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
 
 class SingleResult extends Component {
     viewYelp() {
-        const url = this.props.result[0].mobile_url;
+        const url = this.props.result[0].url;
         Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
 
