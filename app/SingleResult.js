@@ -298,7 +298,7 @@ class SingleResult extends Component {
             Directions
           </Text>
           </TouchableHighlight>) : <Text style={styles.tapDirectionsDisabled}>Directions</Text>;
-        const picture = result.image_url ? {uri: result.image_url.slice(0,-7) + '/o.jpg' } : tempImage;
+        const picture = result.image_url ? {uri: result.image_url } : tempImage;
 
         return (
             <View style={styles.container}>
