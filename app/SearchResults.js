@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
         padding: 13,
+        paddingTop: 0,
         backgroundColor: 'white',
     },
     fatSeparator: {
@@ -133,7 +134,6 @@ class SearchResults extends Component {
         const area = rowData.location.city + ', ' + rowData.location.state;
         const tempImage = require('./../assets/catnose.jpg');
         const picture = rowData.image_url ? { uri: rowData.image_url } : tempImage;
-
         return (
             <TouchableHighlight 
                 onPress={() => this.rowPressed(rowData)}

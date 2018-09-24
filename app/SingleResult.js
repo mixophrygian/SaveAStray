@@ -15,7 +15,6 @@ import {
 
 import Communications from 'react-native-communications';
 import DisplayAddressParser from './../lib/display_address_parser';
-import starsImages from './../lib/starsImages';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -237,6 +236,7 @@ class SingleResult extends Component {
 
     viewHumaneSociety() {
       const url = 'http://saveastrayapp.com/#tips';
+      console.log('url', url);
       Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
 
@@ -275,7 +275,6 @@ class SingleResult extends Component {
         const reviewCount = result.review_count;
         const reviews = reviewCount + (reviewCount != 1 ? ' Reviews' : ' Review');
         const starsURL = this.getStarRatingImage(result.rating);
-        console.log('starsURL', starsURL);
         let name = result.name;
         if(name.length > 50){
           name = name.substring(0,50) + '...';
@@ -306,7 +305,7 @@ class SingleResult extends Component {
                       onPress={this.viewHumaneSociety.bind(this)}
                       >
                        tips from the humane society </Text>
-                     on how to catch a stray. 
+                     on how to catch a stray. (double tap link)
                     </Text>
                   </View>) : (<View></View>);
         const directions = displayAddress[0].split(',')[0].search(/\d/) >= 0 ? (<TouchableHighlight

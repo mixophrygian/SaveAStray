@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
+    "start": "node_modules/react-native/packager/packager.sh",
+    "build-ios":
+      "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.ios.js' --bundle-output='./main.jsbundle' --dev=false ==platform='ios' --assets-dest='./iOS'"
   },
   "dependencies": {
     "lodash": "4.6.1",

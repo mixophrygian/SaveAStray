@@ -22,8 +22,9 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		6610C54F1D41D84E00867F38 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 6610C54E1D41D84E00867F38 /* main.jsbundle */; };
 		6610C5531D41D8B500867F38 /* main.jsbundle.meta in Resources */ = {isa = PBXBuildFile; fileRef = 6610C5511D41D8B500867F38 /* main.jsbundle.meta */; };
-		6610C5551D41D8D500867F38 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 6610C5541D41D8D500867F38 /* assets */; };
 		6665BB731C8FEF10000987C7 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6665BB721C8FEF10000987C7 /* Base.lproj */; };
+		66ADFE142158AB0000A0EFD0 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 66ADFE132158AB0000A0EFD0 /* main.jsbundle */; };
+		66ADFE182158AD2C00A0EFD0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 66ADFE172158AD2C00A0EFD0 /* assets */; };
 		66BC42E91D165B090074C22F /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66BC42E81D165B090074C22F /* OpenSans-Regular.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -128,8 +129,9 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		6610C54E1D41D84E00867F38 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		6610C5511D41D8B500867F38 /* main.jsbundle.meta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle.meta; sourceTree = "<group>"; };
-		6610C5541D41D8D500867F38 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		6665BB721C8FEF10000987C7 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = iOS/Base.lproj; sourceTree = "<group>"; };
+		66ADFE132158AB0000A0EFD0 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		66ADFE172158AD2C00A0EFD0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = iOS/assets; sourceTree = "<group>"; };
 		66BC42E81D165B090074C22F /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			children = (
 				6665BB721C8FEF10000987C7 /* Base.lproj */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				66ADFE132158AB0000A0EFD0 /* main.jsbundle */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -293,7 +296,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				6610C5541D41D8D500867F38 /* assets */,
+				66ADFE172158AD2C00A0EFD0 /* assets */,
 				6610C5511D41D8B500867F38 /* main.jsbundle.meta */,
 				6610C54E1D41D84E00867F38 /* main.jsbundle */,
 				66BC42E81D165B090074C22F /* OpenSans-Regular.ttf */,
@@ -519,9 +522,10 @@
 			files = (
 				6665BB731C8FEF10000987C7 /* Base.lproj in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				66ADFE182158AD2C00A0EFD0 /* assets in Resources */,
 				6610C5531D41D8B500867F38 /* main.jsbundle.meta in Resources */,
-				6610C5551D41D8D500867F38 /* assets in Resources */,
 				66BC42E91D165B090074C22F /* OpenSans-Regular.ttf in Resources */,
+				66ADFE142158AB0000A0EFD0 /* main.jsbundle in Resources */,
 				6610C54F1D41D84E00867F38 /* main.jsbundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
